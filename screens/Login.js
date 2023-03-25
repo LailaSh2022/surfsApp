@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { Text, View } from "react-native";
 //Using formik
 import { Formik } from "formik";
 //Icons
-import { Octicons } from "@expo/vector-icons";
+import { Octicons, Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 // Styles
 import {
@@ -25,12 +25,13 @@ import {
 
 const { brand, darkLight, tertiary } = Colors;
 const Login = () => {
+  const [hidePassword, setHidePassword] = useState(true);
   return (
     <StyledContainer>
       <StatusBar style="dark" />
       <InnerContainer>
         <PageLogo resizeMode="cover" source={require("./../assets/Logo.png")} />
-        <PageTitle>Login</PageTitle>
+        <PageTitle>Sign In</PageTitle>
 
         <Formik
           initialValues={{ username: "", password: "" }}
@@ -48,15 +49,38 @@ const Login = () => {
                 values={values.username}
                 keyboardType="email-address"
               />
+              <MyTextInput
+                //lable="Password"
+                icon="lock"
+                placeholder="Password"
+                placeholderTextColor={darkLight}
+                onChangeText={handleChange("password")}
+                onBlur={handleBlur("password")}
+                values={values.password}
+                secureTextEntry={hidePassword}
+                isPassword={true}
+                hidePassword={hidePassword}
+                setHidePassword={setHidePassword}
+              />
+              <StyledButton>
+                <ButtonText>Sign In</ButtonText>
+              </StyledButton>
             </StyledFormArea>
           )}
         </Formik>
-        <SubTitle>Not Rigiater Yet? Sign Up</SubTitle>
+        <SubTitle>Not Register Yet? Sign Up</SubTitle>
       </InnerContainer>
     </StyledContainer>
   );
 };
-const MyTextInput = ({ lable, icon, ...props }) => {
+const MyTextInput = ({
+  lable,
+  icon,
+  isPassword,
+  hidePassword,
+  setHidePassword,
+  ...props
+}) => {
   return (
     <View>
       <LeftIcon>
@@ -64,6 +88,15 @@ const MyTextInput = ({ lable, icon, ...props }) => {
       </LeftIcon>
       <StyledInputLable>{lable}</StyledInputLable>
       <StyledTextInput {...props} />
+      {isPassword && (
+        <RightIcon onPress={() => setHidePassword(!hidePassword)}>
+          <Ionicons
+            name={hidePassword ? "md-eye-off" : "md-eye"}
+            size={30}
+            color={darkLight}
+          />
+        </RightIcon>
+      )}
     </View>
   );
 };
