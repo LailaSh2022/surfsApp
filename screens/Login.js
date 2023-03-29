@@ -21,6 +21,10 @@ import {
   StyledButton,
   ButtonText,
   Colors,
+  ExtraView,
+  ExtraText,
+  TextLink,
+  TextLinkContent,
 } from "./../components/Styles";
 
 const { brand, darkLight, tertiary } = Colors;
@@ -62,13 +66,18 @@ const Login = () => {
                 hidePassword={hidePassword}
                 setHidePassword={setHidePassword}
               />
-              <StyledButton>
+              <StyledButton onPress={handleSubmit}>
                 <ButtonText>Sign In</ButtonText>
               </StyledButton>
             </StyledFormArea>
           )}
         </Formik>
-        <SubTitle>Not Register Yet? Sign Up</SubTitle>
+        <ExtraView>
+          <ExtraText>Not Register Yet? </ExtraText>
+          <TextLink>
+            <TextLinkContent>Sign Up</TextLinkContent>
+          </TextLink>
+        </ExtraView>
       </InnerContainer>
     </StyledContainer>
   );

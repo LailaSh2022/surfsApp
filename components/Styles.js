@@ -9,7 +9,7 @@ export const Colors = {
   secondary: "#E5E7EB",
   tertiary: "#1F2937",
   darkLight: "#9CA3AF",
-  //brand: "#6D28D9",
+  brand: "#2854d9",
   blue: "#152A5F",
   gray: "#979797",
 };
@@ -89,4 +89,34 @@ export const ButtonText = styled.Text`
   color: ${primary};
   font-size: 16px;
   text-align: center;
+`;
+export const MsgBox = styled.Text`
+  text-align: center;
+  font-size: 13px;
+`;
+export const Line = styled.View`
+  hight: 1px;
+  width: 100%;
+  background-color: ${darkLight};
+  margin-vertical: 10px;
+`;
+export const ExtraView = styled.View`
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px;
+`;
+export const ExtraText = styled.Text`
+  justify-content: center;
+  align-items: center;
+  color: ${blue};
+  font-size: 15px;
+`;
+export const TextLink = styled.TouchableOpacity`
+  justify-content: center;
+  align-items: center;
+`;
+export const TextLinkContent = styled.Text`
+  color: ${brand};
+  font-size: 15px;
 `;
