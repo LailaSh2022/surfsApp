@@ -47,6 +47,9 @@ export const SubTitle = styled.Text`
 export const StyledFormArea = styled.View`
   width: 90%;
 `;
+export const StyledSmallFormArea = styled.View`
+  width: 50%;
+`;
 export const StyledTextInput = styled.TextInput`
   padding: 15px;
   padding-left: 55px;
@@ -84,6 +87,15 @@ export const StyledButton = styled.TouchableOpacity`
   border-radius: 5px;
   margin-vertical: 5px;
   height: 60px;
+`;
+export const StyledSmallButton = styled.TouchableOpacity`
+  padding: 15px;
+  background-color: ${blue};
+  justify-content: center;
+  border-radius: 5px;
+  margin-vertical: 5px;
+  height: 60px;
+  width: 120px;
 `;
 export const ButtonText = styled.Text`
   color: ${primary};

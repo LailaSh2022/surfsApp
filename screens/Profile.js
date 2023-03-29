@@ -25,6 +25,8 @@ import {
   ExtraText,
   TextLink,
   TextLinkContent,
+  StyledSmallButton,
+  StyledSmallFormArea,
 } from "./../components/Styles";
 
 const { brand, darkLight, tertiary } = Colors;
@@ -107,18 +109,17 @@ const Profile = () => {
                   hidePassword={hidePassword}
                   setHidePassword={setHidePassword}
                 />
-                <StyledButton onPress={handleSubmit}>
-                  <ButtonText>Sign In</ButtonText>
-                </StyledButton>
+                <StyledSmallFormArea>
+                  <StyledSmallButton onPress={handleSubmit}>
+                    <ButtonText>Update</ButtonText>
+                  </StyledSmallButton>
+                  <StyledSmallButton onPress={handleSubmit}>
+                    <ButtonText>Unsubscribe</ButtonText>
+                  </StyledSmallButton>
+                </StyledSmallFormArea>
               </StyledFormArea>
             )}
           </Formik>
-          <ExtraView>
-            <ExtraText>Not Register Yet? </ExtraText>
-            <TextLink>
-              <TextLinkContent>Sign Up</TextLinkContent>
-            </TextLink>
-          </ExtraView>
         </InnerContainer>
       </StyledContainer>
     </ScrollView>
