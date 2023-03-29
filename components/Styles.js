@@ -85,6 +85,15 @@ export const StyledButton = styled.TouchableOpacity`
   margin-vertical: 5px;
   height: 60px;
 `;
+
+export const StyledBackButton = styled.TouchableOpacity`
+  background-color: ${blue};
+  justify-content: center;
+  border-radius: 5px;
+  padding: 10px;
+`;
+
+
 export const ButtonText = styled.Text`
   color: ${primary};
   font-size: 16px;
