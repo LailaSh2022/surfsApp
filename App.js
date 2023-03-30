@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Home from "./screens/Home";
 import Login from "./screens/Login";
+import OrderSummary from "./screens/OrderSummary";
 import ReceiverDetails from "./screens/ReceiverDetails";
 
 
@@ -21,7 +22,8 @@ export default function App() {
               options={{ title: "SurfsApp Limited" }}
             />
                 <Stack.Screen name="Login" component={Login} />
-                <Stack.Screen name="ReceiverDetails" component={ReceiverDetails}/>
+                <Stack.Screen name="ReceiverDetails" component={ReceiverDetails} />
+                <Stack.Screen name="OrderSummary" component={OrderSummary} />
           </Stack.Navigator>
         </NavigationContainer>
      );

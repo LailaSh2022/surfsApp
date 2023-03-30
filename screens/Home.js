@@ -20,11 +20,17 @@ import {
   TextLink,
   TextLinkContent,
 } from "./../components/Styles";
+
+
 const Home = ({ navigation }) => {
     const login = "login";
+    const receiverDetails = "receiver details"
+    const orderSummary ="order summary"
     return (
         <View>
             <Text onPress={() => navigation.navigate("Login")}>{login}</Text>
+            <Text onPress={() => navigation.navigate("ReceiverDetails")}>{receiverDetails}</Text>
+            <Text onPress={() => navigation.navigate("OrderSummary")}>{orderSummary}</Text>
         </View>
     );
 };
