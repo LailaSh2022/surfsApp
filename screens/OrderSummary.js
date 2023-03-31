@@ -1,10 +1,7 @@
 import React from 'react';
-import { StyleSheet, View, Text, Pressable } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import {
-    StyledBackButton,
-    ButtonText,
     StyledContainer,
-    StyledButton,
 } from "./../components/Styles";
 
 

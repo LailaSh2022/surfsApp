@@ -5,6 +5,7 @@ import Home from "./screens/Home";
 import Login from "./screens/Login";
 import OrderSummary from "./screens/OrderSummary";
 import ReceiverDetails from "./screens/ReceiverDetails";
+import History from "./screens/History";
 
 
 //import Profile from "./screens/Profile";
@@ -24,6 +25,7 @@ export default function App() {
                 <Stack.Screen name="Login" component={Login} />
                 <Stack.Screen name="ReceiverDetails" component={ReceiverDetails} />
                 <Stack.Screen name="OrderSummary" component={OrderSummary} />
+                <Stack.Screen name="History" component={History} />
           </Stack.Navigator>
         </NavigationContainer>
      );

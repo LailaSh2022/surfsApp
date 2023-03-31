@@ -25,12 +25,14 @@ import {
 const Home = ({ navigation }) => {
     const login = "login";
     const receiverDetails = "receiver details"
-    const orderSummary ="order summary"
+    const orderSummary = "order summary"
+    const history = "history"
     return (
         <View>
             <Text onPress={() => navigation.navigate("Login")}>{login}</Text>
             <Text onPress={() => navigation.navigate("ReceiverDetails")}>{receiverDetails}</Text>
             <Text onPress={() => navigation.navigate("OrderSummary")}>{orderSummary}</Text>
+            <Text onPress={() => navigation.navigate("History")}>{history}</Text>
         </View>
     );
 };
