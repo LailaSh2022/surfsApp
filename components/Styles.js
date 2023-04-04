@@ -30,6 +30,10 @@ export const PageLogo = styled.Image`
   width: 250px;
   height: 200px;
 `;
+export const SubPageLogo = styled.Image`
+  width: 150px;
+  height: 100px;
+`;
 export const PageTitle = styled.Text`
   font-size: 30px;
   text-align: center;
@@ -139,4 +143,12 @@ export const TextLink = styled.TouchableOpacity`
 export const TextLinkContent = styled.Text`
   color: ${brand};
   font-size: 15px;
+`;
+export const UserImage = styled.Image`
+  width: 90px;
+  height: 100px;
+  border-radius: 50px;
+  border: 8px;
+  border-color: ${blue};
+  border-style: solid;
 `;
