@@ -25,8 +25,7 @@ import {
   ExtraText,
   TextLink,
   TextLinkContent,
-  StyledSmallButton,
-  StyledSmallFormArea,
+  UserImage,
 } from "./../components/Styles";
 
 const { brand, darkLight, tertiary } = Colors;
@@ -36,6 +35,13 @@ const Profile = () => {
     <ScrollView>
       <StyledContainer>
         <StatusBar style="dark" />
+        <UserImage
+          source={require("./../assets/UserImage.png")}
+          style={{
+            alignSelf: "flex-end",
+            marginTop: -50,
+          }}
+        />
         <InnerContainer>
           <PageLogo
             resizeMode="cover"
