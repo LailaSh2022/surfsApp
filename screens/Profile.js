@@ -109,17 +109,18 @@ const Profile = () => {
                   hidePassword={hidePassword}
                   setHidePassword={setHidePassword}
                 />
-                <StyledSmallFormArea>
-                  <StyledSmallButton onPress={handleSubmit}>
-                    <ButtonText>Update</ButtonText>
-                  </StyledSmallButton>
-                  <StyledSmallButton onPress={handleSubmit}>
-                    <ButtonText>Unsubscribe</ButtonText>
-                  </StyledSmallButton>
-                </StyledSmallFormArea>
+                <StyledButton onPress={handleSubmit}>
+                  <ButtonText>Update</ButtonText>
+                </StyledButton>
               </StyledFormArea>
             )}
           </Formik>
+          <ExtraView>
+            <ExtraText>Want to Unsubscribe? </ExtraText>
+            <TextLink>
+              <TextLinkContent>Unsubscribe</TextLinkContent>
+            </TextLink>
+          </ExtraView>
         </InnerContainer>
       </StyledContainer>
     </ScrollView>

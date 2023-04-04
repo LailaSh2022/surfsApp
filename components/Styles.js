@@ -48,7 +48,7 @@ export const StyledFormArea = styled.View`
   width: 90%;
 `;
 export const StyledSmallFormArea = styled.View`
-  width: 50%;
+  align-items: right;
 `;
 export const StyledTextInput = styled.TextInput`
   padding: 15px;
@@ -104,7 +104,6 @@ export const StyledBackButton = styled.TouchableOpacity`
   border-radius: 5px;
   padding: 10px;
 `;
-
 
 export const ButtonText = styled.Text`
   color: ${primary};
