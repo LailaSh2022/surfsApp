@@ -9,8 +9,6 @@ import OrderSummary from "./screens/OrderSummary";
 import ReceiverDetails from "./screens/ReceiverDetails";
 import History from "./screens/History";
 
-//import Profile from "./screens/Profile";
-
 const Stack = createStackNavigator();
 
 export default function App() {

@@ -33,6 +33,7 @@ export const PageLogo = styled.Image`
 export const SubPageLogo = styled.Image`
   width: 150px;
   height: 100px;
+  padding: 10px;
 `;
 export const PageTitle = styled.Text`
   font-size: 30px;
@@ -93,13 +94,13 @@ export const StyledButton = styled.TouchableOpacity`
   height: 60px;
 `;
 export const StyledSmallButton = styled.TouchableOpacity`
-  padding: 15px;
+  padding: 5px;
   background-color: ${blue};
   justify-content: center;
-  border-radius: 5px;
-  margin-vertical: 5px;
-  height: 60px;
-  width: 120px;
+  border-radius: 10px;
+  margin-vertical: 1px;
+  height: 40px;
+  width: 100px;
 `;
 
 export const StyledBackButton = styled.TouchableOpacity`
@@ -114,6 +115,11 @@ export const ButtonText = styled.Text`
   font-size: 16px;
   text-align: center;
 `;
+export const SmallButtonText = styled.Text`
+  color: ${primary};
+  font-size: 16px;
+  text-align: center;
+`;
 export const MsgBox = styled.Text`
   text-align: center;
   font-size: 13px;
@@ -123,6 +129,12 @@ export const Line = styled.View`
   width: 100%;
   background-color: ${darkLight};
   margin-vertical: 10px;
+`;
+export const BorderText = styled.View`
+  border-radius: 5px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: ${tertiary};
 `;
 export const ExtraView = styled.View`
   justify-content: center;
@@ -149,6 +161,13 @@ export const UserImage = styled.Image`
   height: 100px;
   border-radius: 50px;
   border: 8px;
+  border-color: ${blue};
+  border-style: solid;
+`;
+export const FlagImage = styled.Image`
+  width: 50px;
+  height: 25px;
+  border: 1px;
   border-color: ${blue};
   border-style: solid;
 `;
