@@ -1,5 +1,13 @@
 import styled from "styled-components";
-import { View, Image, Text, TextInput, TouchableOpacity } from "react-native";
+import {
+  View,
+  Image,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  TouchableHighlight,
+  StyleSheet,
+} from "react-native";
 import Constants from "expo-constants";
 const statusBarHeight = Constants.statusBarHeight;
 
@@ -170,4 +178,44 @@ export const FlagImage = styled.Image`
   border: 1px;
   border-color: ${blue};
   border-style: solid;
+`;
+export const Container = styled.View`
+  background-color: ${primary};
+  width: 90%;
+  height: 48px;
+  border-radius: 4px;
+  flex-direction: row;
+  align-items: center;
+  margin-vertical: 11px;
+`;
+export const ButtonContainer = styled.TouchableOpacity`
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+  background-color: ${blue};
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+`;
+export const SideButtonText = styled.Text`
+  font-weight: 600;
+  font-size: 20px;
+  padding-horizontal: 16px;
+  color: ${primary};
+`;
+export const Border = styled.View`
+  height: 48px;
+  width: ${StyleSheet.hairlineWidth}px;
+  background-color: ${blue};
+`;
+export const Input = styled.TextInput`
+  height: 48px;
+  flex: 1;
+  font-size: 18px;
+  border: 1px;
+  border-color: ${blue};
+  border-style: solid;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding-horizontal: 8px;
+  color: ${darkLight};
 `;
