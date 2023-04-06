@@ -1,11 +1,11 @@
 import React from "react";
-import { StyleSheet, View, Text, Button } from "react-native";
+import { StyleSheet, View, Text, Button, ScrollView } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
 import Login from "./Login";
 import CurrencyScreen from "../components/CurrencyScreen";
 import InputWithButton from "../components/InputWithButton";
-import { Formik } from "formik";
+import Footer from "../components/PageFooter";
 //styles
 import {
   SubPageLogo,
@@ -41,7 +41,7 @@ function Home_Page() {
         <StyledSmallButton>
           <SmallButtonText>Sign Up</SmallButtonText>
         </StyledSmallButton>
-        <View style={{ width: 5 }} />
+        <View style={{ width: 25 }} />
       </View>
 
       <SubPageLogo
@@ -54,35 +54,38 @@ function Home_Page() {
         }}
       />
       <View style={{ height: 30 }} />
-      <CurrencyScreen />
-      <View style={{ height: 30 }} />
-      <View style={{ alignItems: "center" }}>
-        <InputWithButton buttonText={TEMP_BASE_CURRENCY} />
-        <View style={{ height: 10 }} />
-        <Text>%1.00 Our fee</Text>
-        <View style={{ height: 10 }} />
-        <Text>%1.00 Total fee</Text>
-        <View style={{ height: 10 }} />
-        <Text>$1.00 Total Amount will Convert</Text>
-        <View style={{ height: 10 }} />
-        <InputWithButton buttonText={TEMP_QUOTE_CURRENCY} disable={false} />
-      </View>
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-        }}
-      >
-        <View style={{ width: 75, height: 70 }} />
-        <StyledSmallButton>
-          <SmallButtonText>Refresh</SmallButtonText>
-        </StyledSmallButton>
-        <View style={{ width: 30 }} />
-        <StyledSmallButton>
-          <SmallButtonText>Transfer</SmallButtonText>
-        </StyledSmallButton>
-        <View style={{ width: 5 }} />
-      </View>
+      <ScrollView>
+        <CurrencyScreen />
+        <View style={{ height: 30 }} />
+        <View style={{ alignItems: "center" }}>
+          <InputWithButton buttonText={TEMP_BASE_CURRENCY} />
+          <View style={{ height: 10 }} />
+          <Text>%1.00 Our fee</Text>
+          <View style={{ height: 10 }} />
+          <Text>%1.00 Total fee</Text>
+          <View style={{ height: 10 }} />
+          <Text>$1.00 Total Amount will Convert</Text>
+          <View style={{ height: 10 }} />
+          <InputWithButton buttonText={TEMP_QUOTE_CURRENCY} disable={false} />
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          <View style={{ width: 75, height: 70 }} />
+          <StyledSmallButton>
+            <SmallButtonText>Refresh</SmallButtonText>
+          </StyledSmallButton>
+          <View style={{ width: 30 }} />
+          <StyledSmallButton>
+            <SmallButtonText>Transfer</SmallButtonText>
+          </StyledSmallButton>
+          <View style={{ width: 5 }} />
+        </View>
+      </ScrollView>
+      <Footer />
     </StyledContainer>
   );
 }
