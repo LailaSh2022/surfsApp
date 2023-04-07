@@ -39,16 +39,15 @@ const Profile = () => {
         <StatusBar style="dark" />
 
         <InnerContainer>
-          <UserImage
-            source={require("./../assets/UserImage.png")}
-            style={{
-              left: "1%",
-              top: "0.5%",
-              position: "absolute",
-              marginTop: 1,
-            }}
-          />
-
+          <View style={{ position: "absolute", left: "1%", top: "0.5%" }}>
+            <UserImage
+              source={require("./../assets/UserImage.png")}
+              style={{
+                //position: "absolute",
+                marginTop: 1,
+              }}
+            />
+          </View>
           <MediumPageLogo
             resizeMode="cover"
             source={require("./../assets/Logo.png")}

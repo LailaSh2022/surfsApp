@@ -5,15 +5,16 @@ import { Footer, GooglePlayBadge, ExtraSmallText } from "./Styles";
 const PageFooter = () => {
   return (
     <Footer>
-      <GooglePlayBadge
-        resizeMode="cover"
-        source={require("./../assets/google-play-badge.png")}
-        style={{
-          position: "absolute",
-          left: "35%",
-          top: "0%",
-        }}
-      />
+      <View style={{ position: "absolute" }}>
+        <GooglePlayBadge
+          resizeMode="cover"
+          source={require("./../assets/google-play-badge.png")}
+          style={{
+            left: "0%",
+            top: "0%",
+          }}
+        />
+      </View>
       <View style={{ height: "50%" }} />
       <View>
         <ExtraSmallText>Join Us for fast and secure online </ExtraSmallText>

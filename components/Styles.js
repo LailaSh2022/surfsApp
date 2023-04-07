@@ -177,9 +177,7 @@ export const UserImage = styled.Image`
   width: 90px;
   height: 100px;
   border-radius: 50px;
-  border: 8px;
   border-color: ${blue};
-  border-style: solid;
 `;
 export const FlagImage = styled.Image`
   width: 50px;
