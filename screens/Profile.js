@@ -27,32 +27,36 @@ import {
   TextLinkContent,
   UserImage,
   SubPageLogo,
-  MediumPageLogo
+  MediumPageLogo,
 } from "./../components/Styles";
 
 const { brand, darkLight, tertiary } = Colors;
 const Profile = () => {
   const [hidePassword, setHidePassword] = useState(true);
   return (
-    
-      <StyledContainer>
-        <ScrollView>
+    <StyledContainer>
+      <ScrollView>
         <StatusBar style="dark" />
-        
+
         <InnerContainer>
-        
-        <UserImage
-          source={require("./../assets/UserImage.png")}
-          style={{
-            alignSelf: "left",
-          marginTop: 1,
-          
-          }}
-        />
-        
+          <UserImage
+            source={require("./../assets/UserImage.png")}
+            style={{
+              left: "1%",
+              top: "0.5%",
+              position: "absolute",
+              marginTop: 1,
+            }}
+          />
+
           <MediumPageLogo
             resizeMode="cover"
             source={require("./../assets/Logo.png")}
+            style={{
+              left: "4%",
+              top: "3%",
+              // position: "absolute",
+            }}
           />
 
           <Formik
@@ -134,14 +138,10 @@ const Profile = () => {
               <TextLinkContent>Unsubscribe</TextLinkContent>
             </TextLink>
           </ExtraView>
-          
         </InnerContainer>
-        
-        </ScrollView>
-        <PageFooter /> 
-      </StyledContainer>
-    
-    
+      </ScrollView>
+      <PageFooter />
+    </StyledContainer>
   );
 };
 const MyTextInput = ({

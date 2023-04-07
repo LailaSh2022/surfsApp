@@ -30,42 +30,43 @@ function Home_Page() {
         style={{
           flexDirection: "row",
           alignSelf: "flex-end",
-          marginTop: 20,
+          marginTop: "7%",
           position: "absolute",
         }}
       >
         <StyledSmallButton>
           <SmallButtonText>Sign In</SmallButtonText>
         </StyledSmallButton>
-        <View style={{ width: 5 }} />
+        <View style={{ width: "5%" }} />
         <StyledSmallButton>
           <SmallButtonText>Sign Up</SmallButtonText>
         </StyledSmallButton>
-        <View style={{ width: 25 }} />
+        <View style={{ width: "8%" }} />
       </View>
 
       <SubPageLogo
         resizeMode="cover"
         source={require("./../assets/Logo.png")}
         style={{
-          alignSelf: "left",
-          marginTop: -10,
+          left: 0,
+          top: 0,
+          marginTop: "-2%",
           position: "absolute",
         }}
       />
-      <View style={{ height: 30 }} />
+      <View style={{ height: "5%" }} />
       <ScrollView>
         <CurrencyScreen />
-        <View style={{ height: 30 }} />
+        <View style={{ height: "5%" }} />
         <View style={{ alignItems: "center" }}>
           <InputWithButton buttonText={TEMP_BASE_CURRENCY} />
-          <View style={{ height: 10 }} />
+          <View style={{ height: "5%" }} />
           <Text>%1.00 Our fee</Text>
-          <View style={{ height: 10 }} />
+          <View style={{ height: "2%" }} />
           <Text>%1.00 Total fee</Text>
-          <View style={{ height: 10 }} />
+          <View style={{ height: "2%" }} />
           <Text>$1.00 Total Amount will Convert</Text>
-          <View style={{ height: 10 }} />
+          <View style={{ height: "2%" }} />
           <InputWithButton buttonText={TEMP_QUOTE_CURRENCY} disable={false} />
         </View>
         <View
@@ -74,15 +75,15 @@ function Home_Page() {
             alignItems: "center",
           }}
         >
-          <View style={{ width: 75, height: 70 }} />
+          <View style={{ width: "20%", height: "10%" }} />
           <StyledSmallButton>
             <SmallButtonText>Refresh</SmallButtonText>
           </StyledSmallButton>
-          <View style={{ width: 30 }} />
+          <View style={{ width: "10%" }} />
           <StyledSmallButton>
             <SmallButtonText>Transfer</SmallButtonText>
           </StyledSmallButton>
-          <View style={{ width: 5 }} />
+          <View style={{ width: "30%" }} />
         </View>
       </ScrollView>
       <Footer />

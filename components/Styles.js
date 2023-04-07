@@ -46,7 +46,6 @@ export const SubPageLogo = styled.Image`
 export const MediumPageLogo = styled.Image`
   width: 200px;
   height: 150px;
-  
 `;
 export const PageTitle = styled.Text`
   font-size: 30px;

@@ -6,13 +6,15 @@ const PageFooter = () => {
   return (
     <Footer>
       <GooglePlayBadge
-        resizeMode="fit"
+        resizeMode="cover"
         source={require("./../assets/google-play-badge.png")}
         style={{
           position: "absolute",
+          left: "35%",
+          top: "0%",
         }}
       />
-      <View style={{ height: 50 }} />
+      <View style={{ height: "50%" }} />
       <View>
         <ExtraSmallText>Join Us for fast and secure online </ExtraSmallText>
         <ExtraSmallText>money transfer</ExtraSmallText>
