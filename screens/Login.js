@@ -5,7 +5,7 @@ import { Text, View } from "react-native";
 import { Formik } from "formik";
 //Icons
 import { Octicons, Ionicons } from "@expo/vector-icons";
-import { AntDesign } from "@expo/vector-icons";
+import PageFooter from "../components/PageFooter";
 // Styles
 import {
   StyledContainer,
@@ -106,6 +106,7 @@ const Login = () => {
           </TextLink>
         </ExtraView>
       </InnerContainer>
+      <PageFooter />
     </StyledContainer>
   );
 };

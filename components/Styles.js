@@ -1,5 +1,13 @@
 import styled from "styled-components";
-import { View, Image, Text, TextInput, TouchableOpacity } from "react-native";
+import {
+  View,
+  Image,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  TouchableHighlight,
+  StyleSheet,
+} from "react-native";
 import Constants from "expo-constants";
 const statusBarHeight = Constants.statusBarHeight;
 
@@ -34,6 +42,10 @@ export const SubPageLogo = styled.Image`
   width: 150px;
   height: 100px;
   padding: 10px;
+`;
+export const MediumPageLogo = styled.Image`
+  width: 200px;
+  height: 150px;
 `;
 export const PageTitle = styled.Text`
   font-size: 30px;
@@ -148,6 +160,11 @@ export const ExtraText = styled.Text`
   color: ${blue};
   font-size: 15px;
 `;
+export const ExtraSmallText = styled.Text`
+  color: ${primary};
+  font-size: 9px;
+  text-align: center;
+`;
 export const TextLink = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
@@ -160,9 +177,7 @@ export const UserImage = styled.Image`
   width: 90px;
   height: 100px;
   border-radius: 50px;
-  border: 8px;
   border-color: ${blue};
-  border-style: solid;
 `;
 export const FlagImage = styled.Image`
   width: 50px;
@@ -170,4 +185,55 @@ export const FlagImage = styled.Image`
   border: 1px;
   border-color: ${blue};
   border-style: solid;
+`;
+export const GooglePlayBadge = styled.Image`
+  width: 100px;
+  height: 50px;
+`;
+export const Container = styled.View`
+  background-color: ${primary};
+  width: 90%;
+  height: 48px;
+  border-radius: 4px;
+  flex-direction: row;
+  align-items: center;
+  margin-vertical: 11px;
+`;
+export const ButtonContainer = styled.TouchableOpacity`
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+  background-color: ${blue};
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+`;
+export const SideButtonText = styled.Text`
+  font-weight: 600;
+  font-size: 20px;
+  padding-horizontal: 16px;
+  color: ${primary};
+`;
+export const Border = styled.View`
+  height: 48px;
+  width: ${StyleSheet.hairlineWidth}px;
+  background-color: ${blue};
+`;
+export const Input = styled.TextInput`
+  height: 48px;
+  flex: 1;
+  font-size: 18px;
+  border: 1px;
+  border-color: ${blue};
+  border-style: solid;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding-horizontal: 8px;
+  color: ${darkLight};
+`;
+export const Footer = styled.View`
+  background-color: ${blue};
+  align-items: center;
+  height: 100px;
+  position: "absolute";
+  width: 100%;
 `;

@@ -5,7 +5,7 @@ import { Text, View, ScrollView } from "react-native";
 import { Formik } from "formik";
 //Icons
 import { Octicons, Ionicons } from "@expo/vector-icons";
-import { AntDesign } from "@expo/vector-icons";
+import PageFooter from "../components/PageFooter";
 // Styles
 import {
   StyledContainer,
@@ -26,26 +26,36 @@ import {
   TextLink,
   TextLinkContent,
   UserImage,
+  SubPageLogo,
+  MediumPageLogo,
 } from "./../components/Styles";
 
 const { brand, darkLight, tertiary } = Colors;
 const Profile = () => {
   const [hidePassword, setHidePassword] = useState(true);
   return (
-    <ScrollView>
-      <StyledContainer>
+    <StyledContainer>
+      <ScrollView>
         <StatusBar style="dark" />
-        <UserImage
-          source={require("./../assets/UserImage.png")}
-          style={{
-            alignSelf: "flex-end",
-            marginTop: -50,
-          }}
-        />
+
         <InnerContainer>
-          <PageLogo
+          <View style={{ position: "absolute", left: "1%", top: "0.5%" }}>
+            <UserImage
+              source={require("./../assets/UserImage.png")}
+              style={{
+                //position: "absolute",
+                marginTop: 1,
+              }}
+            />
+          </View>
+          <MediumPageLogo
             resizeMode="cover"
             source={require("./../assets/Logo.png")}
+            style={{
+              left: "4%",
+              top: "3%",
+              // position: "absolute",
+            }}
           />
 
           <Formik
@@ -128,8 +138,9 @@ const Profile = () => {
             </TextLink>
           </ExtraView>
         </InnerContainer>
-      </StyledContainer>
-    </ScrollView>
+      </ScrollView>
+      <PageFooter />
+    </StyledContainer>
   );
 };
 const MyTextInput = ({
