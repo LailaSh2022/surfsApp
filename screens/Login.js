@@ -27,8 +27,35 @@ import {
   TextLinkContent,
 } from "./../components/Styles";
 
+import * as SQLite from "expo-sqlite";
+
+const dbName = "surfsApp.db";
+async function createDb() {
+  if (
+    !(await FileSystem.getInfoAsync(FileSystem.documentDirectory + "SQLite"))
+      .exists
+  ) {
+    await FileSystem.makeDirectoryAsync(
+      FileSystem.documentDirectory + "SQLite"
+    );
+  }
+
+  await FileSystem.downloadAsync(
+    Asset.fromModule(require("./assets/surfsApp.db")).uri,
+    FileSystem.documentDirectory + `SQLite/${dbName}`
+  );
+}
+
 const { brand, darkLight, tertiary } = Colors;
 const Login = () => {
+  createDb();
+  const db = SQLite.openDatabase("surfsApp.db");
+  db.transaction((tx) => {
+    tx.executeSql("SELECT * FROM Users", [], (_, { rows }) =>
+      console.log(rows._array)
+    );
+  });
+
   const [hidePassword, setHidePassword] = useState(true);
   return (
     <StyledContainer>
