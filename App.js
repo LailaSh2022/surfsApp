@@ -9,9 +9,38 @@ import OrderSummary from "./screens/OrderSummary";
 import ReceiverDetails from "./screens/ReceiverDetails";
 import History from "./screens/History";
 
+import * as SQLite from "expo-sqlite";
+import * as FileSystem from "expo-file-system";
+import { Asset } from "expo-asset";
+
+const dbName = "surfsApp.db";
+async function createDb() {
+  if (
+    !(await FileSystem.getInfoAsync(FileSystem.documentDirectory + "SQLite"))
+      .exists
+  ) {
+    await FileSystem.makeDirectoryAsync(
+      FileSystem.documentDirectory + "SQLite"
+    );
+  }
+
+  await FileSystem.downloadAsync(
+    Asset.fromModule(require("./assets/surfsApp.db")).uri,
+    FileSystem.documentDirectory + `SQLite/${dbName}`
+  );
+}
+
 const Stack = createStackNavigator();
 
 export default function App() {
+  createDb();
+  const db = SQLite.openDatabase("surfsApp.db");
+  db.transaction((tx) => {
+    tx.executeSql("SELECT * FROM Users", [], (_, { rows }) =>
+      console.log(rows._array)
+    );
+  });
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
