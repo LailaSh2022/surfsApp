@@ -9,6 +9,8 @@ import {
 
 
 const ReceiverDetails = () => {
+
+    
     
     return (
         <StyledContainer>
@@ -22,7 +24,7 @@ const ReceiverDetails = () => {
                 <Text style={{width:'25%'} }>
                     Name:
                 </Text>
-                <Text> Tatian Roudrigues</Text>
+                <Text> tatiane</Text>
             </View>
             <View style={{ flexDirection: 'row', marginTop: 15 }}>
                 <Text style={{ width: '25%' }} >
