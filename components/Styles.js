@@ -35,8 +35,8 @@ export const InnerContainer = styled.View`
   align-items: center;
 `;
 export const PageLogo = styled.Image`
-  width: 250px;
-  height: 200px;
+  width: 200px;
+  height: 170px;
 `;
 export const SubPageLogo = styled.Image`
   width: 150px;
@@ -44,8 +44,9 @@ export const SubPageLogo = styled.Image`
   padding: 10px;
 `;
 export const MediumPageLogo = styled.Image`
-  width: 200px;
+  width: 150px;
   height: 150px;
+  position: absolute;
 `;
 export const PageTitle = styled.Text`
   font-size: 30px;
@@ -85,12 +86,14 @@ export const StyledInputLable = styled.Text`
   font-size: 13px;
   text-align: left;
 `;
+//position: absolute;
 export const LeftIcon = styled.View`
   left: 15px;
   top: 28px;
   position: absolute;
   z-index = 1;
 `;
+//position: absolute;
 export const RightIcon = styled.TouchableOpacity`
   right: 15px;
   top: 28px;
@@ -113,6 +116,15 @@ export const StyledSmallButton = styled.TouchableOpacity`
   margin-vertical: 1px;
   height: 40px;
   width: 100px;
+`;
+export const StyledSideSmallButton = styled.TouchableOpacity`
+  padding: 5px;
+  background-color: ${blue};
+  justify-content: center;
+  border-radius: 10px;
+  margin-vertical: 1px;
+  height: 40px;
+  width: 70px;
 `;
 
 export const StyledBackButton = styled.TouchableOpacity`
@@ -142,10 +154,11 @@ export const Line = styled.View`
   background-color: ${darkLight};
   margin-vertical: 10px;
 `;
+//border-style: solid;
 export const BorderText = styled.View`
   border-radius: 5px;
   border-width: 1px;
-  border-style: solid;
+
   border-color: ${tertiary};
 `;
 export const ExtraView = styled.View`
@@ -178,13 +191,14 @@ export const UserImage = styled.Image`
   height: 100px;
   border-radius: 50px;
   border-color: ${blue};
+  position: absolute;
 `;
+//border-style: solid;
 export const FlagImage = styled.Image`
   width: 50px;
   height: 25px;
   border: 1px;
   border-color: ${blue};
-  border-style: solid;
 `;
 export const GooglePlayBadge = styled.Image`
   width: 100px;
@@ -230,10 +244,15 @@ export const Input = styled.TextInput`
   padding-horizontal: 8px;
   color: ${darkLight};
 `;
+//position: absolute;
 export const Footer = styled.View`
+  flex: 0.2;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background-color: ${blue};
   align-items: center;
   height: 100px;
-  position: "absolute";
+  position: absolute;
   width: 100%;
 `;

@@ -35,29 +35,36 @@ const Profile = () => {
   const [hidePassword, setHidePassword] = useState(true);
   return (
     <StyledContainer>
+      <StatusBar style="dark" />
+      <View
+        style={{
+          position: "absolute",
+          left: "1%",
+          top: "0.5%",
+          bottom: "2%",
+        }}
+      >
+        <UserImage
+          source={require("./../assets/UserImage.png")}
+          style={{
+            position: "absolute",
+            marginTop: 1,
+          }}
+        />
+      </View>
+      <View style={{ flex: 2, left: "25%" }}>
+        <MediumPageLogo
+          resizeMode="cover"
+          source={require("./../assets/Logo.png")}
+          style={{
+            top: "3%",
+            //position: "absolute",
+          }}
+        />
+      </View>
+      <View style={{ flexDirection: "column", height: "20%" }} />
       <ScrollView>
-        <StatusBar style="dark" />
-
         <InnerContainer>
-          <View style={{ position: "absolute", left: "1%", top: "0.5%" }}>
-            <UserImage
-              source={require("./../assets/UserImage.png")}
-              style={{
-                //position: "absolute",
-                marginTop: 1,
-              }}
-            />
-          </View>
-          <MediumPageLogo
-            resizeMode="cover"
-            source={require("./../assets/Logo.png")}
-            style={{
-              left: "4%",
-              top: "3%",
-              // position: "absolute",
-            }}
-          />
-
           <Formik
             initialValues={{
               name: "",
@@ -139,7 +146,10 @@ const Profile = () => {
           </ExtraView>
         </InnerContainer>
       </ScrollView>
-      <PageFooter />
+      <View style={{ flexDirection: "column", height: "17%" }} />
+      <View>
+        <PageFooter />
+      </View>
     </StyledContainer>
   );
 };

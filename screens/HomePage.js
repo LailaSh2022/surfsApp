@@ -5,7 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import Login from "./Login";
 import CurrencyScreen from "../components/CurrencyScreen";
 import InputWithButton from "../components/InputWithButton";
-import Footer from "../components/PageFooter";
+import PageFooter from "../components/PageFooter";
 //styles
 import {
   SubPageLogo,
@@ -18,6 +18,8 @@ import {
   ButtonContainer,
   StyledButton,
   Input,
+  StyledSideSmallButton,
+  InnerContainer,
 } from "../components/Styles";
 const { brand, darkLight, tertiary } = Colors;
 const TEMP_BASE_CURRENCY = "NZD";
@@ -34,31 +36,33 @@ function Home_Page() {
           position: "absolute",
         }}
       >
-        <StyledSmallButton>
+        <StyledSideSmallButton>
           <SmallButtonText>Sign In</SmallButtonText>
-        </StyledSmallButton>
+        </StyledSideSmallButton>
         <View style={{ width: "5%" }} />
-        <StyledSmallButton>
+        <StyledSideSmallButton>
           <SmallButtonText>Sign Up</SmallButtonText>
-        </StyledSmallButton>
+        </StyledSideSmallButton>
         <View style={{ width: "8%" }} />
       </View>
-
-      <SubPageLogo
-        resizeMode="cover"
-        source={require("./../assets/Logo.png")}
+      <View
         style={{
           left: 0,
           top: 0,
           marginTop: "-2%",
           position: "absolute",
         }}
-      />
-      <View style={{ height: "5%" }} />
+      >
+        <SubPageLogo
+          resizeMode="cover"
+          source={require("./../assets/Logo.png")}
+        />
+      </View>
       <ScrollView>
-        <CurrencyScreen />
-        <View style={{ height: "5%" }} />
-        <View style={{ alignItems: "center" }}>
+        <InnerContainer>
+          <View style={{ height: "12%" }} />
+          <CurrencyScreen />
+          <View style={{ height: "5%" }} />
           <InputWithButton buttonText={TEMP_BASE_CURRENCY} />
           <View style={{ height: "5%" }} />
           <Text>%1.00 Our fee</Text>
@@ -68,25 +72,26 @@ function Home_Page() {
           <Text>$1.00 Total Amount will Convert</Text>
           <View style={{ height: "2%" }} />
           <InputWithButton buttonText={TEMP_QUOTE_CURRENCY} disable={false} />
-        </View>
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-          }}
-        >
-          <View style={{ width: "20%", height: "10%" }} />
-          <StyledSmallButton>
-            <SmallButtonText>Refresh</SmallButtonText>
-          </StyledSmallButton>
-          <View style={{ width: "10%" }} />
-          <StyledSmallButton>
-            <SmallButtonText>Transfer</SmallButtonText>
-          </StyledSmallButton>
-          <View style={{ width: "30%" }} />
-        </View>
+          <View
+            style={{
+              flexDirection: "row",
+            }}
+          >
+            <View style={{ width: "30%", height: "10%" }} />
+            <StyledSmallButton>
+              <SmallButtonText>Refresh</SmallButtonText>
+            </StyledSmallButton>
+            <View style={{ width: "10%" }} />
+            <StyledSmallButton>
+              <SmallButtonText>Transfer</SmallButtonText>
+            </StyledSmallButton>
+            <View style={{ width: "30%" }} />
+          </View>
+        </InnerContainer>
       </ScrollView>
-      <Footer />
+      <View>
+        <PageFooter />
+      </View>
     </StyledContainer>
   );
 }

@@ -79,7 +79,10 @@ const Login = () => {
           </TextLink>
         </ExtraView>
       </InnerContainer>
-      <PageFooter />
+      <View style={{ flexDirection: "column", height: "50%" }} />
+      <View>
+        <PageFooter />
+      </View>
     </StyledContainer>
   );
 };
