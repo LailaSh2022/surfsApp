@@ -62,9 +62,13 @@ const Home = ({ navigation }) => {
   const receiverDetails = "receiver details";
   const orderSummary = "order summary";
   const history = "history";
+  const SignUp = "Sign Up";
+
   return (
     <View>
       <Text onPress={() => navigation.navigate("HomePage")}>{HomePage}</Text>
+      <Text onPress={() => navigation.navigate("Sign Up")}>{SignUp}</Text>
+
       <Text onPress={() => navigation.navigate("Login")}>{login}</Text>
           <Text onPress={() => navigation.navigate("Profile")}>{Profile}</Text>
           <Text onPress={() => navigation.navigate("ReceiverDetails")}>

@@ -8,6 +8,11 @@ import Profile from "./screens/Profile";
 import OrderSummary from "./screens/OrderSummary";
 import ReceiverDetails from "./screens/ReceiverDetails";
 import History from "./screens/History";
+import AddReceiver from "./screens/AddReceiver";
+import OrderReceiverList from "./screens/OrderReceiverList";
+import SignUp from "./screens/SignUp";
+
+
 
 import * as SQLite from "expo-sqlite";
 import * as FileSystem from "expo-file-system";
@@ -50,6 +55,7 @@ export default function App() {
           options={{ title: "SurfsApp Limited" }}
         />
         <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="HomePage" component={HomePage} />
         <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen name="ReceiverDetails" component={ReceiverDetails} />
