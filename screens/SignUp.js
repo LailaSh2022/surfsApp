@@ -5,7 +5,7 @@ import { Text, View, ScrollView, Alert } from "react-native";
 import { Formik } from "formik";
 //Icons
 import { Octicons, Ionicons } from "@expo/vector-icons";
-import PageFooter from "../components/PageFooter";
+//import PageFooter from "../components/PageFooter";
 // Styles
 import {
   StyledContainer,
