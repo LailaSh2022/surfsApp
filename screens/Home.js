@@ -12,7 +12,7 @@ const Home = ({ navigation }) => {
   const orderSummary = "order summary";
   const history = "history";
   const SignUp = "SignUp";
- // const AddReceiver = "AddReceiver";
+  const AddReceiver = "AddReceiver";
 
   return (
     <View>
@@ -20,6 +20,7 @@ const Home = ({ navigation }) => {
       <Text onPress={() => navigation.navigate("SignUp")}>{SignUp}</Text>
       <Text onPress={() => navigation.navigate("Login")}>{login}</Text>
       <Text onPress={() => navigation.navigate("Profile")}>{Profile}</Text>
+      <Text onPress={() => navigation.navigate("AddReceiver")}>{AddReceiver}</Text>
 
 
       <Text onPress={() => navigation.navigate("ReceiverDetails")}>
