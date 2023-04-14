@@ -74,3 +74,31 @@ export function SignUpNewUser(user) {
     console.log(error);
   }
 }
+
+export function NewReceiver(ReceiverDetails) {
+  console.log(user);
+  try {
+    db.transaction((tx) => {
+      tx.executeSql(
+        "INSERT INTO Users (Currency, Name, MobileNum, relantionship, Email, Bank_Account_Number) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);",
+        [
+          ReceiverDetails.currency,
+          ReceiverDetails.email,
+          ReceiverDetails.name,
+          ReceiverDetails.MobileNum,
+          ReceiverDetails.relantioship,
+          ReceiverDetails.bankAccount,
+          
+          "1",
+          "2",
+        ],
+        (_, { rowsAffected, insertId }) => {
+          console.log(`Inserted ${rowsAffected} row with ID ${insertId}`);
+        },
+        (error) => console.log(error)
+      );
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
