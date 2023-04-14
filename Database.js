@@ -47,6 +47,27 @@ export function CheckUserNameExists(username) {
   });
 }
 
+export function GetReceiverDetails(receiverId) {
+  return new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        "SELECT * FROM Recipients WHERE receiverId = ?",
+        [receiverId],
+        (_, { rows }) => {
+          if (rows._array.length > 0) {
+            resolve(rows.item(0));
+          } else {
+            resolve(null);
+          }
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+  });
+}
+
 export function SignUpNewUser(user) {
   console.log(user);
   try {
@@ -61,6 +82,34 @@ export function SignUpNewUser(user) {
           user.DateOfBirth,
           user.Email,
           user.Phone_Number,
+          "1",
+          "2",
+        ],
+        (_, { rowsAffected, insertId }) => {
+          console.log(`Inserted ${rowsAffected} row with ID ${insertId}`);
+        },
+        (error) => console.log(error)
+      );
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export function NewReceiver(ReceiverDetails) {
+  console.log(user);
+  try {
+    db.transaction((tx) => {
+      tx.executeSql(
+        "INSERT INTO Users (Currency, Name, MobileNum, relantionship, Email, Bank_Account_Number) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);",
+        [
+          ReceiverDetails.currency,
+          ReceiverDetails.email,
+          ReceiverDetails.name,
+          ReceiverDetails.MobileNum,
+          ReceiverDetails.relantioship,
+          ReceiverDetails.bankAccount,
+
           "1",
           "2",
         ],

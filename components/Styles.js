@@ -22,6 +22,7 @@ export const Colors = {
   gray: "#979797",
 };
 const { primary, secondary, tertiary, darkLight, brand, blue, gray } = Colors;
+
 export const StyledContainer = styled.View`
   flex: 1;
   padding: 25px;
@@ -147,6 +148,7 @@ export const SmallButtonText = styled.Text`
 export const MsgBox = styled.Text`
   text-align: center;
   font-size: 13px;
+  color: ${(props) => (props.type == "SUCCESS" ? green : red)};
 `;
 export const Line = styled.View`
   hight: 1px;
@@ -158,7 +160,7 @@ export const Line = styled.View`
 export const BorderText = styled.View`
   border-radius: 5px;
   border-width: 1px;
-
+  height: 150px;
   border-color: ${tertiary};
 `;
 export const ExtraView = styled.View`
@@ -214,7 +216,7 @@ export const Container = styled.View`
   margin-vertical: 11px;
 `;
 export const ButtonContainer = styled.TouchableOpacity`
-  height: 48px;
+  height: 35px;
   align-items: center;
   justify-content: center;
   background-color: ${blue};
@@ -228,17 +230,17 @@ export const SideButtonText = styled.Text`
   color: ${primary};
 `;
 export const Border = styled.View`
-  height: 48px;
+  height: 35px;
   width: ${StyleSheet.hairlineWidth}px;
   background-color: ${blue};
 `;
+//border-style: solid;
 export const Input = styled.TextInput`
-  height: 48px;
+  height: 35px;
   flex: 1;
   font-size: 18px;
   border: 1px;
   border-color: ${blue};
-  border-style: solid;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   padding-horizontal: 8px;
@@ -252,7 +254,7 @@ export const Footer = styled.View`
   bottom: 0;
   background-color: ${blue};
   align-items: center;
-  height: 100px;
+  height: 90px;
   position: absolute;
   width: 100%;
 `;

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { Text, View, ScrollView } from "react-native";
+import { Text, View, ScrollView, Alert } from "react-native";
 //Using formik
 import { Formik } from "formik";
 //Icons
@@ -29,8 +29,73 @@ import {
   SubPageLogo,
   MediumPageLogo,
 } from "./../components/Styles";
+import { CheckUserNameExists, SignUpNewUser } from "../Database";
+
 
 const { brand, darkLight, tertiary } = Colors;
+const initialValues = {
+    UserName: "",
+    FirstName: "",
+    LastName: "",
+    DateOfBirth: "",
+    Email: "",
+    Phone_Number: "",
+    Password: "",
+    ConfirmPassword: "",
+};
+const onSubmit = (values) => {
+    if (values.UserName == "") {
+        Alert.alert("Error", "UserName cannot be empty");
+        return;
+    }
+    CheckUserNameExists(values.UserName)
+        .then((exists) => {
+            if (exists) {
+                Alert.alert("Error", "Username exists. Please choose another one!");
+                return;
+            }
+        })
+        .catch((error) => {
+            console.log(`Error while checking user: ${error}`);
+            return;
+        });
+
+    if (values.FirstName == "") {
+        Alert.alert("Error", "FirstName cannot be empty");
+        return;
+    }
+
+    if (values.LastName == "") {
+        Alert.alert("Error", "LastName cannot be empty");
+        return;
+    }
+
+    if (values.DateOfBirth == "") {
+        Alert.alert("Error", "DateOfBirth cannot be empty");
+        return;
+    }
+
+    if (values.Email == "") {
+        Alert.alert("Error", "Email cannot be empty");
+        return;
+    }
+
+    if (values.Phone_Number == "") {
+        Alert.alert("Error", "Mobile Number cannot be empty");
+        return;
+    }
+
+    if (values.Password == "") {
+        Alert.alert("Error", "Password cannot be empty");
+        return;
+    }
+
+    if (values.Password != values.ConfirmPassword) {
+        Alert.alert("Error", "Password and Confirm Password must be the same");
+        return;
+    }
+    SignUpNewUser(values);
+};
 const SignUp = () => {
   const [hidePassword, setHidePassword] = useState(true);
   return (
@@ -43,73 +108,81 @@ const SignUp = () => {
           </ExtraView>
         <InnerContainer>
 
-          <Formik
-            initialValues={{
-              username: "",
-              email: "",
-              name: "",
-              MobileNum: "",       
-              password: "",
-              confirmPassword: "",
-              
-            }}
-            onSubmit={(values) => console.log(values)}
-          >
+        <Formik initialValues={initialValues} onSubmit={onSubmit}>
+          
             {({ handleChange, handleBlur, handleSubmit, values }) => (
               <StyledFormArea>
-                <MyTextInput
-                  placeholder="Username"
-                  placeholderTextColor={darkLight}
-                  onChangeText={handleChange("username")}
-                  onBlur={handleBlur("username")}
-                  values={values.username}
-                  keyboardType="email-address"
-                />
-                <MyTextInput
-                  placeholder="Email Address"
-                  placeholderTextColor={darkLight}
-                  onChangeText={handleChange("email")}
-                  onBlur={handleBlur("email")}
-                  values={values.email}
-                  keyboardType="email-address"
-                />
-                <MyTextInput
-                  placeholder="Name"
-                  placeholderTextColor={darkLight}
-                  onChangeText={handleChange("name")}
-                  onBlur={handleBlur("name")}
-                  values={values.name}
-                />     
-                <MyTextInput
-                  placeholder="Mobile Number"
-                  placeholderTextColor={darkLight}
-                  onChangeText={handleChange("MobileNum")}
-                  onBlur={handleBlur("MobileNum")}
-                  values={values.MobileNum}
-                  keyboardType="email-address"
-                />
-                <MyTextInput
-                  placeholder="Password"
-                  placeholderTextColor={darkLight}
-                  onChangeText={handleChange("password")}
-                  onBlur={handleBlur("password")}
-                  values={values.password}
-                  secureTextEntry={hidePassword}
-                  isPassword={true}
-                  hidePassword={hidePassword}
-                  setHidePassword={setHidePassword}
-                />
-                <MyTextInput
-                  placeholder="Confirm Password"
-                  placeholderTextColor={darkLight}
-                  onChangeText={handleChange("confirmPassword")}
-                  onBlur={handleBlur("confirmPassword")}
-                  values={values.confirmPassword}
-                  secureTextEntry={hidePassword}
-                  isPassword={true}
-                  hidePassword={hidePassword}
-                  setHidePassword={setHidePassword}
-                />
+                              <MyTextInput
+                                  placeholder="UserName"
+                                  placeholderTextColor={darkLight}
+                                  onChangeText={handleChange("UserName")}
+                                  onBlur={handleBlur("UserName")}
+                                  values={values.UserName}
+                              //keyboardType="email-address"
+                              />
+                              <MyTextInput
+                                  placeholder="FirstName"
+                                  placeholderTextColor={darkLight}
+                                  onChangeText={handleChange("FirstName")}
+                                  onBlur={handleBlur("FirstName")}
+                                  values={values.FirstName}
+                              />
+
+                              <MyTextInput
+                                  placeholder="LastName"
+                                  placeholderTextColor={darkLight}
+                                  onChangeText={handleChange("LastName")}
+                                  onBlur={handleBlur("LastName")}
+                                  values={values.LastName}
+                              />
+
+                              <MyTextInput
+                                  placeholder="Date of Birth"
+                                  placeholderTextColor={darkLight}
+                                  onChangeText={handleChange("DateOfBirth")}
+                                  onBlur={handleBlur("DateOfBirth")}
+                                  values={values.DateOfBirth}
+                              />
+
+                              <MyTextInput
+                                  placeholder="Email Address"
+                                  placeholderTextColor={darkLight}
+                                  onChangeText={handleChange("Email")}
+                                  onBlur={handleBlur("Email")}
+                                  values={values.Email}
+                                  keyboardType="email-address"
+                              />
+
+                              <MyTextInput
+                                  placeholder="Mobile Number"
+                                  placeholderTextColor={darkLight}
+                                  onChangeText={handleChange("Phone_Number")}
+                                  onBlur={handleBlur("Phone_Number")}
+                                  values={values.Phone_Number}
+                              //keyboardType="email-address"
+                              />
+                              <MyTextInput
+                                  placeholder="Password"
+                                  placeholderTextColor={darkLight}
+                                  onChangeText={handleChange("Password")}
+                                  onBlur={handleBlur("Password")}
+                                  values={values.Password}
+                                  secureTextEntry={hidePassword}
+                                  isPassword={true}
+                                  hidePassword={hidePassword}
+                                  setHidePassword={setHidePassword}
+                              />
+                              <MyTextInput
+                                  placeholder="Confirm Password"
+                                  placeholderTextColor={darkLight}
+                                  onChangeText={handleChange("ConfirmPassword")}
+                                  onBlur={handleBlur("ConfirmPassword")}
+                                  values={values.ConfirmPassword}
+                                  secureTextEntry={hidePassword}
+                                  isPassword={true}
+                                  hidePassword={hidePassword}
+                                  setHidePassword={setHidePassword}
+                              />
 
                 
                 <StyledButton onPress={handleSubmit}>

@@ -32,7 +32,7 @@ function Home_Page() {
         style={{
           flexDirection: "row",
           alignSelf: "flex-end",
-          marginTop: "7%",
+          marginTop: "2%",
           position: "absolute",
         }}
       >
@@ -49,7 +49,7 @@ function Home_Page() {
         style={{
           left: 0,
           top: 0,
-          marginTop: "-2%",
+          marginTop: "-6%",
           position: "absolute",
         }}
       >
@@ -58,37 +58,34 @@ function Home_Page() {
           source={require("./../assets/Logo.png")}
         />
       </View>
-      <ScrollView>
-        <InnerContainer>
-          <View style={{ height: "12%" }} />
-          <CurrencyScreen />
-          <View style={{ height: "5%" }} />
-          <InputWithButton buttonText={TEMP_BASE_CURRENCY} />
-          <View style={{ height: "5%" }} />
-          <Text>%1.00 Our fee</Text>
-          <View style={{ height: "2%" }} />
-          <Text>%1.00 Total fee</Text>
-          <View style={{ height: "2%" }} />
-          <Text>$1.00 Total Amount will Convert</Text>
-          <View style={{ height: "2%" }} />
-          <InputWithButton buttonText={TEMP_QUOTE_CURRENCY} disable={false} />
-          <View
-            style={{
-              flexDirection: "row",
-            }}
-          >
-            <View style={{ width: "30%", height: "10%" }} />
-            <StyledSmallButton>
-              <SmallButtonText>Refresh</SmallButtonText>
-            </StyledSmallButton>
-            <View style={{ width: "10%" }} />
-            <StyledSmallButton>
-              <SmallButtonText>Transfer</SmallButtonText>
-            </StyledSmallButton>
-            <View style={{ width: "30%" }} />
-          </View>
-        </InnerContainer>
-      </ScrollView>
+
+      <InnerContainer>
+        <View style={{ height: "7%" }} />
+        <CurrencyScreen />
+        <View style={{ height: "0.5%" }} />
+        <InputWithButton buttonText={TEMP_BASE_CURRENCY} />
+        <View style={{ height: "0.5%" }} />
+        <Text>%1.00 Our fee</Text>
+        <View style={{ height: "2%" }} />
+        <Text>%1.00 Total fee</Text>
+        <View style={{ height: "2%" }} />
+        <Text>$1.00 Total Amount will Convert</Text>
+        <View style={{ height: "1%" }} />
+        <InputWithButton buttonText={TEMP_QUOTE_CURRENCY} disable={false} />
+        <View
+          style={{
+            flexDirection: "row",
+          }}
+        >
+          <StyledSmallButton>
+            <SmallButtonText>Refresh</SmallButtonText>
+          </StyledSmallButton>
+          <View style={{ width: "10%" }} />
+          <StyledSmallButton>
+            <SmallButtonText>Transfer</SmallButtonText>
+          </StyledSmallButton>
+        </View>
+      </InnerContainer>
       <View>
         <PageFooter />
       </View>
