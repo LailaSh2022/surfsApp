@@ -5,14 +5,14 @@ import { BorderText, FlagImage } from "../components/Styles";
 const CurrencyScreen = () => {
   return (
     <BorderText>
-      <View style={{ flexDirection: "row", height: "10%" }}>
+      <View style={{ flexDirection: "row", height: "11%" }}>
         <View style={{ width: "25%" }} />
         <Text>Currency</Text>
         <View style={{ width: "25%" }} />
         <Text>Exchange Rate</Text>
       </View>
-      <View style={{ flexDirection: "column", height: "7%" }} />
-      <View style={{ flexDirection: "row", height: "7%" }}>
+      <View style={{ flexDirection: "column", height: "8%" }} />
+      <View style={{ flexDirection: "row", height: "11%" }}>
         <View style={{ width: "3%" }} />
         <FlagImage source={require("./../assets/USFlag.png")} />
         <View style={{ width: "10%" }} />
@@ -22,7 +22,7 @@ const CurrencyScreen = () => {
       </View>
 
       <View style={{ flexDirection: "column", height: "7%" }} />
-      <View style={{ flexDirection: "row", height: "7%" }}>
+      <View style={{ flexDirection: "row", height: "11%" }}>
         <View style={{ width: "3%" }} />
         <FlagImage source={require("./../assets/AustraliaFlag.png")} />
         <View style={{ width: "10%" }} />
@@ -31,7 +31,7 @@ const CurrencyScreen = () => {
         <Text>USD</Text>
       </View>
       <View style={{ flexDirection: "column", height: "7%" }} />
-      <View style={{ flexDirection: "row", height: "7%" }}>
+      <View style={{ flexDirection: "row", height: "11%" }}>
         <View style={{ width: "3%" }} />
         <FlagImage source={require("./../assets/UKFlag.png")} />
         <View style={{ width: "10%" }} />
@@ -41,7 +41,7 @@ const CurrencyScreen = () => {
       </View>
 
       <View style={{ flexDirection: "column", height: "7%" }} />
-      <View style={{ flexDirection: "row", height: "7%" }}>
+      <View style={{ flexDirection: "row" }}>
         <View style={{ width: "3%" }} />
         <FlagImage source={require("./../assets/ChinaFlag.png")} />
         <View style={{ width: "10%" }} />
