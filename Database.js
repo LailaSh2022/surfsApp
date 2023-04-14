@@ -109,7 +109,7 @@ export function NewReceiver(ReceiverDetails) {
           ReceiverDetails.MobileNum,
           ReceiverDetails.relantioship,
           ReceiverDetails.bankAccount,
-
+          
           "1",
           "2",
         ],
