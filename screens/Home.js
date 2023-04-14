@@ -67,7 +67,7 @@ const Home = ({ navigation }) => {
   return (
     <View>
       <Text onPress={() => navigation.navigate("HomePage")}>{HomePage}</Text>
-      <Text onPress={() => navigation.navigate("Sign Up")}>{SignUp}</Text>
+      <Text onPress={() => navigation.navigate("SignUp")}>{SignUp}</Text>
 
       <Text onPress={() => navigation.navigate("Login")}>{login}</Text>
           <Text onPress={() => navigation.navigate("Profile")}>{Profile}</Text>
