@@ -7,7 +7,9 @@ import {
   StyledButton,
 } from "./../components/Styles";
 
-const ReceiverDetails = () => {
+const ReceiverDetails = ({ route }) => {
+  const { receiver } = route.params;
+  console.log(receiver);
   return (
     <StyledContainer>
       <View style={{ flexDirection: "row" }}>
@@ -18,7 +20,7 @@ const ReceiverDetails = () => {
       </View>
       <View style={{ flexDirection: "row", marginTop: 30 }}>
         <Text style={{ width: "25%" }}>Name:</Text>
-        <Text> tatiane</Text>
+        <Text> {receiver.FirstName}</Text>
       </View>
       <View style={{ flexDirection: "row", marginTop: 15 }}>
         <Text style={{ width: "25%" }}>Account No:</Text>

@@ -1,8 +1,29 @@
 import * as SQLite from "expo-sqlite";
+import * as FileSystem from "expo-file-system";
+import { Asset } from "expo-asset";
 
-const db = SQLite.openDatabase("surfsApp.db");
+const CopyDatabase = async () => {
+  if (
+    !(await FileSystem.getInfoAsync(FileSystem.documentDirectory + "SQLite"))
+      .exists
+  ) {
+    await FileSystem.makeDirectoryAsync(
+      FileSystem.documentDirectory + "SQLite"
+    );
+  }
+  await FileSystem.downloadAsync(
+    Asset.fromModule(require("./assets/surfsApp.db")).uri,
+    FileSystem.documentDirectory + "SQLite/surfsApp.db"
+  );
+};
 
-export function getAllRecipients() {
+export async function OpenDatabase() {
+  await CopyDatabase();
+  return SQLite.openDatabase("surfsApp.db");
+}
+
+export async function getAllRecipients() {
+  const db = await OpenDatabase();
   try {
     db.transaction((tx) => {
       tx.executeSql("SELECT * FROM Recipients", [], (tx, { rows }) => {
@@ -14,7 +35,8 @@ export function getAllRecipients() {
   }
 }
 
-export function getAllUsers() {
+export async function getAllUsers() {
+  const db = await OpenDatabase();
   try {
     db.transaction((tx) => {
       tx.executeSql("SELECT * FROM Users", [], (tx, { rows }) => {
@@ -26,11 +48,12 @@ export function getAllUsers() {
   }
 }
 
-export function CheckUserNameExists(username) {
+export async function CheckUserNameExists(username) {
+  const db = await OpenDatabase();
   return new Promise((resolve, reject) => {
     db.transaction((tx) => {
       tx.executeSql(
-        "SELECT * FROM Users WHERE username = ?",
+        "SELECT * FROM Users WHERE UserName = ?",
         [username],
         (_, { rows: { _array } }) => {
           if (_array.length > 0) {
@@ -47,14 +70,16 @@ export function CheckUserNameExists(username) {
   });
 }
 
-export function GetReceiverDetails(receiverId) {
+export async function GetReceiverDetails(receiverId) {
+  const db = await OpenDatabase();
   return new Promise((resolve, reject) => {
     db.transaction((tx) => {
       tx.executeSql(
-        "SELECT * FROM Recipients WHERE receiverId = ?",
+        "SELECT * FROM Recipients WHERE Id = ?",
         [receiverId],
         (_, { rows }) => {
           if (rows._array.length > 0) {
+            console.log(rows.item(0));
             resolve(rows.item(0));
           } else {
             resolve(null);
@@ -68,7 +93,8 @@ export function GetReceiverDetails(receiverId) {
   });
 }
 
-export function SignUpNewUser(user) {
+export async function SignUpNewUser(user) {
+  const db = await OpenDatabase();
   console.log(user);
   try {
     db.transaction((tx) => {
@@ -82,8 +108,8 @@ export function SignUpNewUser(user) {
           user.DateOfBirth,
           user.Email,
           user.Phone_Number,
-          "1",
-          "2",
+          "",
+          "",
         ],
         (_, { rowsAffected, insertId }) => {
           console.log(`Inserted ${rowsAffected} row with ID ${insertId}`);
@@ -96,8 +122,8 @@ export function SignUpNewUser(user) {
   }
 }
 
-export function NewReceiver(ReceiverDetails) {
-  console.log(user);
+export async function NewReceiver(ReceiverDetails) {
+  const db = await OpenDatabase();
   try {
     db.transaction((tx) => {
       tx.executeSql(
@@ -109,7 +135,7 @@ export function NewReceiver(ReceiverDetails) {
           ReceiverDetails.MobileNum,
           ReceiverDetails.relantioship,
           ReceiverDetails.bankAccount,
-          
+
           "1",
           "2",
         ],
