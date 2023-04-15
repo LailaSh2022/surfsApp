@@ -47,6 +47,27 @@ export function CheckUserNameExists(username) {
   });
 }
 
+export function GetReceiverDetails(receiverId) {
+  return new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        "SELECT * FROM Recipients WHERE receiverId = ?",
+        [receiverId],
+        (_, { rows }) => {
+          if (rows._array.length > 0) {
+            resolve(rows.item(0));
+          } else {
+            resolve(null);
+          }
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+  });
+}
+
 export function SignUpNewUser(user) {
   console.log(user);
   try {

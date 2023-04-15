@@ -20,6 +20,7 @@ const Stack = createStackNavigator();
 export default function App() {
   useEffect(() => {
     getAllUsers();
+    getAllRecipients();
   }, []);
 
   return (
