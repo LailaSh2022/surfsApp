@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { Text, View, ScrollView } from "react-native";
+import { Text, View, ScrollView, Button } from "react-native";
 //Using formik
 import { Formik } from "formik";
 //Icons
 import { Octicons, Ionicons } from "@expo/vector-icons";
 import PageFooter from "../components/PageFooter";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { openDatabase } from "expo-sqlite";
 // Styles
 import {
   StyledContainer,
@@ -30,6 +33,48 @@ import {
 const { brand, darkLight, tertiary } = Colors;
 const Login = () => {
   const [hidePassword, setHidePassword] = useState(true);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleUserNameChange = (text) => {
+    setUsername(text);
+  };
+
+  const handlePasswordChange = (text) => {
+    setPassword(text);
+  };
+
+  const handleLogin = () => {
+    if (!username.trim()) {
+      alert("Please enter your username");
+      return;
+    }
+
+    if (!password.trim()) {
+      alert("Please enter your password");
+      return;
+    }
+
+    // perform login logic
+    const db = openDatabase("surfsAppDB.db");
+    console.log("db:", db);
+    db.transaction((tx) => {
+      tx.executeSql(
+        "SELECT * FROM users WHERE username=? AND password=?",
+        [username, password],
+        (tx, results) => {
+          if (results.rows.length > 0) {
+            console.log("Login successful");
+          } else {
+            console.log("Invalid username or password");
+          }
+        },
+        (error) => {
+          console.log("Error", error);
+        }
+      );
+    });
+  };
   return (
     <StyledContainer>
       <StatusBar style="dark" />
@@ -45,14 +90,22 @@ const Login = () => {
             initialValues={{ username: "", password: "" }}
             onSubmit={(values) => console.log(values)}
           >
-            {({ handleChange, handleBlur, handleSubmit, values }) => (
+            {({
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              values,
+              errors,
+              touched,
+              isValid,
+            }) => (
               <StyledFormArea>
                 <MyTextInput
                   //lable="Username"
                   icon="person-fill"
                   placeholder="Username"
                   placeholderTextColor={darkLight}
-                  onChangeText={handleChange("username")}
+                  onChangeText={handleUserNameChange}
                   onBlur={handleBlur("username")}
                   values={values.username}
                   keyboardType="email-address"
@@ -62,7 +115,7 @@ const Login = () => {
                   icon="lock"
                   placeholder="Password"
                   placeholderTextColor={darkLight}
-                  onChangeText={handleChange("password")}
+                  onChangeText={handlePasswordChange}
                   onBlur={handleBlur("password")}
                   values={values.password}
                   secureTextEntry={hidePassword}
@@ -70,7 +123,7 @@ const Login = () => {
                   hidePassword={hidePassword}
                   setHidePassword={setHidePassword}
                 />
-                <StyledButton onPress={handleSubmit}>
+                <StyledButton onPress={handleLogin} disabled={!isValid}>
                   <ButtonText>Sign In</ButtonText>
                 </StyledButton>
               </StyledFormArea>

@@ -33,6 +33,47 @@ import {
 const { brand, darkLight, tertiary } = Colors;
 const Profile = () => {
   const [hidePassword, setHidePassword] = useState(true);
+  const [name, setname] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const handleNameChange = (text) => {
+    setname(text);
+  };
+
+  const handleUserNameChange = (text) => {
+    setUsername(text);
+  };
+
+  const handlePasswordChange = (text) => {
+    setPassword(text);
+  };
+  const handleConfirmPasswordChange = (text) => {
+    setConfirmPassword(text);
+  };
+
+  const handleLogin = () => {
+    if (!name.trim()) {
+      alert("Please enter your name");
+      return;
+    }
+    if (!username.trim()) {
+      alert("Please enter your username");
+      return;
+    }
+
+    if (!password.trim()) {
+      alert("Please enter your password");
+      return;
+    }
+    if (!confirmPassword.trim()) {
+      alert("Please enter your confirm password");
+      return;
+    }
+
+    // perform login logic
+  };
   return (
     <StyledContainer>
       <StatusBar style="dark" />
@@ -81,7 +122,7 @@ const Profile = () => {
                 <MyTextInput
                   placeholder="Name"
                   placeholderTextColor={darkLight}
-                  onChangeText={handleChange("name")}
+                  onChangeText={handleNameChange}
                   onBlur={handleBlur("name")}
                   values={values.name}
                 />
@@ -89,7 +130,7 @@ const Profile = () => {
                 <MyTextInput
                   placeholder="Username"
                   placeholderTextColor={darkLight}
-                  onChangeText={handleChange("username")}
+                  onChangeText={handleUserNameChange}
                   onBlur={handleBlur("username")}
                   values={values.username}
                   keyboardType="email-address"
@@ -113,7 +154,7 @@ const Profile = () => {
                 <MyTextInput
                   placeholder="Password"
                   placeholderTextColor={darkLight}
-                  onChangeText={handleChange("password")}
+                  onChangeText={handlePasswordChange}
                   onBlur={handleBlur("password")}
                   values={values.password}
                   secureTextEntry={hidePassword}
@@ -124,7 +165,7 @@ const Profile = () => {
                 <MyTextInput
                   placeholder="Confirm Password"
                   placeholderTextColor={darkLight}
-                  onChangeText={handleChange("confirmPassword")}
+                  onChangeText={handleConfirmPasswordChange}
                   onBlur={handleBlur("confirmPassword")}
                   values={values.confirmPassword}
                   secureTextEntry={hidePassword}
@@ -132,7 +173,7 @@ const Profile = () => {
                   hidePassword={hidePassword}
                   setHidePassword={setHidePassword}
                 />
-                <StyledButton onPress={handleSubmit}>
+                <StyledButton onPress={handleLogin}>
                   <ButtonText>Update</ButtonText>
                 </StyledButton>
               </StyledFormArea>
