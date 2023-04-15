@@ -93,6 +93,29 @@ export async function GetReceiverDetails(receiverId) {
   });
 }
 
+export async function GetReceiverBankInfo(BankInfoId) {
+  const db = await OpenDatabase();
+  return new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        "SELECT * FROM Bank_Info WHERE Id = ?",
+        [BankInfoId],
+        (_, { rows }) => {
+          if (rows._array.length > 0) {
+            console.log(rows.item(0));
+            resolve(rows.item(0));
+          } else {
+            resolve(null);
+          }
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+  });
+}
+
 export async function SignUpNewUser(user) {
   const db = await OpenDatabase();
   console.log(user);
