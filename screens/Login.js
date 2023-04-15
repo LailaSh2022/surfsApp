@@ -29,6 +29,7 @@ import {
   TextLink,
   TextLinkContent,
 } from "./../components/Styles";
+import { checkUsernamePassword } from "../Database";
 
 const { brand, darkLight, tertiary } = Colors;
 const Login = () => {
@@ -56,24 +57,18 @@ const Login = () => {
     }
 
     // perform login logic
-    const db = openDatabase("surfsAppDB.db");
-    console.log("db:", db);
-    db.transaction((tx) => {
-      tx.executeSql(
-        "SELECT * FROM users WHERE username=? AND password=?",
-        [username, password],
-        (tx, results) => {
-          if (results.rows.length > 0) {
-            console.log("Login successful");
-          } else {
-            console.log("Invalid username or password");
-          }
-        },
-        (error) => {
-          console.log("Error", error);
+    checkUsernamePassword(username, password)
+      .then((exists) => {
+        if (exists) {
+          Alert.alert("Error", "Invalid username or password!");
+          return;
         }
-      );
-    });
+      })
+      .catch((error) => {
+        console.log(`Error while checking user's credentials: ${error}`);
+        console.log(error);
+        return;
+      });
   };
   return (
     <StyledContainer>

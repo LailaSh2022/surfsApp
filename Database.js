@@ -47,6 +47,33 @@ export async function getAllUsers() {
     console.log(error);
   }
 }
+//Check the user credentials
+
+export async function checkUsernamePassword(username, password) {
+  const db = await OpenDatabase();
+  return new Promise((resolve, reject) => {
+    console.log("Executing SQL query...");
+    db.transaction((tx) => {
+      tx.executeSql(
+        "SELECT * FROM Users WHERE UserName = ? AND Password = ?",
+        [username, password],
+        (_, { rows: { _array } }) => {
+          console.log("Query completed successfully.");
+          if (_array.length > 0) {
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        },
+        (_, error) => {
+          console.log(`Error while executing SQL query: ${error}`);
+          console.log(error);
+          reject(error);
+        }
+      );
+    });
+  });
+}
 
 export async function CheckUserNameExists(username) {
   const db = await OpenDatabase();
