@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { Text, View } from "react-native";
+import { Text, View, ScrollView } from "react-native";
 //Using formik
 import { Formik } from "formik";
 //Icons
@@ -33,53 +33,58 @@ const Login = () => {
   return (
     <StyledContainer>
       <StatusBar style="dark" />
-      <InnerContainer>
-        <PageLogo resizeMode="cover" source={require("./../assets/Logo.png")} />
-        <PageTitle>Sign In</PageTitle>
+      <ScrollView>
+        <InnerContainer>
+          <PageLogo
+            resizeMode="cover"
+            source={require("./../assets/Logo.png")}
+          />
+          <PageTitle>Sign In</PageTitle>
 
-        <Formik
-          initialValues={{ username: "", password: "" }}
-          onSubmit={(values) => console.log(values)}
-        >
-          {({ handleChange, handleBlur, handleSubmit, values }) => (
-            <StyledFormArea>
-              <MyTextInput
-                //lable="Username"
-                icon="person-fill"
-                placeholder="Username"
-                placeholderTextColor={darkLight}
-                onChangeText={handleChange("username")}
-                onBlur={handleBlur("username")}
-                values={values.username}
-                keyboardType="email-address"
-              />
-              <MyTextInput
-                //lable="Password"
-                icon="lock"
-                placeholder="Password"
-                placeholderTextColor={darkLight}
-                onChangeText={handleChange("password")}
-                onBlur={handleBlur("password")}
-                values={values.password}
-                secureTextEntry={hidePassword}
-                isPassword={true}
-                hidePassword={hidePassword}
-                setHidePassword={setHidePassword}
-              />
-              <StyledButton onPress={handleSubmit}>
-                <ButtonText>Sign In</ButtonText>
-              </StyledButton>
-            </StyledFormArea>
-          )}
-        </Formik>
-        <ExtraView>
-          <ExtraText>Not Register Yet? </ExtraText>
-          <TextLink>
-            <TextLinkContent>Sign Up</TextLinkContent>
-          </TextLink>
-        </ExtraView>
-      </InnerContainer>
-      <View style={{ flexDirection: "column", height: "50%" }} />
+          <Formik
+            initialValues={{ username: "", password: "" }}
+            onSubmit={(values) => console.log(values)}
+          >
+            {({ handleChange, handleBlur, handleSubmit, values }) => (
+              <StyledFormArea>
+                <MyTextInput
+                  //lable="Username"
+                  icon="person-fill"
+                  placeholder="Username"
+                  placeholderTextColor={darkLight}
+                  onChangeText={handleChange("username")}
+                  onBlur={handleBlur("username")}
+                  values={values.username}
+                  keyboardType="email-address"
+                />
+                <MyTextInput
+                  //lable="Password"
+                  icon="lock"
+                  placeholder="Password"
+                  placeholderTextColor={darkLight}
+                  onChangeText={handleChange("password")}
+                  onBlur={handleBlur("password")}
+                  values={values.password}
+                  secureTextEntry={hidePassword}
+                  isPassword={true}
+                  hidePassword={hidePassword}
+                  setHidePassword={setHidePassword}
+                />
+                <StyledButton onPress={handleSubmit}>
+                  <ButtonText>Sign In</ButtonText>
+                </StyledButton>
+              </StyledFormArea>
+            )}
+          </Formik>
+          <ExtraView>
+            <ExtraText>Not Register Yet? </ExtraText>
+            <TextLink>
+              <TextLinkContent>Sign Up</TextLinkContent>
+            </TextLink>
+          </ExtraView>
+        </InnerContainer>
+      </ScrollView>
+      <View style={{ flexDirection: "column", height: "18%" }} />
       <View>
         <PageFooter />
       </View>
