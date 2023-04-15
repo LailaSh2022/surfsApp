@@ -8,7 +8,7 @@ import {
 } from "./../components/Styles";
 
 const ReceiverDetails = ({ route }) => {
-  const { receiver } = route.params;
+  const { receiver, bank_info } = route.params;
   console.log(receiver);
   return (
     <StyledContainer>
@@ -20,37 +20,34 @@ const ReceiverDetails = ({ route }) => {
       </View>
       <View style={{ flexDirection: "row", marginTop: 30 }}>
         <Text style={{ width: "25%" }}>Name:</Text>
-        <Text> {receiver.FirstName}</Text>
+          <Text>{receiver.FirstName} {receiver.MiddleName} {receiver.LastName}</Text>
       </View>
       <View style={{ flexDirection: "row", marginTop: 15 }}>
         <Text style={{ width: "25%" }}>Account No:</Text>
-        <Text> 001-11111111111111-07</Text>
+              <Text>{receiver.Bank_Account_Number}</Text>
       </View>
       <View style={{ flexDirection: "row", marginTop: 15 }}>
         <Text style={{ width: "25%" }}>Address:</Text>
-        <Text> 10 Martin Road Orakei Auckland {`\n`} New Zealand</Text>
+              <Text style={{ paddingRight: "15%" }}>{receiver.Address}</Text>
       </View>
       <View style={{ flexDirection: "row", marginTop: 15 }}>
         <Text style={{ width: "25%" }}>Email:</Text>
-        <Text> tatian@gmail.com</Text>
+        <Text>{receiver.Email}</Text>
       </View>
       <View style={{ flexDirection: "row", marginTop: 15 }}>
         <Text>Bank Info:</Text>
       </View>
       <View style={{ flexDirection: "row", marginTop: 15 }}>
         <Text style={{ width: "25%" }}>Name:</Text>
-        <Text> XYZ Bank New Zealand LTD</Text>
+        <Text>{bank_info.Bank_Name}</Text>
       </View>
       <View style={{ flexDirection: "row", marginTop: 15 }}>
         <Text style={{ width: "25%" }}>Address:</Text>
-        <Text>
-          {" "}
-          Wiri Station RD, Manukau, Auckland 2104, {"\n"} New Zealand
-        </Text>
+              <Text style={{paddingRight:"15%"} }>{bank_info.Address}</Text>
       </View>
       <View style={{ flexDirection: "row", marginTop: 15 }}>
         <Text style={{ width: "25%" }}>Swift Code:</Text>
-        <Text style={{ paddingBottom: 30 }}> XYZ BNZ 23</Text>
+        <Text style={{ paddingBottom: 30 }}>{bank_info.Swift_Code}</Text>
       </View>
       <StyledButton>
         <ButtonText>Continue</ButtonText>

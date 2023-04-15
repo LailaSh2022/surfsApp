@@ -3,6 +3,7 @@ import React from "react";
 import { View, Text } from "react-native";
 import Profile from "./Profile";
 import HomePage from "./HomePage";
+import { GetReceiverDetails, GetReceiverBankInfo } from "../Database";
 
 const Home = ({ navigation }) => {
   const login = "login";
@@ -14,16 +15,38 @@ const Home = ({ navigation }) => {
   const SignUp = "SignUp";
   const AddReceiver = "AddReceiver";
 
+  var receiver;
+  var bank_info;
+  GetReceiverDetails(1)
+    .then((result) => {
+      receiver = result;
+      GetReceiverBankInfo(receiver.Bank_Info)
+        .then((result) => {
+          bank_info = result;
+        })
+        .catch((error) => {
+          console.log(`Error while getting bank_info: ${error}`);
+          return;
+        });
+    })
+    .catch((error) => {
+      console.log(`Error while getting receiver details: ${error}`);
+      return;
+    });
+
   return (
     <View>
       <Text onPress={() => navigation.navigate("HomePage")}>{HomePage}</Text>
       <Text onPress={() => navigation.navigate("SignUp")}>{SignUp}</Text>
       <Text onPress={() => navigation.navigate("Login")}>{login}</Text>
       <Text onPress={() => navigation.navigate("Profile")}>{Profile}</Text>
-      <Text onPress={() => navigation.navigate("AddReceiver")}>{AddReceiver}</Text>
+      <Text onPress={() => navigation.navigate("AddReceiver")}>
+        {AddReceiver}
+      </Text>
 
-
-      <Text onPress={() => navigation.navigate("ReceiverDetails")}>
+      <Text
+        onPress={() => navigation.navigate("ReceiverDetails", { receiver,bank_info })}
+      >
         {receiverDetails}
       </Text>
       <Text onPress={() => navigation.navigate("OrderSummary")}>
