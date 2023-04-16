@@ -282,12 +282,13 @@ export async function deleteUser(id) {
 }
 
 export async function GetAllOrderByUserId(userId) {
+  console.log(userId);
   const db = await OpenDatabase();
   return new Promise((resolve, reject) => {
     console.log("Executing SQL query...");
     db.transaction((tx) => {
       tx.executeSql(
-        "SELECT * FROM Orders WHERE SenderId = ?",
+        "SELECT * FROM Orders WHERE SenderId=?;",
         [userId],
         (_, { rows: { _array } }) => {
           console.log("Query completed successfully.");
