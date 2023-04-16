@@ -34,6 +34,17 @@ const Home = ({ navigation }) => {
       return;
     });
 
+  //for testing
+  var OrderSummary = {
+    OrderId: 1,
+    Date: "16/04/2023",
+    Rate: 3.05,
+    From_Currency: "NZD",
+    To_Currency: "BRL",
+    Amount: 350,
+    Fee: 0.01,
+  };
+
   return (
     <View>
       <Text onPress={() => navigation.navigate("HomePage")}>{HomePage}</Text>
@@ -45,11 +56,15 @@ const Home = ({ navigation }) => {
       </Text>
 
       <Text
-        onPress={() => navigation.navigate("ReceiverDetails", { receiver,bank_info })}
+        onPress={() =>
+          navigation.navigate("ReceiverDetails", { receiver, bank_info })
+        }
       >
         {receiverDetails}
       </Text>
-      <Text onPress={() => navigation.navigate("OrderSummary")}>
+      <Text
+        onPress={() => navigation.navigate("OrderSummary", { OrderSummary })}
+      >
         {orderSummary}
       </Text>
       <Text onPress={() => navigation.navigate("History")}>{history}</Text>
