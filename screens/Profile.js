@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
-import { Text, View, ScrollView, ActivityIndicator } from "react-native";
+import { Text, View, ScrollView, ActivityIndicator, Alert } from "react-native";
 //Using formik
 import { Formik } from "formik";
 //Icons
 import { Octicons, Ionicons } from "@expo/vector-icons";
 import PageFooter from "../components/PageFooter";
+import UnsubscribeLink from "../components/UnsubscribeLink";
 // Styles
 import {
   StyledContainer,
@@ -29,7 +30,12 @@ import {
   SubPageLogo,
   MediumPageLogo,
 } from "./../components/Styles";
-import { CheckUserNameExists, getUser, updateExistingUser } from "../Database";
+import {
+  CheckUserNameExists,
+  getUser,
+  updateExistingUser,
+  deleteUser,
+} from "../Database";
 const { brand, darkLight, tertiary } = Colors;
 const onSubmit = (values) => {
   if (values.UserName == "") {
@@ -212,7 +218,7 @@ const Profile = () => {
           <ExtraView>
             <ExtraText>Want to Unsubscribe? </ExtraText>
             <TextLink>
-              <TextLinkContent>Unsubscribe</TextLinkContent>
+              <UnsubscribeLink userId={0} onDeleteUser={deleteUser} />
             </TextLink>
           </ExtraView>
         </InnerContainer>

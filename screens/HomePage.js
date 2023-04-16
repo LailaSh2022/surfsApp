@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Text, Button, ScrollView } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useRoute } from "@react-navigation/native";
 import Login from "./Login";
+import Profile from "./Profile";
 import CurrencyScreen from "../components/CurrencyScreen";
 import InputWithButton from "../components/InputWithButton";
 import PageFooter from "../components/PageFooter";
+import SignedInDrawerNavigator from "../components/SignedInDrawerNavigator";
 //styles
 import {
   SubPageLogo,
@@ -122,15 +124,21 @@ const DrawerNavigator = () => {
   );
 };
 
+
 const HomePage = () => {
-  return <DrawerNavigator />;
+  const route = useRoute();
+  console.log("route: ", route);
+
+  const { userId } = route.params || {};
+  console.log("userId: ", userId);
+  if (!userId) {
+    console.log("Error: userId is undefined");
+    return <DrawerNavigator />;
+  } else {
+   
+    return <SignedInDrawerNavigator />;
+  }
 };
 
 export default HomePage;
-/*export function HomePage() {
-  return (
-    <NavigationContainer>
-      <DrawerNavigator />
-    </NavigationContainer>
-  );
-}*/
+

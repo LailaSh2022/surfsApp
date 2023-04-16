@@ -15,6 +15,7 @@ import { Octicons, Ionicons } from "@expo/vector-icons";
 import PageFooter from "../components/PageFooter";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import SignUpLink from "../components/SignUpLink";
 
 // Styles
 import {
@@ -37,12 +38,14 @@ import {
   TextLinkContent,
 } from "./../components/Styles";
 import { checkUsernamePassword } from "../Database";
+import { useNavigation } from "@react-navigation/native";
 
 const { brand, darkLight, tertiary } = Colors;
 const Login = () => {
   const [hidePassword, setHidePassword] = useState(true);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigation = useNavigation();
 
   const handleUserNameChange = (text) => {
     setUsername(text);
@@ -65,19 +68,19 @@ const Login = () => {
 
     // perform login logic
     checkUsernamePassword(username, password)
-      .then((exists) => {
-        if (exists) {
-          alert("Login Successfull!");
-          return;
+      .then((userId) => {
+        if (userId) {
+          alert("Login Successful! " + userId);
+          navigation.navigate("HomePage", { userId: userId });
         } else {
-          alert("Error", "Invalid username or password!");
+          alert("Invalid username or password!");
         }
       })
       .catch((error) => {
         console.log(`Error while checking user's credentials: ${error}`);
         console.log(error);
-        return;
       });
+
   };
   return (
     <StyledContainer>
@@ -140,7 +143,7 @@ const Login = () => {
             <ExtraView>
               <ExtraText>Not Register Yet? </ExtraText>
               <TextLink>
-                <TextLinkContent>Sign Up</TextLinkContent>
+                <SignUpLink />
               </TextLink>
             </ExtraView>
           </InnerContainer>

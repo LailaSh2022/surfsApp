@@ -16,12 +16,12 @@ const CopyDatabase = async () => {
     FileSystem.documentDirectory + "SQLite/surfsApp.db"
   );
 };
-/*
+
 export async function OpenDatabase() {
   await CopyDatabase();
   return SQLite.openDatabase("surfsApp.db");
 }
-*/
+/*
 export default async function OpenDatabase() {
   const database = SQLite.openDatabase("surfsApp.db");
   database._db.close();
@@ -42,7 +42,7 @@ export default async function OpenDatabase() {
 
   return SQLite.openDatabase("surfsApp.db");
 }
-
+*/
 export async function getAllRecipients() {
   const db = await OpenDatabase();
   try {
@@ -81,9 +81,9 @@ export async function checkUsernamePassword(username, password) {
         (_, { rows: { _array } }) => {
           console.log("Query completed successfully.");
           if (_array.length > 0) {
-            resolve(true);
+            resolve(_array[0].Id);
           } else {
-            resolve(false);
+            resolve(null);
           }
         },
         (_, error) => {
@@ -241,43 +241,47 @@ export async function getUser(id) {
 }
 
 // Update user profile data.
+//
 export async function updateExistingUser(user) {
   const db = await OpenDatabase();
   console.log(user);
   console.log("Executing SQL query...");
-  try {
-    if (!user.username) {
-      console.log("UserName is null or empty, skipping update...");
-      return;
-    }
-    db.transaction((tx) => {
-      console.log("Transaction started");
-      tx.executeSql(
-        "UPDATE Users SET FirstName = ?, LastName = ?, UserName = ?, Password = ?," +
-          "Email = ?, Phone_Number = ? WHERE Id = ? ;",
-        [
-          user.firstName,
-          user.lastName,
-          user.username,
-          user.password,
-          user.email,
-          user.MobileNum,
-          user.Id,
-        ],
-        (_, { rowsAffected, updateId }) => {
-          console.log(`Updated ${rowsAffected} row with ID ${updateId}`);
-        },
-        (_, error) => console.log(`Error updating user ${user.Id}: `, error)
-      );
-      console.log("Transaction completed");
-    });
-  } catch (error) {
-    console.log("Error while updating user: ", error);
-  }
+  db.transaction((tx) => {
+    console.log("Transaction started");
+    console.log(user.Id);
+    tx.executeSql(
+      "UPDATE Users SET FirstName = ?, LastName = ?, UserName = ?, Password = ?," +
+        "Email = ?, Phone_Number = ? WHERE Id = ? ;",
+      [
+        user.firstName,
+        user.lastName,
+        user.username,
+        user.password,
+        user.email,
+        user.MobileNum,
+        user.Id,
+      ],
+      (_, { rowsAffected }) => {
+        console.log(`Updated ${rowsAffected} row`);
+        tx.executeSql(
+          "SELECT * FROM Users WHERE Id = ?;",
+          [user.Id],
+          (_, { rows }) => {
+            console.log(`User updated successfully`);
+            console.log(rows.item(0));
+          },
+          (_, error) =>
+            console.log(`Error while getting receiver details: `, error)
+        );
+      },
+      (_, error) => console.log(`Error updating user ${user.Id}: `, error)
+    );
+    console.log("Transaction completed");
+  });
 }
 
 // Unsubscribe User
-/*
+
 export async function deleteUser(id) {
   const db = await OpenDatabase();
   console.log("Executing SQL query...");
@@ -296,4 +300,3 @@ export async function deleteUser(id) {
     console.log(error);
   }
 }
-*/
