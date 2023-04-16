@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { Text, View, ScrollView, Button ,KeyboardAvoidingView, Alert} from "react-native";
+import {
+  Text,
+  View,
+  ScrollView,
+  Button,
+  KeyboardAvoidingView,
+  Alert,
+} from "react-native";
 //Using formik
 import { Formik } from "formik";
 //Icons
@@ -60,8 +67,10 @@ const Login = () => {
     checkUsernamePassword(username, password)
       .then((exists) => {
         if (exists) {
-          Alert.alert("Error", "Invalid username or password!");
+          alert("Login Successfull!");
           return;
+        } else {
+          alert("Error", "Invalid username or password!");
         }
       })
       .catch((error) => {
