@@ -282,7 +282,6 @@ export async function deleteUser(id) {
 }
 
 export async function GetAllOrderByUserId(userId) {
-  console.log(userId);
   const db = await OpenDatabase();
   return new Promise((resolve, reject) => {
     console.log("Executing SQL query...");
@@ -293,7 +292,7 @@ export async function GetAllOrderByUserId(userId) {
         (_, { rows: { _array } }) => {
           console.log("Query completed successfully.");
           if (_array.length > 0) {
-            resolve(_array[0].Id);
+            resolve(_array);
           } else {
             resolve(null);
           }
