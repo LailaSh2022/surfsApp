@@ -7,7 +7,8 @@ import {
   StyledButton,
 } from "./../components/Styles";
 
-const OrderSummary = () => {
+const OrderSummary = ({ route }) => {
+  const { OrderSummary } = route.params;
   return (
     <StyledContainer>
       <View style={{ flexDirection: "row" }}>
@@ -18,43 +19,52 @@ const OrderSummary = () => {
       </View>
       <View style={{ flexDirection: "row", marginTop: 30 }}>
         <Text style={{ width: "25%" }}>Order No:</Text>
-        <Text> 123</Text>
+        <Text>{OrderSummary.OrderId}</Text>
       </View>
       <View style={{ flexDirection: "row", marginTop: 15 }}>
         <Text style={{ width: "25%" }}>Date:</Text>
-        <Text> 13/02/2023</Text>
+        <Text>{OrderSummary.Date}</Text>
       </View>
       <View style={styles.line} />
       <View style={{ flexDirection: "row", marginTop: 15 }}>
         <Text style={{ width: "25%" }}>Rate:</Text>
         <Text style={{ fontSize: 20, marginTop: -5 }}>
-          {" "}
-          1.00NZD = 0.5912 USD
+          1.00{OrderSummary.From_Currency} = {OrderSummary.Rate}
+          {OrderSummary.To_Currency}
         </Text>
       </View>
       <View style={styles.line} />
       <View style={{ flexDirection: "row", marginTop: 15 }}>
-        <Text>Transfer:</Text>
+        <Text>Transfer Info:</Text>
       </View>
       <View style={{ flexDirection: "row", marginTop: 15 }}>
         <Text style={{ width: "25%" }}>Amount:</Text>
-        <Text style={{ fontSize: 20, marginTop: -5 }}> 350NZD</Text>
+        <Text style={{ fontSize: 20, marginTop: -5 }}>
+          {OrderSummary.Amount}
+          {OrderSummary.From_Currency}
+        </Text>
       </View>
 
       <View style={{ flexDirection: "row", marginTop: 15 }}>
         <Text style={{ width: "25%" }}>Fee (1%):</Text>
-        <Text style={{ fontSize: 20, marginTop: -5 }}> 3.50NZD</Text>
+        <Text style={{ fontSize: 20, marginTop: -5 }}>
+          {(OrderSummary.Amount / 100).toFixed(2)}
+          {OrderSummary.From_Currency}
+        </Text>
       </View>
       <View style={{ flexDirection: "row", marginTop: 15 }}>
         <Text style={{ width: "25%" }}>Total:</Text>
-        <Text style={{ fontSize: 20, marginTop: -5 }}>353.50NZD</Text>
+        <Text style={{ fontSize: 20, marginTop: -5 }}>
+          {(OrderSummary.Amount + OrderSummary.Amount / 100).toFixed(2)}
+          {OrderSummary.From_Currency}
+        </Text>
       </View>
       <View style={styles.line} />
       <View style={{ flexDirection: "row", marginTop: 15 }}>
         <Text style={{ width: "40%" }}>Total Receiver gets:</Text>
         <Text style={{ paddingBottom: 30, fontSize: 20, marginTop: -5 }}>
-          {" "}
-          208.99 USD
+          {(OrderSummary.Amount * OrderSummary.Rate).toFixed(2)}
+          {OrderSummary.From_Currency}
         </Text>
       </View>
       <StyledButton>
