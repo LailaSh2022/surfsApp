@@ -18,11 +18,12 @@ import { getAllRecipients, getAllUsers } from "./Database";
 const Stack = createStackNavigator();
 
 export default function App() {
+  /*
   useEffect(() => {
     getAllUsers();
     getAllRecipients();
   }, []);
-  5;
+  */
 
   return (
     <NavigationContainer>

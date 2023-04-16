@@ -48,7 +48,7 @@ export async function getAllRecipients() {
   try {
     db.transaction((tx) => {
       tx.executeSql("SELECT * FROM Recipients", [], (tx, { rows }) => {
-        console.log(rows._array);
+        //console.log(rows._array);
       });
     });
   } catch (error) {
@@ -61,7 +61,7 @@ export async function getAllUsers() {
   try {
     db.transaction((tx) => {
       tx.executeSql("SELECT * FROM Users", [], (tx, { rows }) => {
-        console.log(rows._array);
+        //console.log(rows._array);
       });
     });
   } catch (error) {
@@ -127,7 +127,7 @@ export async function GetReceiverDetails(receiverId) {
         [receiverId],
         (_, { rows }) => {
           if (rows._array.length > 0) {
-            console.log(rows.item(0));
+            //console.log(rows.item(0));
             resolve(rows.item(0));
           } else {
             resolve(null);
@@ -150,7 +150,7 @@ export async function GetReceiverBankInfo(BankInfoId) {
         [BankInfoId],
         (_, { rows }) => {
           if (rows._array.length > 0) {
-            console.log(rows.item(0));
+            //console.log(rows.item(0));
             resolve(rows.item(0));
           } else {
             resolve(null);
@@ -170,7 +170,7 @@ export async function SignUpNewUser(user) {
   try {
     db.transaction((tx) => {
       tx.executeSql(
-        "INSERT INTO Users (FirstName, LastName, UserName, Password, DateOfBIrth, Email, Phone_Number, Image, Bank_Account_Number) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);",
+        "INSERT INTO Users (FirstName, LastName, UserName, Password, DateOfBIrth, Email, Phone_Number, Image, Bank_Account_Number, Account_Type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?);",
         [
           user.FirstName,
           user.LastName,
@@ -179,6 +179,7 @@ export async function SignUpNewUser(user) {
           user.DateOfBirth,
           user.Email,
           user.Phone_Number,
+          "",
           "",
           "",
         ],
@@ -299,4 +300,29 @@ export async function deleteUser(id) {
   } catch (error) {
     console.log(error);
   }
+}
+
+export async function GetAllOrderByUserId(userId) {
+  const db = await OpenDatabase();
+  return new Promise((resolve, reject) => {
+    console.log("Executing SQL query...");
+    db.transaction((tx) => {
+      tx.executeSql(
+        "SELECT * FROM Orders WHERE SenderId = ?",
+        [userId],
+        (_, { rows: { _array } }) => {
+          console.log("Query completed successfully.");
+          if (_array.length > 0) {
+            resolve(_array[0].Id);
+          } else {
+            resolve(null);
+          }
+        },
+        (_, error) => {
+          console.log(`Error while executing SQL query: ${error}`);
+          reject(error);
+        }
+      );
+    });
+  });
 }
