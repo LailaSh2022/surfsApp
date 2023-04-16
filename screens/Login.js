@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { Text, View, ScrollView, Button } from "react-native";
+import {
+  Text,
+  View,
+  ScrollView,
+  Button,
+  KeyboardAvoidingView,
+} from "react-native";
 //Using formik
 import { Formik } from "formik";
 //Icons
@@ -8,7 +14,7 @@ import { Octicons, Ionicons } from "@expo/vector-icons";
 import PageFooter from "../components/PageFooter";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { openDatabase } from "expo-sqlite";
+
 // Styles
 import {
   StyledContainer,
@@ -60,8 +66,10 @@ const Login = () => {
     checkUsernamePassword(username, password)
       .then((exists) => {
         if (exists) {
-          Alert.alert("Error", "Invalid username or password!");
+          alert("Login sucess!");
           return;
+        } else {
+          alert("Error", "Invalid username or password!");
         }
       })
       .catch((error) => {
@@ -74,71 +82,76 @@ const Login = () => {
     <StyledContainer>
       <StatusBar style="dark" />
       <ScrollView>
-        <InnerContainer>
-          <PageLogo
-            resizeMode="cover"
-            source={require("./../assets/Logo.png")}
-          />
-          <PageTitle>Sign In</PageTitle>
+        <KeyboardAvoidingView
+          behavior="position"
+          style={{ backgroundColor: "white", flex: 1 }}
+        >
+          <InnerContainer>
+            <PageLogo
+              resizeMode="cover"
+              source={require("./../assets/Logo.png")}
+            />
+            <PageTitle>Sign In</PageTitle>
 
-          <Formik
-            initialValues={{ username: "", password: "" }}
-            onSubmit={(values) => console.log(values)}
-          >
-            {({
-              handleChange,
-              handleBlur,
-              handleSubmit,
-              values,
-              errors,
-              touched,
-              isValid,
-            }) => (
-              <StyledFormArea>
-                <MyTextInput
-                  //lable="Username"
-                  icon="person-fill"
-                  placeholder="Username"
-                  placeholderTextColor={darkLight}
-                  onChangeText={handleUserNameChange}
-                  onBlur={handleBlur("username")}
-                  values={values.username}
-                  keyboardType="email-address"
-                />
-                <MyTextInput
-                  //lable="Password"
-                  icon="lock"
-                  placeholder="Password"
-                  placeholderTextColor={darkLight}
-                  onChangeText={handlePasswordChange}
-                  onBlur={handleBlur("password")}
-                  values={values.password}
-                  secureTextEntry={hidePassword}
-                  isPassword={true}
-                  hidePassword={hidePassword}
-                  setHidePassword={setHidePassword}
-                />
-                <StyledButton onPress={handleLogin} disabled={!isValid}>
-                  <ButtonText>Sign In</ButtonText>
-                </StyledButton>
-              </StyledFormArea>
-            )}
-          </Formik>
-          <ExtraView>
-            <ExtraText>Not Register Yet? </ExtraText>
-            <TextLink>
-              <TextLinkContent>Sign Up</TextLinkContent>
-            </TextLink>
-          </ExtraView>
-        </InnerContainer>
+            <Formik
+              initialValues={{ username: "", password: "" }}
+              onSubmit={(values) => console.log(values)}
+            >
+              {({
+                handleChange,
+                handleBlur,
+                handleSubmit,
+                values,
+                errors,
+                touched,
+                isValid,
+              }) => (
+                <StyledFormArea>
+                  <MyTextInput
+                    //lable="Username"
+                    icon="person-fill"
+                    placeholder="Username"
+                    placeholderTextColor={darkLight}
+                    onChangeText={handleUserNameChange}
+                    onBlur={handleBlur("username")}
+                    values={values.username}
+                    keyboardType="email-address"
+                  />
+                  <MyTextInput
+                    //lable="Password"
+                    icon="lock"
+                    placeholder="Password"
+                    placeholderTextColor={darkLight}
+                    onChangeText={handlePasswordChange}
+                    onBlur={handleBlur("password")}
+                    values={values.password}
+                    secureTextEntry={hidePassword}
+                    isPassword={true}
+                    hidePassword={hidePassword}
+                    setHidePassword={setHidePassword}
+                  />
+                  <StyledButton onPress={handleLogin} disabled={!isValid}>
+                    <ButtonText>Sign In</ButtonText>
+                  </StyledButton>
+                </StyledFormArea>
+              )}
+            </Formik>
+            <ExtraView>
+              <ExtraText>Not Register Yet? </ExtraText>
+              <TextLink>
+                <TextLinkContent>Sign Up</TextLinkContent>
+              </TextLink>
+            </ExtraView>
+          </InnerContainer>
+        </KeyboardAvoidingView>
       </ScrollView>
-      <View style={{ flexDirection: "column", height: "18%" }} />
-      <View>
-        <PageFooter />
-      </View>
     </StyledContainer>
   );
 };
+//<View style={{ flexDirection: "column", height: "18%" }} />
+//<View>
+//<PageFooter />
+//</View>
 const MyTextInput = ({
   lable,
   icon,

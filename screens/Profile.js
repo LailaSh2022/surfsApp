@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
-import { Text, View, ScrollView } from "react-native";
+import { Text, View, ScrollView, ActivityIndicator } from "react-native";
 //Using formik
 import { Formik } from "formik";
 //Icons
@@ -29,55 +29,59 @@ import {
   SubPageLogo,
   MediumPageLogo,
 } from "./../components/Styles";
-
+import { CheckUserNameExists, getUser, updateExistingUser } from "../Database";
 const { brand, darkLight, tertiary } = Colors;
-const Profile = () => {
-  const [hidePassword, setHidePassword] = useState(true);
-  const [name, setname] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-
-  const handleNameChange = (text) => {
-    setname(text);
-  };
-
-  const handleUserNameChange = (text) => {
-    setUsername(text);
-  };
-
-  const handlePasswordChange = (text) => {
-    setPassword(text);
-  };
-  const handleConfirmPasswordChange = (text) => {
-    setConfirmPassword(text);
-  };
-
-  const handleLogin = () => {
-    if (!name.trim()) {
-      alert("Please enter your name");
+const onSubmit = (values) => {
+  if (values.UserName == "") {
+    Alert.alert("Error", "UserName cannot be empty");
+    return;
+  }
+  CheckUserNameExists(values.userName)
+    .then((exists) => {
+      if (exists) {
+        Alert.alert("Error", "Username exists. Please choose another one!");
+        return;
+      }
+    })
+    .catch((error) => {
+      console.log(`Error while checking user: ${error}`);
       return;
-    }
-    if (!username.trim()) {
-      alert("Please enter your username");
-      return;
-    }
+    });
 
-    if (!password.trim()) {
-      alert("Please enter your password");
-      return;
-    }
-    if (!confirmPassword.trim()) {
-      alert("Please enter your confirm password");
-      return;
-    }
+  if (values.firstName == "") {
+    Alert.alert("Error", "FirstName cannot be empty");
+    return;
+  }
 
-    // perform login logic
-  };
-  return (
-    <StyledContainer>
-      <StatusBar style="dark" />
-      <View
+  if (values.lastName == "") {
+    Alert.alert("Error", "LastName cannot be empty");
+    return;
+  }
+
+  if (values.email == "") {
+    Alert.alert("Error", "Email cannot be empty");
+    return;
+  }
+
+  if (values.MobileNum == "") {
+    Alert.alert("Error", "Mobile Number cannot be empty");
+    return;
+  }
+
+  if (values.password == "") {
+    Alert.alert("Error", "Password cannot be empty");
+    return;
+  }
+
+  if (values.password != values.confirmPassword) {
+    Alert.alert("Error", "Password and Confirm Password must be the same");
+    return;
+  }
+  updateExistingUser(values);
+};
+/*
+// User Image's code. 
+<View
         style={{
           position: "absolute",
           left: "1%",
@@ -92,46 +96,70 @@ const Profile = () => {
             marginTop: 1,
           }}
         />
-      </View>
-      <View style={{ flex: 2, left: "25%" }}>
-        <MediumPageLogo
-          resizeMode="cover"
-          source={require("./../assets/Logo.png")}
-          style={{
-            top: "3%",
-            //position: "absolute",
-          }}
-        />
-      </View>
-      <View style={{ flexDirection: "column", height: "20%" }} />
+      </View> */
+const Profile = () => {
+  const [hidePassword, setHidePassword] = useState(true);
+  const [userData, setUserData] = useState(null);
+  const userId = 2;
+
+  useEffect(() => {
+    getUser(userId).then((data) => setUserData(data));
+  }, [userId]);
+  // console.log(userData);
+
+  // Check if the user's data has been fetched before rendering the form
+  if (!userData) {
+    return <ActivityIndicator />;
+  }
+  return (
+    <StyledContainer>
+      <StatusBar style="dark" />
       <ScrollView>
         <InnerContainer>
+          <MediumPageLogo
+            resizeMode="cover"
+            source={require("./../assets/Logo.png")}
+          />
+          <PageTitle>User Profile</PageTitle>
           <Formik
             initialValues={{
-              name: "",
-              username: "",
-              email: "",
+              Id: userData.Id,
+              firstName: userData.FirstName,
+              lastName: userData.LastName,
+              username: userData.UserName,
+              email: userData.Email,
+              MobileNum: userData.Phone_Number,
               password: "",
               confirmPassword: "",
-              MobileNum: "",
             }}
-            onSubmit={(values) => console.log(values)}
+            onSubmit={onSubmit}
           >
             {({ handleChange, handleBlur, handleSubmit, values }) => (
               <StyledFormArea>
                 <MyTextInput
-                  placeholder="Name"
+                  placeholder="First Name"
                   placeholderTextColor={darkLight}
-                  onChangeText={handleNameChange}
-                  onBlur={handleBlur("name")}
-                  values={values.name}
+                  onChangeText={handleChange("firstName")}
+                  onBlur={handleBlur("firstName")}
+                  defaultValue={userData.FirstName}
+                  values={values.FirstName}
+                />
+
+                <MyTextInput
+                  placeholder="Last Name"
+                  placeholderTextColor={darkLight}
+                  onChangeText={handleChange("LastName")}
+                  onBlur={handleBlur("LastName")}
+                  defaultValue={userData.LastName}
+                  values={values.LastName}
                 />
 
                 <MyTextInput
                   placeholder="Username"
                   placeholderTextColor={darkLight}
-                  onChangeText={handleUserNameChange}
+                  onChangeText={handleChange("username")}
                   onBlur={handleBlur("username")}
+                  defaultValue={userData.UserName}
                   values={values.username}
                   keyboardType="email-address"
                 />
@@ -141,6 +169,7 @@ const Profile = () => {
                   onChangeText={handleChange("email")}
                   onBlur={handleBlur("email")}
                   values={values.email}
+                  defaultValue={userData.Email}
                   keyboardType="email-address"
                 />
                 <MyTextInput
@@ -149,12 +178,13 @@ const Profile = () => {
                   onChangeText={handleChange("MobileNum")}
                   onBlur={handleBlur("MobileNum")}
                   values={values.MobileNum}
+                  defaultValue={userData.MobileNum}
                   keyboardType="email-address"
                 />
                 <MyTextInput
                   placeholder="Password"
                   placeholderTextColor={darkLight}
-                  onChangeText={handlePasswordChange}
+                  onChangeText={handleChange("password")}
                   onBlur={handleBlur("password")}
                   values={values.password}
                   secureTextEntry={hidePassword}
@@ -165,7 +195,7 @@ const Profile = () => {
                 <MyTextInput
                   placeholder="Confirm Password"
                   placeholderTextColor={darkLight}
-                  onChangeText={handleConfirmPasswordChange}
+                  onChangeText={handleChange("confirmPassword")}
                   onBlur={handleBlur("confirmPassword")}
                   values={values.confirmPassword}
                   secureTextEntry={hidePassword}
@@ -173,7 +203,7 @@ const Profile = () => {
                   hidePassword={hidePassword}
                   setHidePassword={setHidePassword}
                 />
-                <StyledButton onPress={handleLogin}>
+                <StyledButton onPress={handleSubmit}>
                   <ButtonText>Update</ButtonText>
                 </StyledButton>
               </StyledFormArea>
@@ -188,12 +218,12 @@ const Profile = () => {
         </InnerContainer>
       </ScrollView>
       <View style={{ flexDirection: "column", height: "17%" }} />
-      <View>
-        <PageFooter />
-      </View>
     </StyledContainer>
   );
 };
+/*<View>
+        <PageFooter />
+      </View> */
 const MyTextInput = ({
   lable,
   icon,
