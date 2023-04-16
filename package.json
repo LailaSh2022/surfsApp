@@ -9,12 +9,12 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "@expo/webpack-config": "^0.17.4",
+    "@expo/webpack-config": "^18.0.4",
     "@react-navigation/drawer": "^6.6.2",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/native-stack": "^6.9.12",
     "@react-navigation/stack": "^6.3.16",
-    "expo": "^48.0.10",
+    "expo": "^46.0.21",
     "expo-asset": "^8.6.0",
     "expo-file-system": "^15.2.2",
     "expo-sqlite": "~11.1.1",

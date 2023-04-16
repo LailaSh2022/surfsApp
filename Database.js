@@ -199,3 +199,79 @@ export async function NewReceiver(ReceiverDetails) {
     console.log(error);
   }
 }
+//Get user's data
+export async function getUser(id) {
+  const db = await OpenDatabase();
+  return new Promise((resolve, reject) => {
+    try {
+      db.transaction((tx) => {
+        tx.executeSql(
+          "SELECT * FROM Users Where Id = ?",
+          [id],
+          (tx, { rows }) => {
+            resolve(rows._array[0]);
+          }
+        );
+      });
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
+
+// Update user profile data.
+export async function updateExistingUser(user) {
+  const db = await OpenDatabase();
+  console.log(user);
+  console.log(user.username);
+  console.log("Executing SQL query...");
+  try {
+    if (!user.username) {
+      console.log("UserName is null or empty, skipping update...");
+      return;
+    }
+    db.transaction((tx) => {
+      tx.executeSql(
+        "UPDATE Users SET FirstName = ?, LastName = ?, UserName = ?, Password = ?," +
+          "Email = ?, Phone_Number = ? WHERE Id = ? ;",
+        [
+          user.firstName,
+          user.lastName,
+          user.username,
+          user.password,
+          user.email,
+          user.MobileNum,
+          user.Id,
+        ],
+        (_, { rowsAffected, updateId }) => {
+          console.log(`Updated ${rowsAffected} row with ID ${updateId}`);
+        },
+        (_, error) => console.log(error)
+      );
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// Unsubscribe User
+/*
+export async function deleteUser(id) {
+  const db = await OpenDatabase();
+  console.log("Executing SQL query...");
+  try {
+    db.transaction((tx) => {
+      tx.executeSql(
+        "DELETE FROM Users WHERE Id = ?;",
+        [id],
+        (_, { rowsAffected }) => {
+          console.log(`Deleted ${rowsAffected} rows`);
+        },
+        (_, error) => console.log(error)
+      );
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+*/

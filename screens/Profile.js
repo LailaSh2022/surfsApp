@@ -105,7 +105,7 @@ const Profile = () => {
   useEffect(() => {
     getUser(userId).then((data) => setUserData(data));
   }, [userId]);
-  // console.log(userData);
+  console.log(userData);
 
   // Check if the user's data has been fetched before rendering the form
   if (!userData) {
