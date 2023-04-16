@@ -21,34 +21,13 @@ export async function OpenDatabase() {
   await CopyDatabase();
   return SQLite.openDatabase("surfsApp.db");
 }
-/*
-export default async function OpenDatabase() {
-  const database = SQLite.openDatabase("surfsApp.db");
-  database._db.close();
 
-  if (
-    !(await FileSystem.getInfoAsync(FileSystem.documentDirectory + "SQLite"))
-      .exists
-  ) {
-    await FileSystem.makeDirectoryAsync(
-      FileSystem.documentDirectory + "SQLite"
-    );
-  }
-
-  await FileSystem.downloadAsync(
-    Asset.fromModule(require("./assets/surfsApp.db")).uri,
-    FileSystem.documentDirectory + "SQLite/surfsApp.db"
-  );
-
-  return SQLite.openDatabase("surfsApp.db");
-}
-*/
 export async function getAllRecipients() {
   const db = await OpenDatabase();
   try {
     db.transaction((tx) => {
       tx.executeSql("SELECT * FROM Recipients", [], (tx, { rows }) => {
-        //console.log(rows._array);
+        console.log(rows._array);
       });
     });
   } catch (error) {
@@ -61,7 +40,7 @@ export async function getAllUsers() {
   try {
     db.transaction((tx) => {
       tx.executeSql("SELECT * FROM Users", [], (tx, { rows }) => {
-        //console.log(rows._array);
+        console.log(rows._array);
       });
     });
   } catch (error) {
@@ -127,7 +106,7 @@ export async function GetReceiverDetails(receiverId) {
         [receiverId],
         (_, { rows }) => {
           if (rows._array.length > 0) {
-            //console.log(rows.item(0));
+            console.log(rows.item(0));
             resolve(rows.item(0));
           } else {
             resolve(null);
@@ -150,7 +129,7 @@ export async function GetReceiverBankInfo(BankInfoId) {
         [BankInfoId],
         (_, { rows }) => {
           if (rows._array.length > 0) {
-            //console.log(rows.item(0));
+            console.log(rows.item(0));
             resolve(rows.item(0));
           } else {
             resolve(null);
