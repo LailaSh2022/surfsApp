@@ -184,8 +184,8 @@ const Profile = () => {
                   onChangeText={handleChange("MobileNum")}
                   onBlur={handleBlur("MobileNum")}
                   values={values.MobileNum}
-                  defaultValue={userData.MobileNum}
-                  keyboardType="email-address"
+                  defaultValue={userData.Phone_Number}
+                  //keyboardType="email-address"
                 />
                 <MyTextInput
                   placeholder="Password"
