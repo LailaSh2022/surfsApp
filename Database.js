@@ -16,9 +16,30 @@ const CopyDatabase = async () => {
     FileSystem.documentDirectory + "SQLite/surfsApp.db"
   );
 };
-
+/*
 export async function OpenDatabase() {
   await CopyDatabase();
+  return SQLite.openDatabase("surfsApp.db");
+}
+*/
+export default async function OpenDatabase() {
+  const database = SQLite.openDatabase("surfsApp.db");
+  database._db.close();
+
+  if (
+    !(await FileSystem.getInfoAsync(FileSystem.documentDirectory + "SQLite"))
+      .exists
+  ) {
+    await FileSystem.makeDirectoryAsync(
+      FileSystem.documentDirectory + "SQLite"
+    );
+  }
+
+  await FileSystem.downloadAsync(
+    Asset.fromModule(require("./assets/surfsApp.db")).uri,
+    FileSystem.documentDirectory + "SQLite/surfsApp.db"
+  );
+
   return SQLite.openDatabase("surfsApp.db");
 }
 
@@ -223,7 +244,6 @@ export async function getUser(id) {
 export async function updateExistingUser(user) {
   const db = await OpenDatabase();
   console.log(user);
-  console.log(user.username);
   console.log("Executing SQL query...");
   try {
     if (!user.username) {
@@ -231,6 +251,7 @@ export async function updateExistingUser(user) {
       return;
     }
     db.transaction((tx) => {
+      console.log("Transaction started");
       tx.executeSql(
         "UPDATE Users SET FirstName = ?, LastName = ?, UserName = ?, Password = ?," +
           "Email = ?, Phone_Number = ? WHERE Id = ? ;",
@@ -246,11 +267,12 @@ export async function updateExistingUser(user) {
         (_, { rowsAffected, updateId }) => {
           console.log(`Updated ${rowsAffected} row with ID ${updateId}`);
         },
-        (_, error) => console.log(error)
+        (_, error) => console.log(`Error updating user ${user.Id}: `, error)
       );
+      console.log("Transaction completed");
     });
   } catch (error) {
-    console.log(error);
+    console.log("Error while updating user: ", error);
   }
 }
 
