@@ -4,6 +4,7 @@ import HistoryItem from "./../components/HistoryItem";
 import { StyledContainer } from "./../components/Styles";
 import { GetAllOrderByUserId, GetReceiverDetails } from "../Database";
 
+var transactions = [];
 const History = () => {
   /*
   let transactions = [
@@ -31,7 +32,6 @@ const History = () => {
   ];
   */
 
-  let transactions = [];
   GetAllOrderByUserId(1)
     .then((result) => {
       const orders = result;
@@ -42,12 +42,15 @@ const History = () => {
             const receiverGet = (order.Amount * order.Exchange_Rate).toFixed(2);
             const history = {
               OrderNo: order.OrderId,
-              SentDate: order.Sent_Date,
+              SentDate: order.Send_Date,
               Receiver: fullname,
               Amount: order.Amount,
               ReceivierGets: receiverGet,
+              From: order.From_Currency,
+              To: order.To_Currency,
             };
             transactions.push(history);
+            //console.log(transactions);
           })
           .catch((error) => {
             console.log(`Error while getting bank_info: ${error}`);
