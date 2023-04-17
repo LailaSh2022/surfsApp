@@ -4,34 +4,8 @@ import HistoryItem from "./../components/HistoryItem";
 import { StyledContainer } from "./../components/Styles";
 import { GetAllOrderByUserId, GetReceiverDetails } from "../Database";
 
-var transactions = [];
 const History = () => {
-  /*
-  let transactions = [
-    {
-      OrderNo: "2458",
-      SentDate: "Jan 18 2023",
-      Receiver: "Tatiane Rodrigues",
-      Amount: "1500NZD",
-      ReceivierGets: "5000BRL",
-    },
-    {
-      OrderNo: "2459",
-      SentDate: "Jan 19 2023",
-      Receiver: "Laila Shihada",
-      Amount: "1600NZD",
-      ReceivierGets: "6000BRL",
-    },
-    {
-      OrderNo: "2458",
-      SentDate: "Jan 20 2023",
-      Receiver: "Sophon Keo",
-      Amount: "1700NZD",
-      ReceivierGets: "7000BRL",
-    },
-  ];
-  */
-
+  let transactions = [];
   GetAllOrderByUserId(1)
     .then((result) => {
       const orders = result;
@@ -50,7 +24,6 @@ const History = () => {
               To: order.To_Currency,
             };
             transactions.push(history);
-            //console.log(transactions);
           })
           .catch((error) => {
             console.log(`Error while getting bank_info: ${error}`);
