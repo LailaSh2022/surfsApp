@@ -149,7 +149,7 @@ export async function SignUpNewUser(user) {
   try {
     db.transaction((tx) => {
       tx.executeSql(
-        "INSERT INTO Users (FirstName, LastName, UserName, Password, DateOfBIrth, Email, Phone_Number, Image, Bank_Account_Number, Account_Type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?);",
+        "INSERT INTO Users (FirstName, LastName, UserName, Password, DateOfBirth, Email, Phone_Number, Image, Bank_Account_Number) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);",
         [
           user.FirstName,
           user.LastName,
@@ -158,7 +158,6 @@ export async function SignUpNewUser(user) {
           user.DateOfBirth,
           user.Email,
           user.Phone_Number,
-          "",
           "",
           "",
         ],
