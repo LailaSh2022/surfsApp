@@ -51,6 +51,9 @@ const AddReceiver = () => {
               MobileNum: "",       
               relantioship: "",
               bankAccount: "",
+              bankname: "",
+              SwiftNum: "",
+
               
             }}
             onSubmit={(values) => console.log(values)}
@@ -104,6 +107,22 @@ const AddReceiver = () => {
                   onChangeText={handleChange("bankaccount")}
                   onBlur={handleBlur("bankaccount")}
                   values={values.bankAccount}
+                  
+                />
+                <MyTextInput
+                  lable="Bank Name"
+                  placeholderTextColor={darkLight}
+                  onChangeText={handleChange("bankname")}
+                  onBlur={handleBlur("bankname")}
+                  values={values.bankname}
+                  
+                />
+                <MyTextInput
+                  lable="SWIFT Number"
+                  placeholderTextColor={darkLight}
+                  onChangeText={handleChange("SwiftNum")}
+                  onBlur={handleBlur("SwiftNum")}
+                  values={values.SwiftNum}
                   
                 />
 
