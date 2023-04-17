@@ -14,6 +14,8 @@ const Home = ({ navigation }) => {
   const history = "history";
   const SignUp = "SignUp";
   const AddReceiver = "AddReceiver";
+  const ContactUs = "ContactUs";
+
 
   var receiver;
   var bank_info;
@@ -51,6 +53,8 @@ const Home = ({ navigation }) => {
       <Text onPress={() => navigation.navigate("SignUp")}>{SignUp}</Text>
       <Text onPress={() => navigation.navigate("Login")}>{login}</Text>
       <Text onPress={() => navigation.navigate("Profile")}>{Profile}</Text>
+      <Text onPress={() => navigation.navigate("ContactUs")}>{ContactUs}</Text>
+
       <Text onPress={() => navigation.navigate("AddReceiver")}>
         {AddReceiver}
       </Text>
