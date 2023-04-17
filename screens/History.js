@@ -2,9 +2,10 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import HistoryItem from "./../components/HistoryItem";
 import { StyledContainer } from "./../components/Styles";
-import { GetAllOrderByUserId } from "../Database";
+import { GetAllOrderByUserId, GetReceiverDetails } from "../Database";
 
 const History = () => {
+  /*
   let transactions = [
     {
       OrderNo: "2458",
@@ -28,23 +29,31 @@ const History = () => {
       ReceivierGets: "7000BRL",
     },
   ];
+  */
 
+  let transactions = [];
   GetAllOrderByUserId(1)
     .then((result) => {
-      console.log(result);
       const orders = result;
-      orders.map((order) => console.log(order));
-
-      /*
-      GetReceiverBankInfo(receiver.Bank_Info)
-        .then((result) => {
-          bank_info = result;
-        })
-        .catch((error) => {
-          console.log(`Error while getting bank_info: ${error}`);
-          return;
-        });
-        */
+      orders.map((order) => {
+        GetReceiverDetails(order.OrderId)
+          .then((result) => {
+            const fullname = result.FirstName + " " + result.LastName;
+            const receiverGet = (order.Amount * order.Exchange_Rate).toFixed(2);
+            const history = {
+              OrderNo: order.OrderId,
+              SentDate: order.Sent_Date,
+              Receiver: fullname,
+              Amount: order.Amount,
+              ReceivierGets: receiverGet,
+            };
+            transactions.push(history);
+          })
+          .catch((error) => {
+            console.log(`Error while getting bank_info: ${error}`);
+            return;
+          });
+      });
     })
     .catch((error) => {
       console.log(`Error while getting order details: ${error}`);
