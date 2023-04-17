@@ -35,6 +35,8 @@ export default function App() {
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="HomePage" component={HomePage} />
         <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen name="AddReceiver" component={AddReceiver} />
+
         <Stack.Screen name="ReceiverDetails" component={ReceiverDetails} />
         <Stack.Screen name="OrderSummary" component={OrderSummary} />
         <Stack.Screen name="History" component={History} />

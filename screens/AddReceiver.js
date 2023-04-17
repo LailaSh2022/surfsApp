@@ -59,7 +59,7 @@ const AddReceiver = () => {
               <StyledFormArea>
                 <MyTextInput
                   
-                  lable="currency"
+                  lable="Currency"
                   placeholderTextColor={darkLight}
                   onChangeText={handleChange("currency")}
                   onBlur={handleBlur("currency")}
@@ -75,14 +75,14 @@ const AddReceiver = () => {
                   keyboardType="email-address"
                 />
                 <MyTextInput
-                  lable="Full Name of the account holder"
+                  lable="Full Name of the Account Holder"
                   placeholderTextColor={darkLight}
                   onChangeText={handleChange("name")}
                   onBlur={handleBlur("name")}
                   values={values.name}
                 />     
                 <MyTextInput
-                  label="Mobile Number"
+                  lable="Mobile Number"
                   placeholderTextColor={darkLight}
                   onChangeText={handleChange("MobileNum")}
                   onBlur={handleBlur("MobileNum")}
@@ -90,16 +90,16 @@ const AddReceiver = () => {
                   keyboardType="email-address"
                 />
                 <MyTextInput
-                  label="Relantionship"
+                  lable="Relantionship"
                   placeholderTextColor={darkLight}
-                  onChangeText={handleChange("password")}
-                  onBlur={handleBlur("password")}
+                  onChangeText={handleChange("relantioship")}
+                  onBlur={handleBlur("relantioship")}
                   values={values.relantioship}
-                  keyboardType="email-address"
+                  keyboardType="relantioship"
                   
                 />
                 <MyTextInput
-                  label="Bank Account Details"
+                  lable="Bank Account Details"
                   placeholderTextColor={darkLight}
                   onChangeText={handleChange("bankaccount")}
                   onBlur={handleBlur("bankaccount")}
