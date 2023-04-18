@@ -1,9 +1,13 @@
 // JavaScript source code
 import React from "react";
 import { View, Text } from "react-native";
-import Profile from "./Profile";
-import HomePage from "./HomePage";
-import { GetReceiverDetails, GetReceiverBankInfo } from "../Database";
+//import Profile from "./Profile";
+//import HomePage from "./HomePage";
+import {
+  GetReceiverDetails,
+  GetReceiverBankInfo,
+  GetAllOrderByUserId,
+} from "../Database";
 
 const Home = ({ navigation }) => {
   const login = "login";
@@ -45,16 +49,50 @@ const Home = ({ navigation }) => {
     Fee: 0.01,
   };
 
+  const transactions = [];
+  GetAllOrderByUserId(1)
+    .then((result) => {
+      const orders = result;
+      //const transactions = [];
+      orders.map((order) => {
+        GetReceiverDetails(order.RecipientId)
+          .then((result) => {
+            const fullname = result.FirstName + " " + result.LastName;
+            const receiverGet = (order.Amount * order.Exchange_Rate).toFixed(2);
+            const history = {
+              OrderNo: order.OrderId,
+              SentDate: order.Send_Date,
+              Receiver: fullname,
+              Amount: order.Amount,
+              ReceivierGets: receiverGet,
+              From: order.From_Currency,
+              To: order.To_Currency,
+            };
+            transactions.push(history);
+          })
+          .catch((error) => {
+            console.log(`Error while getting receiver details: ${error}`);
+            return;
+          });
+      });
+    })
+    .catch((error) => {
+      console.log(`Error while getting order details: ${error}`);
+      return;
+    });
+
   return (
     <View>
-      <Text onPress={() => navigation.navigate("HomePage")}>{HomePage}</Text>
+      {/*
+          <Text onPress={() => navigation.navigate("HomePage")}>{HomePage}</Text>
+      <Text onPress={() => navigation.navigate("Profile")}>{Profile}</Text>
+        */}
+
       <Text onPress={() => navigation.navigate("SignUp")}>{SignUp}</Text>
       <Text onPress={() => navigation.navigate("Login")}>{login}</Text>
-      <Text onPress={() => navigation.navigate("Profile")}>{Profile}</Text>
       <Text onPress={() => navigation.navigate("AddReceiver")}>
         {AddReceiver}
       </Text>
-
       <Text
         onPress={() =>
           navigation.navigate("ReceiverDetails", { receiver, bank_info })
@@ -67,7 +105,9 @@ const Home = ({ navigation }) => {
       >
         {orderSummary}
       </Text>
-      <Text onPress={() => navigation.navigate("History")}>{history}</Text>
+      <Text onPress={() => navigation.navigate("History", { transactions })}>
+        {history}
+      </Text>
     </View>
   );
 };
