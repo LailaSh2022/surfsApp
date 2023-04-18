@@ -21,7 +21,7 @@ import {
   ExtraText,
 } from "./../components/Styles";
 
-import {  AddNewReceiver} from "../Database";
+import {AddNewReceiver} from "../Database";
 
 const { darkLight } = Colors;
 const AddReceiver = () => {

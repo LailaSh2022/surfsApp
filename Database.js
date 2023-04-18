@@ -178,9 +178,8 @@ export async function AddNewReceiver(receiver) {
   try {
     db.transaction((tx) => {
       tx.executeSql(
-        "INSERT INTO Users (Currency, FirstName, MiddleName, LastName, Email, MobileNumber, Relationship, Bank_Account_Number, Address, Swift_Code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?);",
+        "INSERT INTO Recipients (FirstName, MiddleName, LastName, Email, MobileNumber, Relationship, Bank_Account_Number, Address, Currency, Swift_Code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?);",
         [
-          receiver.currency,
           receiver.firstname,
           "",
           receiver.lastname,
@@ -189,6 +188,7 @@ export async function AddNewReceiver(receiver) {
           receiver.relantioship,
           receiver.bankAccount,
           "",
+          receiver.currency,
           receiver.SwiftNum,
         ],
         (_, { rowsAffected, insertId }) => {

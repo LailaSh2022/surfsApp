@@ -37,6 +37,7 @@ const ReceiverDetails = ({ route }) => {
       <View style={{ flexDirection: "row", marginTop: 15 }}>
         <Text>Bank Info:</Text>
       </View>
+      
       <View style={{ flexDirection: "row", marginTop: 15 }}>
         <Text style={{ width: "25%" }}>Name:</Text>
         <Text>{bank_info.Bank_Name}</Text>
