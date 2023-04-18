@@ -172,22 +172,24 @@ export async function SignUpNewUser(user) {
   }
 }
 
-export async function NewReceiver(ReceiverDetails) {
+export async function AddNewReceiver(receiver) {
+  console.log(receiver);
   const db = await OpenDatabase();
   try {
     db.transaction((tx) => {
       tx.executeSql(
-        "INSERT INTO Users (Currency, Name, MobileNum, relantionship, Email, Bank_Account_Number) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);",
+        "INSERT INTO Users (Currency, FirstName, MiddleName, LastName, Email, MobileNumber, Relationship, Bank_Account_Number, Address, Swift_Code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?);",
         [
-          ReceiverDetails.currency,
-          ReceiverDetails.email,
-          ReceiverDetails.name,
-          ReceiverDetails.MobileNum,
-          ReceiverDetails.relantioship,
-          ReceiverDetails.bankAccount,
-
-          "1",
-          "2",
+          receiver.currency,
+          receiver.firstname,
+          "",
+          receiver.lastname,
+          receiver.email,
+          receiver.MobileNum,
+          receiver.relantioship,
+          receiver.bankAccount,
+          "",
+          receiver.SwiftNum,
         ],
         (_, { rowsAffected, insertId }) => {
           console.log(`Inserted ${rowsAffected} row with ID ${insertId}`);
