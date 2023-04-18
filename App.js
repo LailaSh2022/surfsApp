@@ -40,7 +40,6 @@ export default function App() {
           */}
 
         <Stack.Screen name="AddReceiver" component={AddReceiver} />
-
         <Stack.Screen name="ReceiverDetails" component={ReceiverDetails} />
         <Stack.Screen name="OrderSummary" component={OrderSummary} />
         <Stack.Screen name="History" component={History} />

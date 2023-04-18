@@ -1,44 +1,35 @@
-import React, { useState } from "react";
+import React from "react";
 import { StatusBar } from "expo-status-bar";
-import { Text, View, ScrollView } from "react-native";
+import { View, ScrollView } from "react-native";
 //Using formik
 import { Formik } from "formik";
 //Icons
-import { Octicons, Ionicons } from "@expo/vector-icons";
+import { Octicons} from "@expo/vector-icons";
 import PageFooter from "../components/PageFooter";
 // Styles
 import {
   StyledContainer,
   InnerContainer,
-  PageLogo,
-  PageTitle,
-  SubTitle,
   StyledFormArea,
   StyledTextInput,
   StyledInputLable,
   LeftIcon,
-  RightIcon,
   StyledButton,
   ButtonText,
   Colors,
   ExtraView,
   ExtraText,
-  TextLink,
-  TextLinkContent,
-  UserImage,
-  SubPageLogo,
-  MediumPageLogo,
 } from "./../components/Styles";
 
-const { brand, darkLight, tertiary } = Colors;
+import {AddNewReceiver} from "../Database";
+
+const { darkLight } = Colors;
 const AddReceiver = () => {
-  const [hidePassword, setHidePassword] = useState(true);
   return (
     <StyledContainer>
       <ScrollView>
         <StatusBar style="dark" />
           <ExtraView>
-            
             <ExtraText>Enter theis Account details </ExtraText>
           </ExtraView>
         <InnerContainer>
@@ -46,79 +37,77 @@ const AddReceiver = () => {
           <Formik
             initialValues={{
               currency: "",
+              firstname: "",
+              lastname: "",
               email: "",
-              name: "",
               MobileNum: "",       
               relantioship: "",
               bankAccount: "",
-              bankname: "",
               SwiftNum: "",
-
-              
             }}
-            onSubmit={(values) => console.log(values)}
+            onSubmit={(values) => AddNewReceiver(values)}
           >
             {({ handleChange, handleBlur, handleSubmit, values }) => (
               <StyledFormArea>
-                <MyTextInput
-                  
-                  lable="Currency"
+                <MyTextInput                  
+                  placeholder="currency"
                   placeholderTextColor={darkLight}
                   onChangeText={handleChange("currency")}
                   onBlur={handleBlur("currency")}
                   values={values.currency}
-                  keyboardType="currency"
+                  //keyboardType="currency"
                 />
+              <MyTextInput
+                  placeholder="FirstName"
+                  placeholderTextColor={darkLight}
+                  onChangeText={handleChange("firstname")}
+                  onBlur={handleBlur("firstname")}
+                  values={values.firstname}
+                />
+
                 <MyTextInput
-                  lable="Their Email Address"
+                  placeholder="LastName"
+                  placeholderTextColor={darkLight}
+                  onChangeText={handleChange("lastname")}
+                  onBlur={handleBlur("lastname")}
+                  values={values.lastname}
+                />
+
+                <MyTextInput
+                  placeholder="Their Email Address"
                   placeholderTextColor={darkLight}
                   onChangeText={handleChange("email")}
                   onBlur={handleBlur("email")}
                   values={values.email}
                   keyboardType="email-address"
                 />
+                
                 <MyTextInput
-                  lable="Full Name of the Account Holder"
-                  placeholderTextColor={darkLight}
-                  onChangeText={handleChange("name")}
-                  onBlur={handleBlur("name")}
-                  values={values.name}
-                />     
-                <MyTextInput
-                  lable="Mobile Number"
+                  placeholder="Mobile Number"
                   placeholderTextColor={darkLight}
                   onChangeText={handleChange("MobileNum")}
                   onBlur={handleBlur("MobileNum")}
                   values={values.MobileNum}
-                  keyboardType="email-address"
                 />
                 <MyTextInput
-                  lable="Relantionship"
+                  placeholder="Relantionship"
                   placeholderTextColor={darkLight}
                   onChangeText={handleChange("relantioship")}
                   onBlur={handleBlur("relantioship")}
                   values={values.relantioship}
-                  keyboardType="relantioship"
+                  //keyboardType="relantioship"
                   
                 />
                 <MyTextInput
-                  lable="Bank Account Details"
+                  placeholder="Bank Account Details"
                   placeholderTextColor={darkLight}
-                  onChangeText={handleChange("bankaccount")}
-                  onBlur={handleBlur("bankaccount")}
+                  onChangeText={handleChange("bankAccount")}
+                  onBlur={handleBlur("bankAccount")}
                   values={values.bankAccount}
                   
                 />
                 <MyTextInput
-                  lable="Bank Name"
-                  placeholderTextColor={darkLight}
-                  onChangeText={handleChange("bankname")}
-                  onBlur={handleBlur("bankname")}
-                  values={values.bankname}
-                  
-                />
-                <MyTextInput
-                  lable="SWIFT Number"
+                  placeholder="SWIFT Number"
                   placeholderTextColor={darkLight}
                   onChangeText={handleChange("SwiftNum")}
                   onBlur={handleBlur("SwiftNum")}

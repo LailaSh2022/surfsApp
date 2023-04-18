@@ -11,13 +11,14 @@ import {
 
 const Home = ({ navigation }) => {
   const login = "login";
-  const Profile = "Profile";
-  const HomePage = "HomePage";
+  //const Profile = "Profile";
+  //const HomePage = "HomePage";
   const receiverDetails = "receiver details";
   const orderSummary = "order summary";
   const history = "history";
   const SignUp = "SignUp";
   const AddReceiver = "AddReceiver";
+  //const ContactUs = "ContactUs";
 
   var receiver;
   var bank_info;
