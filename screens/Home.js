@@ -5,7 +5,7 @@ import Profile from "./Profile";
 import HomePage from "./HomePage";
 import {
   GetReceiverDetails,
-  GetReceiverBankInfo,
+  //GetReceiverBankInfo,
   GetAllOrderByUserId,
 } from "../Database";
 
@@ -21,10 +21,11 @@ const Home = ({ navigation }) => {
   //const ContactUs = "ContactUs";
 
   var receiver;
-  var bank_info;
+  //var bank_info;
   GetReceiverDetails(1)
     .then((result) => {
       receiver = result;
+      /*
       GetReceiverBankInfo(receiver.Bank_Info)
         .then((result) => {
           bank_info = result;
@@ -33,6 +34,7 @@ const Home = ({ navigation }) => {
           console.log(`Error while getting bank_info: ${error}`);
           return;
         });
+        */
     })
     .catch((error) => {
       console.log(`Error while getting receiver details: ${error}`);
@@ -51,7 +53,7 @@ const Home = ({ navigation }) => {
   };
 
   const transactions = [];
-  GetAllOrderByUserId(1)
+  GetAllOrderByUserId(2)
     .then((result) => {
       const orders = result;
       //const transactions = [];
@@ -69,6 +71,7 @@ const Home = ({ navigation }) => {
               From: order.From_Currency,
               To: order.To_Currency,
             };
+            console.log(history)
             transactions.push(history);
           })
           .catch((error) => {
@@ -95,9 +98,7 @@ const Home = ({ navigation }) => {
         {AddReceiver}
       </Text>
       <Text
-        onPress={() =>
-          navigation.navigate("ReceiverDetails", { receiver, bank_info })
-        }
+        onPress={() => navigation.navigate("ReceiverDetails", { receiver })}
       >
         {receiverDetails}
       </Text>

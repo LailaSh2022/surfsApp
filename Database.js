@@ -18,13 +18,15 @@ const CopyDatabase = async () => {
 };
 
 export async function OpenDatabase() {
+  const database = SQLite.openDatabase("surfsApp.db");
+  database._db.close();
   await CopyDatabase();
   return SQLite.openDatabase("surfsApp.db");
 }
 
 export async function getAllRecipients() {
+  const db = await OpenDatabase();
   try {
-    const db = await OpenDatabase();
     db.transaction((tx) => {
       tx.executeSql("SELECT * FROM Recipients", [], (tx, { rows }) => {
         console.log(rows._array);
@@ -36,8 +38,8 @@ export async function getAllRecipients() {
 }
 
 export async function getAllUsers() {
+  const db = await OpenDatabase();
   try {
-    const db = await OpenDatabase();
     db.transaction((tx) => {
       tx.executeSql("SELECT * FROM Users", [], (tx, { rows }) => {
         console.log(rows._array);
@@ -67,6 +69,7 @@ export async function checkUsernamePassword(username, password) {
         },
         (_, error) => {
           console.log(`Error while executing SQL query: ${error}`);
+          console.log(error);
           reject(error);
         }
       );
@@ -119,6 +122,7 @@ export async function GetReceiverDetails(receiverId) {
   });
 }
 
+/*
 export async function GetReceiverBankInfo(BankInfoId) {
   const db = await OpenDatabase();
   return new Promise((resolve, reject) => {
@@ -141,6 +145,7 @@ export async function GetReceiverBankInfo(BankInfoId) {
     });
   });
 }
+*/
 
 export async function SignUpNewUser(user) {
   const db = await OpenDatabase();
@@ -160,10 +165,13 @@ export async function SignUpNewUser(user) {
           "",
           "",
         ],
-        (_, { rowsAffected, insertId }) => {
-          console.log(`Inserted ${rowsAffected} row with ID ${insertId}`);
+        (txObj, resultSet) => {
+          console.log("insertId: " + resultSet.insertId);
+          console.log("rowsAffected: " + resultSet.rowsAffected);
         },
-        (error) => console.log(error)
+        (txObj, error) => {
+          console.log("Error: " + error.message);
+        }
       );
     });
   } catch (error) {
@@ -184,7 +192,7 @@ export async function AddNewReceiver(receiver) {
           receiver.lastname,
           receiver.email,
           receiver.MobileNum,
-          receiver.relantioship,
+          receiver.relationship,
           receiver.bankAccount,
           "",
           receiver.currency,
@@ -287,7 +295,7 @@ export async function GetAllOrderByUserId(userId) {
     console.log("Executing SQL query...");
     db.transaction((tx) => {
       tx.executeSql(
-        "SELECT * FROM Orders WHERE SenderId=?",
+        "SELECT * FROM Orders WHERE SenderId=?;",
         [userId],
         (_, { rows: { _array } }) => {
           console.log("Query completed successfully.");
