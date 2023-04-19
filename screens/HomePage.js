@@ -27,7 +27,7 @@ const { brand, darkLight, tertiary } = Colors;
 const TEMP_BASE_CURRENCY = "NZD";
 const TEMP_QUOTE_CURRENCY = "USD";
 // Open the Home Page
-function Home_Page() {
+function DrawHome_Page() {
   return (
     <StyledContainer>
       <View
@@ -116,7 +116,7 @@ const DrawerNavigator = () => {
         headerTitle: "",
       }}
     >
-      <Drawer.Screen component={Home_Page} name={"Home Page"} />
+      <Drawer.Screen component={DrawHome_Page} name={"Home Page"} />
       <Drawer.Screen component={Contacts} name={"Contact Us"} />
       <Drawer.Screen component={Login} name={"Sign In"} />
       {/*Navigate to Login Page*/}
@@ -124,21 +124,21 @@ const DrawerNavigator = () => {
   );
 };
 
-
-const HomePage = () => {
+const HomePage = ({ navigation }) => {
   const route = useRoute();
   console.log("route: ", route);
 
   const { userId } = route.params || {};
   console.log("userId: ", userId);
-  if (!userId) {
-    console.log("Error: userId is undefined");
-    return <DrawerNavigator />;
-  } else {
-   
-    return <SignedInDrawerNavigator />;
-  }
+
+  useEffect(() => {
+    if (!userId) {
+      console.log("Error: userId is undefined");
+      navigation.navigate("Login");
+    }
+  }, [userId, navigation]);
+
+  return userId ? <SignedInDrawerNavigator /> : <DrawerNavigator />;
 };
 
 export default HomePage;
-

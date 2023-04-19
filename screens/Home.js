@@ -1,8 +1,8 @@
 // JavaScript source code
 import React from "react";
 import { View, Text } from "react-native";
-//import Profile from "./Profile";
-//import HomePage from "./HomePage";
+import Profile from "./Profile";
+import HomePage from "./HomePage";
 import {
   GetReceiverDetails,
   GetReceiverBankInfo,
@@ -11,8 +11,8 @@ import {
 
 const Home = ({ navigation }) => {
   const login = "login";
-  //const Profile = "Profile";
-  //const HomePage = "HomePage";
+  const Profile = "Profile";
+  const HomePage = "HomePage";
   const receiverDetails = "receiver details";
   const orderSummary = "order summary";
   const history = "history";
@@ -84,10 +84,10 @@ const Home = ({ navigation }) => {
 
   return (
     <View>
-      {/*
+      
           <Text onPress={() => navigation.navigate("HomePage")}>{HomePage}</Text>
       <Text onPress={() => navigation.navigate("Profile")}>{Profile}</Text>
-        */}
+       
 
       <Text onPress={() => navigation.navigate("SignUp")}>{SignUp}</Text>
       <Text onPress={() => navigation.navigate("Login")}>{login}</Text>
