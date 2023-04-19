@@ -9,6 +9,7 @@ import InputWithButton from "../components/InputWithButton";
 import PageFooter from "../components/PageFooter";
 import SignedInDrawerNavigator from "../components/SignedInDrawerNavigator";
 import { useNavigation } from "@react-navigation/native";
+import CurrencyExchange from "../components/CurrencyExchange";
 
 //styles
 import {
@@ -68,29 +69,9 @@ function DrawHome_Page() {
         <View style={{ height: "7%" }} />
         <CurrencyScreen />
         <View style={{ height: "0.5%" }} />
-        <InputWithButton buttonText={TEMP_BASE_CURRENCY} />
-        <View style={{ height: "0.5%" }} />
-        <Text>%1.00 Our fee</Text>
-        <View style={{ height: "2%" }} />
-        <Text>%1.00 Total fee</Text>
-        <View style={{ height: "2%" }} />
-        <Text>$1.00 Total Amount will Convert</Text>
-        <View style={{ height: "1%" }} />
-        <InputWithButton buttonText={TEMP_QUOTE_CURRENCY} disable={false} />
-        <View
-          style={{
-            flexDirection: "row",
-          }}
-        >
-          <StyledSmallButton>
-            <SmallButtonText>Refresh</SmallButtonText>
-          </StyledSmallButton>
-          <View style={{ width: "10%" }} />
-          <StyledSmallButton>
-            <SmallButtonText>Transfer</SmallButtonText>
-          </StyledSmallButton>
-        </View>
+        <CurrencyExchange />
       </InnerContainer>
+
       <View>
         <PageFooter />
       </View>
@@ -140,7 +121,11 @@ const HomePage = () => {
     }
   }, [userId]);
 
-  return userId ? <SignedInDrawerNavigator userId={userId}/> : <DrawHome_Page />;
+  return userId ? (
+    <SignedInDrawerNavigator userId={userId} />
+  ) : (
+    <DrawHome_Page />
+  );
 };
 
 export default HomePage;
