@@ -53,7 +53,7 @@ const Home = ({ navigation }) => {
   };
 
   const transactions = [];
-  GetAllOrderByUserId(1)
+  GetAllOrderByUserId(2)
     .then((result) => {
       const orders = result;
       //const transactions = [];
@@ -71,6 +71,7 @@ const Home = ({ navigation }) => {
               From: order.From_Currency,
               To: order.To_Currency,
             };
+            console.log(history)
             transactions.push(history);
           })
           .catch((error) => {
