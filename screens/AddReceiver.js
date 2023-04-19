@@ -44,7 +44,10 @@ const AddReceiver = () => {
               bankAccount: "",
               SwiftNum: "",
             }}
-            onSubmit={(values) => AddNewReceiver(values)}
+            onSubmit={(values) => {
+              console.log(values);
+              AddNewReceiver(values);
+            }}
           >
             {({ handleChange, handleBlur, handleSubmit, values }) => (
               <StyledFormArea>

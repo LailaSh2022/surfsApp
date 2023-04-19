@@ -18,6 +18,8 @@ const CopyDatabase = async () => {
 };
 
 export async function OpenDatabase() {
+  const database = SQLite.openDatabase("surfsApp.db");
+  database._db.close();
   await CopyDatabase();
   return SQLite.openDatabase("surfsApp.db");
 }
@@ -163,10 +165,13 @@ export async function SignUpNewUser(user) {
           "",
           "",
         ],
-        (_, { rowsAffected, insertId }) => {
-          console.log(`Inserted ${rowsAffected} row with ID ${insertId}`);
+        (txObj, resultSet) => {
+          console.log("insertId: " + resultSet.insertId);
+          console.log("rowsAffected: " + resultSet.rowsAffected);
         },
-        (error) => console.log(error)
+        (txObj, error) => {
+          console.log("Error: " + error.message);
+        }
       );
     });
   } catch (error) {
