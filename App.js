@@ -9,7 +9,7 @@ import OrderSummary from "./screens/OrderSummary";
 import ReceiverDetails from "./screens/ReceiverDetails";
 import History from "./screens/History";
 import AddReceiver from "./screens/AddReceiver";
-import OrderReceiverList from "./screens/OrderReceiverList";
+import ReceiverList from "./screens/ReceiverList";
 import SignUp from "./screens/SignUp";
 
 import { useEffect } from "react";
@@ -33,12 +33,14 @@ export default function App() {
         />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="SignUp" component={SignUp} />
-        {/*
-        <Stack.Screen name="HomePage" component={HomePage} />
-        
+        {
+          /*
+          <Stack.Screen name="HomePage" component={HomePage} />
           <Stack.Screen name="Profile" component={Profile} />
-          */}
-
+          */
+        }
+        
+        
         <Stack.Screen name="AddReceiver" component={AddReceiver} />
         <Stack.Screen name="ReceiverDetails" component={ReceiverDetails} />
         <Stack.Screen name="OrderSummary" component={OrderSummary} />

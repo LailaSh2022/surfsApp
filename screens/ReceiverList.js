@@ -1,12 +1,12 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import HistoryItem from "./../components/HistoryItem";
-import { StyledContainer } from "./../components/Styles";
+import HistoryItem from "../components/HistoryItem";
+import { StyledContainer } from "../components/Styles";
 import { GetAllOrderByUserId, GetReceiverDetails } from "../Database";
 
-const History = () => {
+const OrderReceiverList = () => {
   let transactions = [];
-  GetAllOrderByUserId(1)
+  GetReceiverDetails(1)
     .then((result) => {
       const orders = result;
       orders.map((order) => {
@@ -14,16 +14,11 @@ const History = () => {
           .then((result) => {
             const fullname = result.FirstName + " " + result.LastName;
             const receiverGet = (order.Amount * order.Exchange_Rate).toFixed(2);
-            const history = {
-              OrderNo: order.OrderId,
-              SentDate: order.Send_Date,
-              Receiver: fullname,
-              Amount: order.Amount,
-              ReceivierGets: receiverGet,
-              From: order.From_Currency,
-              To: order.To_Currency,
+            const Recipients = {
+              BankAccount: Recipients.BankAccount,
+              Currency: Recipients.Currency
             };
-            transactions.push(history);
+            transactions.push(Recipients);
           })
           .catch((error) => {
             console.log(`Error while getting bank_info: ${error}`);
@@ -40,13 +35,13 @@ const History = () => {
     <StyledContainer>
       <View>
         <View style={{ flexDirection: "row" }}>
-          <Text style={styles.headline}> History</Text>
+          <Text style={styles.headline}> Receiver List</Text>
         </View>
         <Text style={{ paddingTop: 15, color: "blue", fontSize: 15 }}>
-          Transactions
+          Receiver List
         </Text>
         {transactions.map((item, i) => (
-          <HistoryItem item={item} key={i} />
+          <ReceiverList item={item} key={i} />
         ))}
       </View>
     </StyledContainer>
@@ -64,4 +59,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default History;
+export default OrderReceiverList;

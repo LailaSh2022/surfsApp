@@ -23,8 +23,8 @@ export async function OpenDatabase() {
 }
 
 export async function getAllRecipients() {
+  const db = await OpenDatabase();
   try {
-    const db = await OpenDatabase();
     db.transaction((tx) => {
       tx.executeSql("SELECT * FROM Recipients", [], (tx, { rows }) => {
         console.log(rows._array);
@@ -36,8 +36,8 @@ export async function getAllRecipients() {
 }
 
 export async function getAllUsers() {
+  const db = await OpenDatabase();
   try {
-    const db = await OpenDatabase();
     db.transaction((tx) => {
       tx.executeSql("SELECT * FROM Users", [], (tx, { rows }) => {
         console.log(rows._array);
@@ -67,6 +67,7 @@ export async function checkUsernamePassword(username, password) {
         },
         (_, error) => {
           console.log(`Error while executing SQL query: ${error}`);
+          console.log(error);
           reject(error);
         }
       );
@@ -289,7 +290,7 @@ export async function GetAllOrderByUserId(userId) {
     console.log("Executing SQL query...");
     db.transaction((tx) => {
       tx.executeSql(
-        "SELECT * FROM Orders WHERE SenderId=?",
+        "SELECT * FROM Orders WHERE SenderId=?;",
         [userId],
         (_, { rows: { _array } }) => {
           console.log("Query completed successfully.");
