@@ -22,24 +22,14 @@ import {
     InnerContainer,
     PageLogo,
     PageTitle,
-    SubTitle,
-    StyledFormArea,
-    StyledTextInput,
-    StyledInputLable,
-    LeftIcon,
-    RightIcon,
-    StyledButton,
-    ButtonText,
     Colors,
     ExtraView,
     ExtraText,
-    TextLink,
-    TextLinkContent,
+    
   } from "./../components/Styles";
   
-
   import { useNavigation } from "@react-navigation/native";
-  
+
   const { brand, darkLight, tertiary } = Colors;
   const ContactUs = () => {
     const navigation = useNavigation();
