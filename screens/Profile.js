@@ -7,6 +7,7 @@ import { Formik } from "formik";
 import { Octicons, Ionicons } from "@expo/vector-icons";
 import PageFooter from "../components/PageFooter";
 import UnsubscribeLink from "../components/UnsubscribeLink";
+import { useRoute } from "@react-navigation/native";
 // Styles
 import {
   StyledContainer,
@@ -106,14 +107,15 @@ const onSubmit = (values) => {
 const Profile = () => {
   const [hidePassword, setHidePassword] = useState(true);
   const [userData, setUserData] = useState(null);
-  const userId = 2;
-
+  const route = useRoute();
+  const { userId } = route.params || {};
+  console.log("ProfilePage - userId: " + userId);
   useEffect(() => {
     getUser(userId).then((data) => setUserData(data));
   }, [userId]);
   console.log(userData);
 
-  // Check if the user's data has been fetched before rendering the form
+  //Check if the user's data has been fetched before rendering the form
   if (!userData) {
     return <ActivityIndicator />;
   }

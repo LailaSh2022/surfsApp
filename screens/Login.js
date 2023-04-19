@@ -71,7 +71,7 @@ const Login = () => {
     checkUsernamePassword(username, password)
       .then((userId) => {
         if (userId) {
-          alert("Login Successful! " + userId);
+          //alert("Login Successful! " + userId);
           navigation.navigate("HomePage", { userId: userId });
         } else {
           alert("Invalid username or password!");

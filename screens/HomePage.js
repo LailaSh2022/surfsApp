@@ -140,7 +140,7 @@ const HomePage = () => {
     }
   }, [userId]);
 
-  return userId ? <SignedInDrawerNavigator /> : <DrawHome_Page />;
+  return userId ? <SignedInDrawerNavigator userId={userId}/> : <DrawHome_Page />;
 };
 
 export default HomePage;

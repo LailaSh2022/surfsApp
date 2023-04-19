@@ -13,7 +13,9 @@ function Contacts() {
 }
 
 const Drawer = createDrawerNavigator();
-const SignedInDrawerNavigator = () => {
+const SignedInDrawerNavigator = ({ userId }) => {
+  const screenProps = { userId: userId };
+  console.log(screenProps);
   return (
     <Drawer.Navigator
       screenOptions={{
@@ -25,10 +27,28 @@ const SignedInDrawerNavigator = () => {
         headerTitle: "",
       }}
     >
-      <Drawer.Screen component={Home_Page01} name={"Home Page"} />
-      <Drawer.Screen component={Profile} name={"Your Profile"} />
-      <Drawer.Screen component={History} name={"History"} />
-      <Drawer.Screen component={Contacts} name={"Contact Us"} />
+      <Drawer.Screen
+        component={Home_Page01}
+        name={"Home Page"}
+        // screenProps={screenProps}
+        //initialParams={{ userId: userId }}
+      />
+      <Drawer.Screen
+        component={Profile}
+        name={"Your Profile"}
+        initialParams={{ userId: userId }}
+      />
+      <Drawer.Screen
+        component={History}
+        name={"History"}
+        initialParams={{ userId: userId }}
+      />
+      <Drawer.Screen
+        component={Contacts}
+        name={"Contact Us"}
+        initialParams={{ userId: userId }}
+        // screenProps={screenProps}
+      />
       {/*Navigate to Login Page*/}
     </Drawer.Navigator>
   );
