@@ -9,7 +9,7 @@ import OrderSummary from "./screens/OrderSummary";
 import ReceiverDetails from "./screens/ReceiverDetails";
 import History from "./screens/History";
 import AddReceiver from "./screens/AddReceiver";
-import OrderReceiverList from "./screens/OrderReceiverList";
+import ReceiverList from "./screens/ReceiverList";
 import SignUp from "./screens/SignUp";
 
 import { useEffect } from "react";
