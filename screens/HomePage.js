@@ -8,6 +8,8 @@ import CurrencyScreen from "../components/CurrencyScreen";
 import InputWithButton from "../components/InputWithButton";
 import PageFooter from "../components/PageFooter";
 import SignedInDrawerNavigator from "../components/SignedInDrawerNavigator";
+import { useNavigation } from "@react-navigation/native";
+
 //styles
 import {
   SubPageLogo,
@@ -28,6 +30,7 @@ const TEMP_BASE_CURRENCY = "NZD";
 const TEMP_QUOTE_CURRENCY = "USD";
 // Open the Home Page
 function DrawHome_Page() {
+  const navigation = useNavigation();
   return (
     <StyledContainer>
       <View
@@ -38,7 +41,7 @@ function DrawHome_Page() {
           position: "absolute",
         }}
       >
-        <StyledSideSmallButton>
+        <StyledSideSmallButton onPress={() => navigation.navigate("Login")}>
           <SmallButtonText>Sign In</SmallButtonText>
         </StyledSideSmallButton>
         <View style={{ width: "5%" }} />
@@ -103,28 +106,28 @@ function Contacts() {
   );
 }
 
-const Drawer = createDrawerNavigator();
-const DrawerNavigator = () => {
-  return (
-    <Drawer.Navigator
-      screenOptions={{
-        headerShown: true,
-        headerStyle: {
-          elevation: 0,
-          shadowOpacity: 0,
-        },
-        headerTitle: "",
-      }}
-    >
-      <Drawer.Screen component={DrawHome_Page} name={"Home Page"} />
-      <Drawer.Screen component={Contacts} name={"Contact Us"} />
-      <Drawer.Screen component={Login} name={"Sign In"} />
-      {/*Navigate to Login Page*/}
-    </Drawer.Navigator>
-  );
-};
+// const Drawer = createDrawerNavigator();
+// const DrawerNavigator = () => {
+//   return (
+//     <Drawer.Navigator
+//       screenOptions={{
+//         headerShown: true,
+//         headerStyle: {
+//           elevation: 0,
+//           shadowOpacity: 0,
+//         },
+//         headerTitle: "",
+//       }}
+//     >
+//       <Drawer.Screen component={DrawHome_Page} name={"Home Page"} />
+//       <Drawer.Screen component={Contacts} name={"Contact Us"} />
+//       <Drawer.Screen component={Login} name={"Sign In"} />
+//       {/*Navigate to Login Page*/}
+//     </Drawer.Navigator>
+//   );
+// };
 
-const HomePage = ({ navigation }) => {
+const HomePage = () => {
   const route = useRoute();
   console.log("route: ", route);
 
@@ -133,12 +136,11 @@ const HomePage = ({ navigation }) => {
 
   useEffect(() => {
     if (!userId) {
-      console.log("Error: userId is undefined");
-      navigation.navigate("Login");
+      console.log("Info: userId is undefined");
     }
-  }, [userId, navigation]);
+  }, [userId]);
 
-  return userId ? <SignedInDrawerNavigator /> : <DrawerNavigator />;
+  return userId ? <SignedInDrawerNavigator /> : <DrawHome_Page />;
 };
 
 export default HomePage;
