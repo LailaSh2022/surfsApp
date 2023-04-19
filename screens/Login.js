@@ -16,6 +16,7 @@ import PageFooter from "../components/PageFooter";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import SignUpLink from "../components/SignUpLink";
+import HomePage from "./HomePage";
 
 // Styles
 import {
@@ -80,7 +81,6 @@ const Login = () => {
         console.log(`Error while checking user's credentials: ${error}`);
         console.log(error);
       });
-
   };
   return (
     <StyledContainer>

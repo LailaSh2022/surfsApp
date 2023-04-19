@@ -11,7 +11,7 @@ import History from "./screens/History";
 import AddReceiver from "./screens/AddReceiver";
 import ReceiverList from "./screens/ReceiverList";
 import SignUp from "./screens/SignUp";
-
+import Unsubscribe from "./screens/Unsubscribe";
 import { useEffect } from "react";
 import { getAllRecipients, getAllUsers } from "./Database";
 
@@ -33,16 +33,13 @@ export default function App() {
         />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="SignUp" component={SignUp} />
-        
         <Stack.Screen name="HomePage" component={HomePage} />
-        
-          <Stack.Screen name="Profile" component={Profile} />
-          
-
+        <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen name="AddReceiver" component={AddReceiver} />
         <Stack.Screen name="ReceiverDetails" component={ReceiverDetails} />
         <Stack.Screen name="OrderSummary" component={OrderSummary} />
         <Stack.Screen name="History" component={History} />
+        <Stack.Screen name="Unsubscribe" component={Unsubscribe} />
       </Stack.Navigator>
     </NavigationContainer>
   );

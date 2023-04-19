@@ -8,6 +8,7 @@ import {
   //GetReceiverBankInfo,
   GetAllOrderByUserId,
 } from "../Database";
+import Unsubscribe from "./Unsubscribe";
 
 const Home = ({ navigation }) => {
   const login = "login";
@@ -19,6 +20,7 @@ const Home = ({ navigation }) => {
   const SignUp = "SignUp";
   const AddReceiver = "AddReceiver";
   //const ContactUs = "ContactUs";
+  const Unsubscribe = "Unsubscribe";
 
   var receiver;
   //var bank_info;
@@ -109,6 +111,9 @@ const Home = ({ navigation }) => {
       </Text>
       <Text onPress={() => navigation.navigate("History", { transactions })}>
         {history}
+      </Text>
+      <Text onPress={() => navigation.navigate("Unsubscribe", { Unsubscribe })}>
+        {Unsubscribe}
       </Text>
     </View>
   );

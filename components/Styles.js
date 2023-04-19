@@ -38,6 +38,9 @@ export const InnerContainer = styled.View`
 export const PageLogo = styled.Image`
   width: 200px;
   height: 170px;
+`;export const UnsubscribeLogo = styled.Image`
+width: 300px;
+height: 300px;
 `;
 export const SubPageLogo = styled.Image`
   width: 150px;
