@@ -4,7 +4,7 @@ import { View, ScrollView } from "react-native";
 //Using formik
 import { Formik } from "formik";
 //Icons
-import { Octicons} from "@expo/vector-icons";
+import { Octicons } from "@expo/vector-icons";
 import PageFooter from "../components/PageFooter";
 // Styles
 import {
@@ -21,7 +21,7 @@ import {
   ExtraText,
 } from "./../components/Styles";
 
-import {AddNewReceiver} from "../Database";
+import { AddNewReceiver } from "../Database";
 
 const { darkLight } = Colors;
 const AddReceiver = () => {
@@ -29,19 +29,18 @@ const AddReceiver = () => {
     <StyledContainer>
       <ScrollView>
         <StatusBar style="dark" />
-          <ExtraView>
-            <ExtraText>Enter theis Account details </ExtraText>
-          </ExtraView>
+        <ExtraView>
+          <ExtraText>Enter theis Account details </ExtraText>
+        </ExtraView>
         <InnerContainer>
-
           <Formik
             initialValues={{
               currency: "",
               firstname: "",
               lastname: "",
               email: "",
-              MobileNum: "",       
-              relantioship: "",
+              MobileNum: "",
+              relationship: "",
               bankAccount: "",
               SwiftNum: "",
             }}
@@ -49,7 +48,7 @@ const AddReceiver = () => {
           >
             {({ handleChange, handleBlur, handleSubmit, values }) => (
               <StyledFormArea>
-                <MyTextInput                  
+                <MyTextInput
                   placeholder="currency"
                   placeholderTextColor={darkLight}
                   onChangeText={handleChange("currency")}
@@ -57,7 +56,7 @@ const AddReceiver = () => {
                   values={values.currency}
                   //keyboardType="currency"
                 />
-              <MyTextInput
+                <MyTextInput
                   placeholder="FirstName"
                   placeholderTextColor={darkLight}
                   onChangeText={handleChange("firstname")}
@@ -81,7 +80,7 @@ const AddReceiver = () => {
                   values={values.email}
                   keyboardType="email-address"
                 />
-                
+
                 <MyTextInput
                   placeholder="Mobile Number"
                   placeholderTextColor={darkLight}
@@ -90,13 +89,12 @@ const AddReceiver = () => {
                   values={values.MobileNum}
                 />
                 <MyTextInput
-                  placeholder="Relantionship"
+                  placeholder="relationship"
                   placeholderTextColor={darkLight}
-                  onChangeText={handleChange("relantioship")}
-                  onBlur={handleBlur("relantioship")}
-                  values={values.relantioship}
+                  onChangeText={handleChange("relationship")}
+                  onBlur={handleBlur("relationship")}
+                  values={values.relationship}
                   //keyboardType="relantioship"
-                  
                 />
                 <MyTextInput
                   placeholder="Bank Account Details"
@@ -104,7 +102,6 @@ const AddReceiver = () => {
                   onChangeText={handleChange("bankAccount")}
                   onBlur={handleBlur("bankAccount")}
                   values={values.bankAccount}
-                  
                 />
                 <MyTextInput
                   placeholder="SWIFT Number"
@@ -112,26 +109,20 @@ const AddReceiver = () => {
                   onChangeText={handleChange("SwiftNum")}
                   onBlur={handleBlur("SwiftNum")}
                   values={values.SwiftNum}
-                  
                 />
 
-                
                 <StyledButton onPress={handleSubmit}>
                   <ButtonText>Confirm</ButtonText>
                 </StyledButton>
               </StyledFormArea>
             )}
           </Formik>
-                  
-
         </InnerContainer>
       </ScrollView>
       <View style={{ flexDirection: "column", height: "17%" }} />
       <View>
         <PageFooter />
       </View>
-
-      
     </StyledContainer>
   );
 };

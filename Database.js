@@ -119,6 +119,7 @@ export async function GetReceiverDetails(receiverId) {
   });
 }
 
+/*
 export async function GetReceiverBankInfo(BankInfoId) {
   const db = await OpenDatabase();
   return new Promise((resolve, reject) => {
@@ -141,6 +142,7 @@ export async function GetReceiverBankInfo(BankInfoId) {
     });
   });
 }
+*/
 
 export async function SignUpNewUser(user) {
   const db = await OpenDatabase();
@@ -184,7 +186,7 @@ export async function AddNewReceiver(receiver) {
           receiver.lastname,
           receiver.email,
           receiver.MobileNum,
-          receiver.relantioship,
+          receiver.relationship,
           receiver.bankAccount,
           "",
           receiver.currency,
