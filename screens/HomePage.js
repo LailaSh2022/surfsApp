@@ -8,6 +8,9 @@ import CurrencyScreen from "../components/CurrencyScreen";
 import InputWithButton from "../components/InputWithButton";
 import PageFooter from "../components/PageFooter";
 import SignedInDrawerNavigator from "../components/SignedInDrawerNavigator";
+import { useNavigation } from "@react-navigation/native";
+import CurrencyExchange from "../components/CurrencyExchange";
+
 //styles
 import {
   SubPageLogo,
@@ -27,7 +30,8 @@ const { brand, darkLight, tertiary } = Colors;
 const TEMP_BASE_CURRENCY = "NZD";
 const TEMP_QUOTE_CURRENCY = "USD";
 // Open the Home Page
-function Home_Page() {
+function DrawHome_Page() {
+  const navigation = useNavigation();
   return (
     <StyledContainer>
       <View
@@ -38,7 +42,7 @@ function Home_Page() {
           position: "absolute",
         }}
       >
-        <StyledSideSmallButton>
+        <StyledSideSmallButton onPress={() => navigation.navigate("Login")}>
           <SmallButtonText>Sign In</SmallButtonText>
         </StyledSideSmallButton>
         <View style={{ width: "5%" }} />
@@ -65,29 +69,9 @@ function Home_Page() {
         <View style={{ height: "7%" }} />
         <CurrencyScreen />
         <View style={{ height: "0.5%" }} />
-        <InputWithButton buttonText={TEMP_BASE_CURRENCY} />
-        <View style={{ height: "0.5%" }} />
-        <Text>%1.00 Our fee</Text>
-        <View style={{ height: "2%" }} />
-        <Text>%1.00 Total fee</Text>
-        <View style={{ height: "2%" }} />
-        <Text>$1.00 Total Amount will Convert</Text>
-        <View style={{ height: "1%" }} />
-        <InputWithButton buttonText={TEMP_QUOTE_CURRENCY} disable={false} />
-        <View
-          style={{
-            flexDirection: "row",
-          }}
-        >
-          <StyledSmallButton>
-            <SmallButtonText>Refresh</SmallButtonText>
-          </StyledSmallButton>
-          <View style={{ width: "10%" }} />
-          <StyledSmallButton>
-            <SmallButtonText>Transfer</SmallButtonText>
-          </StyledSmallButton>
-        </View>
+        <CurrencyExchange />
       </InnerContainer>
+
       <View>
         <PageFooter />
       </View>
@@ -103,27 +87,26 @@ function Contacts() {
   );
 }
 
-const Drawer = createDrawerNavigator();
-const DrawerNavigator = () => {
-  return (
-    <Drawer.Navigator
-      screenOptions={{
-        headerShown: true,
-        headerStyle: {
-          elevation: 0,
-          shadowOpacity: 0,
-        },
-        headerTitle: "",
-      }}
-    >
-      <Drawer.Screen component={Home_Page} name={"Home Page"} />
-      <Drawer.Screen component={Contacts} name={"Contact Us"} />
-      <Drawer.Screen component={Login} name={"Sign In"} />
-      {/*Navigate to Login Page*/}
-    </Drawer.Navigator>
-  );
-};
-
+// const Drawer = createDrawerNavigator();
+// const DrawerNavigator = () => {
+//   return (
+//     <Drawer.Navigator
+//       screenOptions={{
+//         headerShown: true,
+//         headerStyle: {
+//           elevation: 0,
+//           shadowOpacity: 0,
+//         },
+//         headerTitle: "",
+//       }}
+//     >
+//       <Drawer.Screen component={DrawHome_Page} name={"Home Page"} />
+//       <Drawer.Screen component={Contacts} name={"Contact Us"} />
+//       <Drawer.Screen component={Login} name={"Sign In"} />
+//       {/*Navigate to Login Page*/}
+//     </Drawer.Navigator>
+//   );
+// };
 
 const HomePage = () => {
   const route = useRoute();
@@ -131,14 +114,18 @@ const HomePage = () => {
 
   const { userId } = route.params || {};
   console.log("userId: ", userId);
-  if (!userId) {
-    console.log("Error: userId is undefined");
-    return <DrawerNavigator />;
-  } else {
-   
-    return <SignedInDrawerNavigator />;
-  }
+
+  useEffect(() => {
+    if (!userId) {
+      console.log("Info: userId is undefined");
+    }
+  }, [userId]);
+
+  return userId ? (
+    <SignedInDrawerNavigator userId={userId} />
+  ) : (
+    <DrawHome_Page />
+  );
 };
 
 export default HomePage;
-
