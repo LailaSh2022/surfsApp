@@ -2,10 +2,13 @@ import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, StyleSheet, Button } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import MyButton from "./MyButton";
+import { useNavigation } from "@react-navigation/native";
+import OrderReceiverList from "./../screens/ReceiverList";
 
 const API_KEY = "dc17da5627284a82aec1e8de2ad69a67";
 
 const CurrencyExchange = () => {
+  const navigation = useNavigation();
   const [baseAmount, setBaseAmount] = useState("");
   const [baseCurrency, setBaseCurrency] = useState("USD");
   const [targetAmount, setTargetAmount] = useState("");
@@ -125,7 +128,7 @@ const CurrencyExchange = () => {
         <View style={{ width: "10%" }} />
         <MyButton
           title="Transfer"
-          onPress={convertAmount}
+          onPress={() => navigation.navigate("OrderReceiverList")}
           style={styles.button}
         />
       </View>

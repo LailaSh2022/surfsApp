@@ -87,27 +87,6 @@ function Contacts() {
   );
 }
 
-// const Drawer = createDrawerNavigator();
-// const DrawerNavigator = () => {
-//   return (
-//     <Drawer.Navigator
-//       screenOptions={{
-//         headerShown: true,
-//         headerStyle: {
-//           elevation: 0,
-//           shadowOpacity: 0,
-//         },
-//         headerTitle: "",
-//       }}
-//     >
-//       <Drawer.Screen component={DrawHome_Page} name={"Home Page"} />
-//       <Drawer.Screen component={Contacts} name={"Contact Us"} />
-//       <Drawer.Screen component={Login} name={"Sign In"} />
-//       {/*Navigate to Login Page*/}
-//     </Drawer.Navigator>
-//   );
-// };
-
 const HomePage = () => {
   const route = useRoute();
   console.log("route: ", route);
