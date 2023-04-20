@@ -15,12 +15,22 @@ const CopyDatabase = async () => {
     Asset.fromModule(require("./assets/surfsApp.db")).uri,
     FileSystem.documentDirectory + "SQLite/surfsApp.db"
   );
+
+  return SQLite.openDatabase("surfsApp.db");
 };
+
+CopyDatabase()
+  .then(() => {
+    console.log("success copy db");
+  })
+  .catch((error) => {
+    console.log(`Error while copying database: ${error}`);
+  });
 
 export async function OpenDatabase() {
   const database = SQLite.openDatabase("surfsApp.db");
   database._db.close();
-  await CopyDatabase();
+  //await CopyDatabase();
   return SQLite.openDatabase("surfsApp.db");
 }
 
@@ -61,6 +71,7 @@ export async function checkUsernamePassword(username, password) {
         [username, password],
         (_, { rows: { _array } }) => {
           console.log("Query completed successfully.");
+
           if (_array.length > 0) {
             resolve(_array[0].Id);
           } else {
@@ -122,31 +133,6 @@ export async function GetReceiverDetails(receiverId) {
   });
 }
 
-/*
-export async function GetReceiverBankInfo(BankInfoId) {
-  const db = await OpenDatabase();
-  return new Promise((resolve, reject) => {
-    db.transaction((tx) => {
-      tx.executeSql(
-        "SELECT * FROM Bank_Info WHERE Id = ?",
-        [BankInfoId],
-        (_, { rows }) => {
-          if (rows._array.length > 0) {
-            console.log(rows.item(0));
-            resolve(rows.item(0));
-          } else {
-            resolve(null);
-          }
-        },
-        (error) => {
-          reject(error);
-        }
-      );
-    });
-  });
-}
-*/
-
 export async function SignUpNewUser(user) {
   const db = await OpenDatabase();
   console.log(user);
@@ -179,7 +165,28 @@ export async function SignUpNewUser(user) {
   }
 }
 
-export async function AddNewReceiver(receiver) {
+export async function AddUserIDReceiverId(userId, receiverId) {
+  const db = await OpenDatabase();
+  try {
+    db.transaction((tx) => {
+      tx.executeSql(
+        "INSERT INTO Users_Recipients (UserId, RecipientId) VALUES (?, ?);",
+        [userId, receiverId],
+        (txObj, resultSet) => {
+          console.log("insertId: " + resultSet.insertId);
+          console.log("rowsAffected: " + resultSet.rowsAffected);
+        },
+        (txObj, error) => {
+          console.log("Error: " + error.message);
+        }
+      );
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function AddNewReceiver(receiver, userId) {
   console.log(receiver);
   const db = await OpenDatabase();
   try {
@@ -200,6 +207,7 @@ export async function AddNewReceiver(receiver) {
         ],
         (_, { rowsAffected, insertId }) => {
           console.log(`Inserted ${rowsAffected} row with ID ${insertId}`);
+          AddUserIDReceiverId(userId, insertId);
         },
         (error) => console.log(error)
       );
@@ -299,6 +307,7 @@ export async function GetAllOrderByUserId(userId) {
         [userId],
         (_, { rows: { _array } }) => {
           console.log("Query completed successfully.");
+
           if (_array.length > 0) {
             resolve(_array);
           } else {
@@ -307,6 +316,7 @@ export async function GetAllOrderByUserId(userId) {
         },
         (_, error) => {
           console.log(`Error while executing SQL query: ${error}`);
+
           reject(error);
         }
       );
