@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
-import { Text, View, ScrollView, ActivityIndicator, Alert } from "react-native";
+import {
+  Text,
+  View,
+  ScrollView,
+  ActivityIndicator,
+  Alert,
+  KeyboardAvoidingView,
+} from "react-native";
 //Using formik
 import { Formik } from "formik";
 //Icons
@@ -123,115 +130,117 @@ const Profile = () => {
     <StyledContainer>
       <StatusBar style="dark" />
       <ScrollView>
-        <InnerContainer>
-          <MediumPageLogo
-            resizeMode="cover"
-            source={require("./../assets/Logo.png")}
-          />
-          <PageTitle>User Profile</PageTitle>
-          <Formik
-            initialValues={{
-              Id: userData.Id,
-              firstName: userData.FirstName,
-              lastName: userData.LastName,
-              username: userData.UserName,
-              email: userData.Email,
-              MobileNum: userData.Phone_Number,
-              password: "",
-              confirmPassword: "",
-            }}
-            onSubmit={onSubmit}
-          >
-            {({ handleChange, handleBlur, handleSubmit, values }) => (
-              <StyledFormArea>
-                <MyTextInput
-                  placeholder="First Name"
-                  placeholderTextColor={darkLight}
-                  onChangeText={handleChange("firstName")}
-                  onBlur={handleBlur("firstName")}
-                  defaultValue={userData.FirstName}
-                  values={values.FirstName}
-                />
+        <KeyboardAvoidingView behavior="padding">
+          <InnerContainer>
+            <MediumPageLogo
+              resizeMode="cover"
+              source={require("./../assets/Logo.png")}
+            />
+            <PageTitle>User Profile</PageTitle>
+            <Formik
+              initialValues={{
+                Id: userData.Id,
+                firstName: userData.FirstName,
+                lastName: userData.LastName,
+                username: userData.UserName,
+                email: userData.Email,
+                MobileNum: userData.Phone_Number,
+                password: "",
+                confirmPassword: "",
+              }}
+              onSubmit={onSubmit}
+            >
+              {({ handleChange, handleBlur, handleSubmit, values }) => (
+                <StyledFormArea>
+                  <MyTextInput
+                    placeholder="First Name"
+                    placeholderTextColor={darkLight}
+                    onChangeText={handleChange("firstName")}
+                    onBlur={handleBlur("firstName")}
+                    defaultValue={userData.FirstName}
+                    values={values.FirstName}
+                  />
 
-                <MyTextInput
-                  placeholder="Last Name"
-                  placeholderTextColor={darkLight}
-                  onChangeText={handleChange("LastName")}
-                  onBlur={handleBlur("LastName")}
-                  defaultValue={userData.LastName}
-                  values={values.LastName}
-                />
+                  <MyTextInput
+                    placeholder="Last Name"
+                    placeholderTextColor={darkLight}
+                    onChangeText={handleChange("LastName")}
+                    onBlur={handleBlur("LastName")}
+                    defaultValue={userData.LastName}
+                    values={values.LastName}
+                  />
 
-                <MyTextInput
-                  placeholder="Username"
-                  placeholderTextColor={darkLight}
-                  onChangeText={handleChange("username")}
-                  onBlur={handleBlur("username")}
-                  defaultValue={userData.UserName}
-                  values={values.username}
-                  keyboardType="email-address"
-                />
-                <MyTextInput
-                  placeholder="Email Address"
-                  placeholderTextColor={darkLight}
-                  onChangeText={handleChange("email")}
-                  onBlur={handleBlur("email")}
-                  values={values.email}
-                  defaultValue={userData.Email}
-                  keyboardType="email-address"
-                />
-                <MyTextInput
-                  placeholder="Mobile Number"
-                  placeholderTextColor={darkLight}
-                  onChangeText={handleChange("MobileNum")}
-                  onBlur={handleBlur("MobileNum")}
-                  values={values.MobileNum}
-                  defaultValue={userData.Phone_Number}
-                  //keyboardType="email-address"
-                />
-                <MyTextInput
-                  placeholder="Password"
-                  placeholderTextColor={darkLight}
-                  onChangeText={handleChange("password")}
-                  onBlur={handleBlur("password")}
-                  values={values.password}
-                  secureTextEntry={hidePassword}
-                  isPassword={true}
-                  hidePassword={hidePassword}
-                  setHidePassword={setHidePassword}
-                />
-                <MyTextInput
-                  placeholder="Confirm Password"
-                  placeholderTextColor={darkLight}
-                  onChangeText={handleChange("confirmPassword")}
-                  onBlur={handleBlur("confirmPassword")}
-                  values={values.confirmPassword}
-                  secureTextEntry={hidePassword}
-                  isPassword={true}
-                  hidePassword={hidePassword}
-                  setHidePassword={setHidePassword}
-                />
-                <StyledButton onPress={handleSubmit}>
-                  <ButtonText>Update</ButtonText>
-                </StyledButton>
-              </StyledFormArea>
-            )}
-          </Formik>
-          <ExtraView>
-            <ExtraText>Want to Unsubscribe? </ExtraText>
-            <TextLink>
-              <UnsubscribeLink userId={0} onDeleteUser={deleteUser} />
-            </TextLink>
-          </ExtraView>
-        </InnerContainer>
+                  <MyTextInput
+                    placeholder="Username"
+                    placeholderTextColor={darkLight}
+                    onChangeText={handleChange("username")}
+                    onBlur={handleBlur("username")}
+                    defaultValue={userData.UserName}
+                    values={values.username}
+                    keyboardType="email-address"
+                  />
+                  <MyTextInput
+                    placeholder="Email Address"
+                    placeholderTextColor={darkLight}
+                    onChangeText={handleChange("email")}
+                    onBlur={handleBlur("email")}
+                    values={values.email}
+                    defaultValue={userData.Email}
+                    keyboardType="email-address"
+                  />
+                  <MyTextInput
+                    placeholder="Mobile Number"
+                    placeholderTextColor={darkLight}
+                    onChangeText={handleChange("MobileNum")}
+                    onBlur={handleBlur("MobileNum")}
+                    values={values.MobileNum}
+                    defaultValue={userData.Phone_Number}
+                    //keyboardType="email-address"
+                  />
+                  <MyTextInput
+                    placeholder="Password"
+                    placeholderTextColor={darkLight}
+                    onChangeText={handleChange("password")}
+                    onBlur={handleBlur("password")}
+                    values={values.password}
+                    secureTextEntry={hidePassword}
+                    isPassword={true}
+                    hidePassword={hidePassword}
+                    setHidePassword={setHidePassword}
+                  />
+                  <MyTextInput
+                    placeholder="Confirm Password"
+                    placeholderTextColor={darkLight}
+                    onChangeText={handleChange("confirmPassword")}
+                    onBlur={handleBlur("confirmPassword")}
+                    values={values.confirmPassword}
+                    secureTextEntry={hidePassword}
+                    isPassword={true}
+                    hidePassword={hidePassword}
+                    setHidePassword={setHidePassword}
+                  />
+                  <StyledButton onPress={handleSubmit}>
+                    <ButtonText>Update</ButtonText>
+                  </StyledButton>
+                </StyledFormArea>
+              )}
+            </Formik>
+            <ExtraView>
+              <ExtraText>Want to Unsubscribe? </ExtraText>
+              <TextLink>
+                <UnsubscribeLink userId={0} onDeleteUser={deleteUser} />
+              </TextLink>
+            </ExtraView>
+          </InnerContainer>
+        </KeyboardAvoidingView>
       </ScrollView>
       <View style={{ flexDirection: "column", height: "17%" }} />
+      {/* <View>
+        <PageFooter />
+      </View> */}
     </StyledContainer>
   );
 };
-/*<View>
-        <PageFooter />
-      </View> */
 const MyTextInput = ({
   lable,
   icon,

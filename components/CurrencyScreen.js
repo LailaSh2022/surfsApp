@@ -2,8 +2,12 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Text, Button, TextInput } from "react-native";
 import { BorderText, FlagImage } from "../components/Styles";
 
-const API_URL = "https://api.apilayer.com/currency_data/convert";
-const API_KEY = ""; //"w8IexBQMMawAcT8enFM8I1jXRoYK3dAE";
+// const API_URL = "https://openexchangerates.org/api/convert";
+// //"https://api.apilayer.com/currency_data/convert";
+// const API_KEY = "4d5744e21ad04cfab971dfae110003c7"; //"w8IexBQMMawAcT8enFM8I1jXRoYK3dAE";
+
+const API_URL = "https://openexchangerates.org/api/latest.json";
+const API_KEY = ""; //"dc17da5627284a82aec1e8de2ad69a67";
 
 const CurrencyScreen = () => {
   const [convertedAmount1, setConvertedAmount1] = useState("");
@@ -12,7 +16,7 @@ const CurrencyScreen = () => {
   const [convertedAmount4, setConvertedAmount4] = useState("");
 
   const exchangeResult = (to, from, amount, setConvertedAmount) => {
-    const url = `${API_URL}?to=${to}&from=${from}&amount=${amount}`;
+    const url = `${API_URL}?app_id=${API_KEY}&format=json`;
     const headers = {
       apikey: API_KEY,
     };
@@ -21,13 +25,15 @@ const CurrencyScreen = () => {
       headers: headers,
       timeout: -1,
     };
-
     fetch(url, request)
       .then((response) => response.json())
-      .then((data) => setConvertedAmount(data.result.toFixed(3)))
+      .then((data) => {
+        console.log("API response:", data);
+        const exchangeRate = (data.rates[to] / data.rates[from]) * amount;
+        setConvertedAmount(exchangeRate.toFixed(3));
+      })
       .catch((error) => console.log(error));
   };
-
   useEffect(() => {
     exchangeResult("NZD", "USD", 1, setConvertedAmount1);
     exchangeResult("AUD", "NZD", 1, setConvertedAmount2);

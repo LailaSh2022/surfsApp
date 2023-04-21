@@ -2,15 +2,21 @@ import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, StyleSheet, Button } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import MyButton from "./MyButton";
+import { useNavigation } from "@react-navigation/native";
+import OrderReceiverList from "./../screens/ReceiverList";
 
-const API_KEY = ""; //"dc17da5627284a82aec1e8de2ad69a67";
+const API_KEY = "dc17da5627284a82aec1e8de2ad69a67";
 
 const CurrencyExchange = () => {
+  const navigation = useNavigation();
   const [baseAmount, setBaseAmount] = useState("");
   const [baseCurrency, setBaseCurrency] = useState("USD");
   const [targetAmount, setTargetAmount] = useState("");
   const [targetCurrency, setTargetCurrency] = useState("NZD");
   const [totalAmount, setTotalAmount] = useState("");
+  const [totalAmountWithfee, settotalAmountWithfee] = useState("");
+  const [fee, setfee] = useState("");
+  const [exchangeAmount, setExchangeAmount] = useState("");
   const currencyOptions = [
     { label: "NZD", value: "NZD" },
     { label: "USD", value: "USD" },
@@ -33,9 +39,17 @@ const CurrencyExchange = () => {
     const data = await response.json();
     const rate = data.rates[targetCurrency];
     const convertedAmount = parseFloat(baseAmount) * rate;
-    const totalAmount = (convertedAmount * 1.01).toFixed(2); // Culcolate the total amount.
-    setTargetAmount(convertedAmount.toFixed(2)); // Culcolate the targer amount
-    setTotalAmount(totalAmount);
+    const exchangeAmount = convertedAmount.toFixed(2);
+    const totalAmount = (convertedAmount * 1.01).toFixed(2); // Calculate the total amount.
+    const fee = (totalAmount - convertedAmount).toFixed(2);
+    console.log(fee);
+    const totalAmountWithfee = (convertedAmount - fee).toFixed(2);
+    console.log(totalAmountWithfee);
+    setTargetAmount(totalAmountWithfee); // Calculate the targer amount
+    setTotalAmount(convertedAmount);
+    settotalAmountWithfee(totalAmountWithfee);
+    setfee(fee);
+    setExchangeAmount(exchangeAmount);
   };
   return (
     <View style={styles.container}>
@@ -64,13 +78,22 @@ const CurrencyExchange = () => {
         {/* <Text style={styles.currency}>{baseCurrency}</Text> */}
       </View>
       {/* style={{ alignItems: "flex-start", justifyContent: "flex-start" }} */}
-      <View>
-        <Text>%1.00 Total fee</Text>
-        <View style={{ height: "10%" }} />
-        <Text>
-          {totalAmount} {targetCurrency} Total Amount will Convert
-        </Text>
-      </View>
+      {/* <View> */}
+      <Text>
+        {exchangeAmount}
+        {targetCurrency} Converted Amount
+      </Text>
+      <View style={{ height: "5%" }} />
+      <Text>
+        {fee}
+        {targetCurrency} As %1.00 Total fee
+      </Text>
+      <View style={{ height: "5%" }} />
+      <Text>
+        {totalAmountWithfee}
+        {targetCurrency} Total Amount will Convert
+      </Text>
+      {/* </View> */}
       {/* <View style={{ height: "1%" }} /> */}
       <View style={styles.row}>
         <TextInput
@@ -105,7 +128,7 @@ const CurrencyExchange = () => {
         <View style={{ width: "10%" }} />
         <MyButton
           title="Transfer"
-          onPress={convertAmount}
+          onPress={() => navigation.navigate("OrderReceiverList")}
           style={styles.button}
         />
       </View>
@@ -122,7 +145,7 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
     alignItems: "center",
-    marginVertical: 10,
+    marginVertical: 5,
   },
   input: {
     borderWidth: 1,
