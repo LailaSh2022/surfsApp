@@ -46,7 +46,7 @@ function DrawHome_Page() {
           <SmallButtonText>Sign In</SmallButtonText>
         </StyledSideSmallButton>
         <View style={{ width: "5%" }} />
-        <StyledSideSmallButton>
+        <StyledSideSmallButton onPress={() => navigation.navigate("SignUp")}>
           <SmallButtonText>Sign Up</SmallButtonText>
         </StyledSideSmallButton>
         <View style={{ width: "8%" }} />
