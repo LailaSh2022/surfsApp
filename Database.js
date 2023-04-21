@@ -207,7 +207,13 @@ export async function AddNewReceiver(receiver, userId) {
         ],
         (_, { rowsAffected, insertId }) => {
           console.log(`Inserted ${rowsAffected} row with ID ${insertId}`);
-          AddUserIDReceiverId(userId, insertId);
+          AddUserIDReceiverId(userId, insertId)
+            .then(() => {
+              console.log("adder user id and receiver id success");
+            })
+            .catch((error) => {
+              console.log("error");
+            });
         },
         (error) => console.log(error)
       );
