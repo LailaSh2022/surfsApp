@@ -6,6 +6,8 @@ import { Formik } from "formik";
 //Icons
 import { Octicons, Ionicons } from "@expo/vector-icons";
 import PageFooter from "../components/PageFooter";
+//Buttons and Alert
+import { Button } from 'react-native';
 // Styles
 import {
   StyledContainer,
@@ -30,6 +32,10 @@ import {
   MediumPageLogo,
 } from "./../components/Styles";
 import { CheckUserNameExists, SignUpNewUser } from "../Database";
+import SignInLink from "../components/SignInLink";
+import Login from "./Login";
+import TermsAndConditions from "../components/TermsAndConditions";
+import PrivacyPolicy from "../components/PrivacyPolicy";
 
 const { brand, darkLight, tertiary } = Colors;
 const initialValues = {
@@ -101,15 +107,14 @@ const SignUp = () => {
     <StyledContainer>
       <ScrollView>
         <StatusBar style="dark" />
-        <ExtraView>
-          <ExtraText>Enter your details below </ExtraText>
-        </ExtraView>
+        <PageTitle>Enter your details below</PageTitle>
+        
         <InnerContainer>
           <Formik initialValues={initialValues} onSubmit={onSubmit}>
             {({ handleChange, handleBlur, handleSubmit, values }) => (
               <StyledFormArea>
                 <MyTextInput
-                  placeholder="UserName"
+                  placeholder="Username"
                   placeholderTextColor={darkLight}
                   onChangeText={handleChange("UserName")}
                   onBlur={handleBlur("UserName")}
@@ -117,7 +122,7 @@ const SignUp = () => {
                   //keyboardType="email-address"
                 />
                 <MyTextInput
-                  placeholder="FirstName"
+                  placeholder="First Name"
                   placeholderTextColor={darkLight}
                   onChangeText={handleChange("FirstName")}
                   onBlur={handleBlur("FirstName")}
@@ -125,7 +130,7 @@ const SignUp = () => {
                 />
 
                 <MyTextInput
-                  placeholder="LastName"
+                  placeholder="Last Name"
                   placeholderTextColor={darkLight}
                   onChangeText={handleChange("LastName")}
                   onBlur={handleBlur("LastName")}
@@ -189,25 +194,23 @@ const SignUp = () => {
           <ExtraView>
             <ExtraText>Already have an account? </ExtraText>
             <TextLink>
-              <TextLinkContent>Sign In</TextLinkContent>
+                <SignInLink />
             </TextLink>
           </ExtraView>
           <ExtraView>
             <ExtraText>By signing up you agree to our </ExtraText>
           </ExtraView>
           <ExtraView>
-            <TextLinkContent>Terms of Use </TextLinkContent>
+            <TermsAndConditions />
+            <ExtraText>  </ExtraText>
             <ExtraText>and </ExtraText>
-            <TextLink>
-              <TextLinkContent>Privacy Policy</TextLinkContent>
-            </TextLink>
+            <ExtraText>  </ExtraText>
+            <PrivacyPolicy />
           </ExtraView>
         </InnerContainer>
       </ScrollView>
       <View style={{ flexDirection: "column", height: "17%" }} />
-      <View>
-        <PageFooter />
-      </View>
+      
     </StyledContainer>
   );
 };
