@@ -189,8 +189,8 @@ const SignUp = () => {
           <ExtraView>
             <ExtraText>Already have an account? </ExtraText>
             <TextLink>
-              <TextLinkContent>Sign In</TextLinkContent>
-            </TextLink>
+                <SignInLink />
+              </TextLink>
           </ExtraView>
           <ExtraView>
             <ExtraText>By signing up you agree to our </ExtraText>
