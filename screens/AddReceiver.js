@@ -25,6 +25,7 @@ import { AddNewReceiver } from "../Database";
 
 const { darkLight } = Colors;
 const AddReceiver = () => {
+  const userId = 1; //for testing
   return (
     <StyledContainer>
       <ScrollView>
@@ -46,7 +47,7 @@ const AddReceiver = () => {
             }}
             onSubmit={(values) => {
               console.log(values);
-              AddNewReceiver(values);
+              AddNewReceiver(values, userId);
             }}
           >
             {({ handleChange, handleBlur, handleSubmit, values }) => (
