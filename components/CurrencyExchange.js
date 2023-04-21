@@ -18,6 +18,7 @@ const CurrencyExchange = () => {
   const [fee, setfee] = useState("");
   const [exchangeAmount, setExchangeAmount] = useState("");
   const currencyOptions = [
+    // Creating the list
     { label: "NZD", value: "NZD" },
     { label: "USD", value: "USD" },
     { label: "EUR", value: "EUR" },
@@ -66,13 +67,17 @@ const CurrencyExchange = () => {
           style={styles.picker}
           onValueChange={(itemValue) => setBaseCurrency(itemValue)}
         >
-          {currencyOptions.map((option) => (
-            <Picker.Item
-              key={option.value}
-              label={option.label}
-              value={option.value}
-            />
-          ))}
+          {currencyOptions.map(
+            (
+              option // Assign the list to the picker.
+            ) => (
+              <Picker.Item
+                key={option.value}
+                label={option.label}
+                value={option.value}
+              />
+            )
+          )}
         </Picker>
 
         {/* <Text style={styles.currency}>{baseCurrency}</Text> */}
