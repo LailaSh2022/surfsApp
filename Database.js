@@ -286,6 +286,7 @@ export async function updateExistingUser(user) {
 
 export async function deleteUser(id) {
   const db = await OpenDatabase();
+  console.log(id);
   console.log("Executing SQL query...");
   try {
     db.transaction((tx) => {

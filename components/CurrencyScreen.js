@@ -6,8 +6,8 @@ import { BorderText, FlagImage } from "../components/Styles";
 // //"https://api.apilayer.com/currency_data/convert";
 // const API_KEY = "4d5744e21ad04cfab971dfae110003c7"; //"w8IexBQMMawAcT8enFM8I1jXRoYK3dAE";
 
-const API_URL = "https://openexchangerates.org/api/latest.json";
-const API_KEY = ""; //"dc17da5627284a82aec1e8de2ad69a67";
+const API_URL = "https://openexchangerates.org/api/latest.json"; // Using open exchanger rates api
+const API_KEY = ""; //"dc17da5627284a82aec1e8de2ad69a67"; // Api Key
 
 const CurrencyScreen = () => {
   const [convertedAmount1, setConvertedAmount1] = useState("");
@@ -16,11 +16,12 @@ const CurrencyScreen = () => {
   const [convertedAmount4, setConvertedAmount4] = useState("");
 
   const exchangeResult = (to, from, amount, setConvertedAmount) => {
-    const url = `${API_URL}?app_id=${API_KEY}&format=json`;
+    const url = `${API_URL}?app_id=${API_KEY}&format=json`; // Passing values for the api.
     const headers = {
       apikey: API_KEY,
     };
     const request = {
+      // Create the get request to retreive the data from the api.
       method: "GET",
       headers: headers,
       timeout: -1,
@@ -35,10 +36,10 @@ const CurrencyScreen = () => {
       .catch((error) => console.log(error));
   };
   useEffect(() => {
-    exchangeResult("NZD", "USD", 1, setConvertedAmount1);
-    exchangeResult("AUD", "NZD", 1, setConvertedAmount2);
-    exchangeResult("GBP", "NZD", 1, setConvertedAmount3);
-    exchangeResult("CNY", "NZD", 1, setConvertedAmount4);
+    exchangeResult("NZD", "USD", 1, setConvertedAmount1); // Get the exchange rate for 1 USD to NZD
+    exchangeResult("AUD", "NZD", 1, setConvertedAmount2); // Get the exchange rate for 1 AUD to NZD
+    exchangeResult("GBP", "NZD", 1, setConvertedAmount3); // Get the exchange rate for 1 GBP to NZD
+    exchangeResult("CNY", "NZD", 1, setConvertedAmount4); // Get the exchange rate for 1 CNY to NZD
 
     const intervalId = setInterval(() => {
       exchangeResult("NZD", "USD", 1, setConvertedAmount1);
@@ -50,6 +51,7 @@ const CurrencyScreen = () => {
     return () => clearInterval(intervalId);
   }, []);
   return (
+    //Display the Currency Screen
     <BorderText>
       <View style={{ flexDirection: "row", height: "11%" }}>
         <View style={{ width: "25%" }} />

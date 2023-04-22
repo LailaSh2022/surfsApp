@@ -228,7 +228,7 @@ const Profile = () => {
             <ExtraView>
               <ExtraText>Want to Unsubscribe? </ExtraText>
               <TextLink>
-                <UnsubscribeLink userId={0} onDeleteUser={deleteUser} />
+                <UnsubscribeLink userId={userId} onDeleteUser={deleteUser} />
               </TextLink>
             </ExtraView>
           </InnerContainer>
