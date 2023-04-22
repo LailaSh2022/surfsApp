@@ -33,16 +33,8 @@ export default function App() {
         />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="SignUp" component={SignUp} />
-<<<<<<< HEAD
-        {/*
-          <Stack.Screen name="HomePage" component={HomePage} />
-          <Stack.Screen name="Profile" component={Profile} />
-          */}
-
-=======
         <Stack.Screen name="HomePage" component={HomePage} />
         <Stack.Screen name="Profile" component={Profile} />
->>>>>>> 011a096a56c1d036e7e1a7b202a8a44579c98fe6
         <Stack.Screen name="AddReceiver" component={AddReceiver} />
         <Stack.Screen name="ReceiverDetails" component={ReceiverDetails} />
         <Stack.Screen name="OrderSummary" component={OrderSummary} />
