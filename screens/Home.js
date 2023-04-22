@@ -19,7 +19,7 @@ const Home = ({ navigation }) => {
   const history = "history";
   const SignUp = "SignUp";
   const AddReceiver = "AddReceiver";
-  //const ContactUs = "ContactUs";
+  const Contactus = "ContactUs";
   const Unsubscribe = "Unsubscribe";
 
   var receiver;
@@ -73,7 +73,7 @@ const Home = ({ navigation }) => {
               From: order.From_Currency,
               To: order.To_Currency,
             };
-            console.log(history)
+            console.log(history);
             transactions.push(history);
           })
           .catch((error) => {
@@ -89,10 +89,8 @@ const Home = ({ navigation }) => {
 
   return (
     <View>
-      
-          <Text onPress={() => navigation.navigate("HomePage")}>{HomePage}</Text>
+      <Text onPress={() => navigation.navigate("HomePage")}>{HomePage}</Text>
       <Text onPress={() => navigation.navigate("Profile")}>{Profile}</Text>
-       
 
       <Text onPress={() => navigation.navigate("SignUp")}>{SignUp}</Text>
       <Text onPress={() => navigation.navigate("Login")}>{login}</Text>
@@ -114,6 +112,9 @@ const Home = ({ navigation }) => {
       </Text>
       <Text onPress={() => navigation.navigate("Unsubscribe", { Unsubscribe })}>
         {Unsubscribe}
+      </Text>
+      <Text onPress={() => navigation.navigate("Contactus", { Contactus })}>
+        {Contactus}
       </Text>
     </View>
   );

@@ -14,6 +14,7 @@ import SignUp from "./screens/SignUp";
 import Unsubscribe from "./screens/Unsubscribe";
 import { useEffect } from "react";
 import { getAllRecipients, getAllUsers } from "./Database";
+import Contactus from "./screens/Contactus";
 
 const Stack = createStackNavigator();
 
@@ -35,7 +36,7 @@ export default function App() {
         <Stack.Screen name="SignUp" component={SignUp} />
         {/*
           <Stack.Screen name="HomePage" component={HomePage} />
-          <Stack.Screen name="Profile" component={Profile} />
+          
           */}
         <Stack.Screen name="HomePage" component={HomePage} />
         <Stack.Screen name="Profile" component={Profile} />
@@ -43,6 +44,7 @@ export default function App() {
         <Stack.Screen name="ReceiverDetails" component={ReceiverDetails} />
         <Stack.Screen name="OrderSummary" component={OrderSummary} />
         <Stack.Screen name="History" component={History} />
+        <Stack.Screen name="Contactus" component={Contactus} />
         <Stack.Screen name="Unsubscribe" component={Unsubscribe} />
       </Stack.Navigator>
     </NavigationContainer>

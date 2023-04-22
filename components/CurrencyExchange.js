@@ -133,7 +133,7 @@ const CurrencyExchange = () => {
         <View style={{ width: "10%" }} />
         <MyButton
           title="Transfer"
-          onPress={() => navigation.navigate("OrderReceiverList")}
+          onPress={() => navigation.navigate("ReceiverList")}
           style={styles.button}
         />
       </View>
