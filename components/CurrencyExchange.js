@@ -3,21 +3,22 @@ import { View, Text, TextInput, StyleSheet, Button } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import MyButton from "./MyButton";
 import { useNavigation } from "@react-navigation/native";
-import ReceiverList from "./../screens/ReceiverList";
+
 import Login from "./../screens/Login";
 import "../global.js";
 import { createStackNavigator } from "@react-navigation/stack";
+//import ReceiverList01 from "../screens/ReceiverList01";
 
-const Stack = createStackNavigator();
+// const Stack = createStackNavigator();
 
-const MyNavigator = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="ReceiverList" component={ReceiverList} />
-    </Stack.Navigator>
-  );
-};
+// const MyNavigator = () => {
+//   return (
+//     <Stack.Navigator>
+//       <Stack.Screen name="Login" component={Login} />
+//       <Stack.Screen name="ReceiverList01" component={ReceiverList01} />
+//     </Stack.Navigator>
+//   );
+// };
 const API_KEY = "dc17da5627284a82aec1e8de2ad69a67";
 
 const CurrencyExchange = () => {
@@ -72,7 +73,7 @@ const CurrencyExchange = () => {
   const handleTransferPress = () => {
     console.log("handleTransferPress userId:" + userId);
     if (global.userId[0] > 0)
-      navigation.navigate("ReceiverList", { userId: global.userId[0] });
+      navigation.navigate("OrderSummary", { userId: global.userId[0] });
     else navigation.navigate("Login");
   };
 
