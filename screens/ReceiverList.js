@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import HistoryItem from "../components/HistoryItem";
 import { StyledContainer } from "../components/Styles";
 import { GetAllOrderByUserId, GetReceiverDetails } from "../Database";
+import { useRoute } from "@react-navigation/native";
 
-const OrderReceiverList = () => {
+const ReceiverList = ({ route }) => {
+  ////// Get user Id. Added by Laila.
+  const { userId } = route.params;
+  console.log("ReceiverList_userId: ", userId);
+
+  useEffect(() => {
+    if (!userId) {
+      console.log("Info: userId is undefined");
+    }
+  }, [userId]);
+  //////
   let transactions = [];
   GetReceiverDetails(1)
     .then((result) => {
@@ -16,7 +27,7 @@ const OrderReceiverList = () => {
             const receiverGet = (order.Amount * order.Exchange_Rate).toFixed(2);
             const Recipients = {
               BankAccount: Recipients.BankAccount,
-              Currency: Recipients.Currency
+              Currency: Recipients.Currency,
             };
             transactions.push(Recipients);
           })
@@ -59,4 +70,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default OrderReceiverList;
+export default ReceiverList;

@@ -31,6 +31,11 @@ const TEMP_BASE_CURRENCY = "NZD";
 const TEMP_QUOTE_CURRENCY = "USD";
 // Open the Home Page
 function DrawHome_Page() {
+  const route = useRoute();
+  console.log("route: ", route);
+
+  const { userId } = route.params || {};
+  console.log("Draw_HomePage_userId: ", userId);
   const navigation = useNavigation();
   return (
     <StyledContainer>
@@ -69,7 +74,7 @@ function DrawHome_Page() {
         <View style={{ height: "7%" }} />
         <CurrencyScreen />
         <View style={{ height: "0.5%" }} />
-        <CurrencyExchange />
+        <CurrencyExchange userId={userId} />
       </InnerContainer>
 
       <View>
@@ -79,13 +84,13 @@ function DrawHome_Page() {
   );
 }
 // Open the Contact Us Page
-function Contacts() {
-  return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Contact Us</Text>
-    </View>
-  );
-}
+// function Contacts() {
+//   return (
+//     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+//       <Text>Contact Us</Text>
+//     </View>
+//   );
+// }
 
 const HomePage = () => {
   const route = useRoute();
@@ -100,11 +105,16 @@ const HomePage = () => {
     }
   }, [userId]);
 
-  return userId ? (
-    <SignedInDrawerNavigator userId={userId} />
-  ) : (
-    <DrawHome_Page />
-  );
+  if (userId) {
+    return (
+      <>
+        <SignedInDrawerNavigator userId={userId} />
+        {/* <DrawHome_Page userId={userId} /> */}
+      </>
+    );
+  } else {
+    return <DrawHome_Page />;
+  }
 };
 
 export default HomePage;
