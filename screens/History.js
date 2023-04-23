@@ -2,9 +2,9 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import HistoryItem from "./../components/HistoryItem";
 import { StyledContainer } from "./../components/Styles";
-import { GetAllOrderByUserId, GetReceiverDetails } from "../Database";
 
 const History = ({ route }) => {
+  //console.log(route.params);
   let { transactions } = route.params;
 
   return (

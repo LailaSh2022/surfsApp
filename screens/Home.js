@@ -5,7 +5,6 @@ import Profile from "./Profile";
 import HomePage from "./HomePage";
 import {
   GetReceiverDetails,
-  //GetReceiverBankInfo,
   GetAllOrderByUserId,
 } from "../Database";
 import Unsubscribe from "./Unsubscribe";
@@ -27,16 +26,6 @@ const Home = ({ navigation }) => {
   GetReceiverDetails(1)
     .then((result) => {
       receiver = result;
-      /*
-      GetReceiverBankInfo(receiver.Bank_Info)
-        .then((result) => {
-          bank_info = result;
-        })
-        .catch((error) => {
-          console.log(`Error while getting bank_info: ${error}`);
-          return;
-        });
-        */
     })
     .catch((error) => {
       console.log(`Error while getting receiver details: ${error}`);
@@ -65,13 +54,13 @@ const Home = ({ navigation }) => {
             const fullname = result.FirstName + " " + result.LastName;
             const receiverGet = (order.Amount * order.Exchange_Rate).toFixed(2);
             const history = {
-              OrderNo: order.OrderId,
-              SentDate: order.Send_Date,
-              Receiver: fullname,
-              Amount: order.Amount,
-              ReceivierGets: receiverGet,
-              From: order.From_Currency,
-              To: order.To_Currency,
+                OrderNo: order.OrderId,
+                SentDate: order.Send_Date,
+                Receiver: fullname,
+                Amount: order.Amount,
+                ReceivierGets: receiverGet,
+                From: order.From_Currency,
+                To: order.To_Currency,
             };
             console.log(history)
             transactions.push(history);

@@ -9,7 +9,7 @@ import {
 
 const ReceiverDetails = ({ route }) => {
   const { receiver } = route.params;
-  console.log(receiver);
+  //console.log(receiver);
   return (
     <StyledContainer>
       <View style={{ flexDirection: "row" }}>
