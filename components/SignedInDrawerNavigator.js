@@ -2,18 +2,19 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import Login from "./../screens/Login";
 import Profile from "./../screens/Profile";
 import Home_Page01 from "./../screens/HomePage";
-import SignOut_HomePage from "./../screens/HomePage";
 import History from "./../screens/History";
 import ContactUs from "../screens/Contactus";
 import { View, Text } from "react-native";
 import ReceiverList from "../screens/ReceiverList";
 import TransferMoney from "../screens/ReceiverList";
+import { useNavigation } from "@react-navigation/native";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 const Drawer = createDrawerNavigator();
 const SignedInDrawerNavigator = ({ userId }) => {
   //const screenProps = { userId: userId };
   //console.log(screenProps);
-
+  const navigation = useNavigation();
   // Open the Sign Out Page
   function SignOut() {
     return (
@@ -33,7 +34,25 @@ const SignedInDrawerNavigator = ({ userId }) => {
         headerTitle: "",
       }}
     >
-      <Drawer.Screen component={Home_Page01} name={"Home Page"} />
+      <Drawer.Screen
+        component={Home_Page01}
+        name={"Home Page"}
+        options={{
+          drawerLabel: "Home",
+          drawerIcon: ({ focused, size }) => (
+            <MaterialIcons
+              name="home"
+              size={size}
+              color={focused ? "#007AFF" : "#8E8E93"}
+            />
+          ),
+        }}
+        // Use navigation to navigate to the 'Settings' screen
+        listeners={{
+          press: () => navigation.navigate("DrawHome_Page", { userId: userId }),
+        }}
+      />
+      {/* <Drawer.Screen component={Home_Page01} name={"Home Page"} /> */}
       <Drawer.Screen
         component={Profile}
         name={"Your Profile"}

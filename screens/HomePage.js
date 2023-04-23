@@ -10,6 +10,7 @@ import PageFooter from "../components/PageFooter";
 import SignedInDrawerNavigator from "../components/SignedInDrawerNavigator";
 import { useNavigation } from "@react-navigation/native";
 import CurrencyExchange from "../components/CurrencyExchange";
+import "../global.js";
 
 //styles
 import {
@@ -26,16 +27,12 @@ import {
   StyledSideSmallButton,
   InnerContainer,
 } from "../components/Styles";
-const { brand, darkLight, tertiary } = Colors;
-const TEMP_BASE_CURRENCY = "NZD";
-const TEMP_QUOTE_CURRENCY = "USD";
-// Open the Home Page
-function DrawHome_Page() {
-  const route = useRoute();
-  console.log("route: ", route);
 
-  const { userId } = route.params || {};
-  console.log("Draw_HomePage_userId: ", userId);
+function DrawHome_Page() {
+  // const route = useRoute();
+  // console.log("route: ", route);
+  // const { userId } = route.params || {};
+  console.log("Draw_HomePage_userId: ", global.userId[0]);
   const navigation = useNavigation();
   return (
     <StyledContainer>
@@ -74,7 +71,7 @@ function DrawHome_Page() {
         <View style={{ height: "7%" }} />
         <CurrencyScreen />
         <View style={{ height: "0.5%" }} />
-        <CurrencyExchange userId={userId} />
+        <CurrencyExchange />
       </InnerContainer>
 
       <View>
@@ -98,7 +95,8 @@ const HomePage = () => {
 
   const { userId } = route.params || {};
   console.log("userId: ", userId);
-
+  global.userId[0] = userId;
+  console.log("HomePage global.userId[0]: ", global.userId[0]);
   useEffect(() => {
     if (!userId) {
       console.log("Info: userId is undefined");
@@ -106,12 +104,7 @@ const HomePage = () => {
   }, [userId]);
 
   if (userId) {
-    return (
-      <>
-        <SignedInDrawerNavigator userId={userId} />
-        {/* <DrawHome_Page userId={userId} /> */}
-      </>
-    );
+    return <SignedInDrawerNavigator userId={userId} />;
   } else {
     return <DrawHome_Page />;
   }

@@ -115,7 +115,10 @@ export async function GetReceiverDetails(receiverId) {
   return new Promise((resolve, reject) => {
     db.transaction((tx) => {
       tx.executeSql(
-        "SELECT * FROM Recipients WHERE Id = ?",
+        // Fixed by Laila
+        "SELECT * FROM Recipients,Users_Recipients,users " +
+          "where Recipients.id = Users_Recipients.recipientId" +
+          " and users.id = users_recipients.userId and users.id = ?",
         [receiverId],
         (_, { rows }) => {
           if (rows._array.length > 0) {

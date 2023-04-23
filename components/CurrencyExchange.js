@@ -4,12 +4,27 @@ import { Picker } from "@react-native-picker/picker";
 import MyButton from "./MyButton";
 import { useNavigation } from "@react-navigation/native";
 import ReceiverList from "./../screens/ReceiverList";
+import Login from "./../screens/Login";
+import "../global.js";
+import { createStackNavigator } from "@react-navigation/stack";
 
+const Stack = createStackNavigator();
+
+const MyNavigator = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="ReceiverList" component={ReceiverList} />
+    </Stack.Navigator>
+  );
+};
 const API_KEY = "dc17da5627284a82aec1e8de2ad69a67";
 
-const CurrencyExchange = ({ userId }) => {
+const CurrencyExchange = () => {
   console.log("CurrencyExchange_userId: ", userId);
+  console.log("CurrencyExchange global.userId[0]: ", global.userId[0]);
   const navigation = useNavigation();
+
   const [baseAmount, setBaseAmount] = useState("");
   const [baseCurrency, setBaseCurrency] = useState("USD");
   const [targetAmount, setTargetAmount] = useState("");
@@ -46,6 +61,7 @@ const CurrencyExchange = ({ userId }) => {
     const fee = (totalAmount - convertedAmount).toFixed(2);
     console.log(fee);
     const totalAmountWithfee = (convertedAmount - fee).toFixed(2);
+    global.Amount[0] = totalAmountWithfee; // Using global variable to pass values between screens.
     console.log(totalAmountWithfee);
     setTargetAmount(totalAmountWithfee); // Calculate the targer amount
     setTotalAmount(convertedAmount);
@@ -55,12 +71,11 @@ const CurrencyExchange = ({ userId }) => {
   };
   const handleTransferPress = () => {
     console.log("handleTransferPress userId:" + userId);
-    if (true) {
-      navigation.navigate("ReceiverList", { userId: 2 });
-    } else {
-      navigation.navigate("Login");
-    }
+    if (global.userId[0] > 0)
+      navigation.navigate("ReceiverList", { userId: global.userId[0] });
+    else navigation.navigate("Login");
   };
+
   return (
     <View style={styles.container}>
       <View style={styles.row}>
