@@ -132,10 +132,17 @@ const Profile = () => {
       <ScrollView>
         <KeyboardAvoidingView behavior="padding">
           <InnerContainer>
-            <MediumPageLogo
-              resizeMode="cover"
-              source={require("./../assets/Logo.png")}
-            />
+            <View
+              style={{
+                top: 0,
+                marginTop: "-10%",
+              }}
+            >
+              <MediumPageLogo
+                resizeMode="cover"
+                source={require("./../assets/Logo.png")}
+              />
+            </View>
             <PageTitle>User Profile</PageTitle>
             <Formik
               initialValues={{
