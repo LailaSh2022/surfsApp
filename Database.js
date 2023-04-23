@@ -30,7 +30,6 @@ CopyDatabase()
 export async function OpenDatabase() {
   const database = SQLite.openDatabase("surfsApp.db");
   database._db.close();
-  //await CopyDatabase();
   return SQLite.openDatabase("surfsApp.db");
 }
 
@@ -254,6 +253,7 @@ export async function updateExistingUser(user) {
   db.transaction((tx) => {
     console.log("Transaction started");
     console.log(user.Id);
+    console.log(user);
     tx.executeSql(
       "UPDATE Users SET FirstName = ?, LastName = ?, UserName = ?, Password = ?," +
         "Email = ?, Phone_Number = ? WHERE Id = ? ;",
