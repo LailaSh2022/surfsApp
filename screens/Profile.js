@@ -50,6 +50,8 @@ import {
   UpdateUserInfoIntoServer,
 } from "../DataSynchronization";
 
+import NetInfo from "@react-native-community/netinfo";
+
 const { brand, darkLight, tertiary } = Colors;
 const onSubmit = (values) => {
   if (values.UserName == "") {
@@ -101,10 +103,15 @@ const onSubmit = (values) => {
     return;
   }
   updateExistingUser(values);
-  //console.log("....");
-  //getUserInfoFromServer();
-  console.log("....");
-  UpdateUserInfoIntoServer(values);
+  
+  //synchronize user data to server if there is any connection
+  NetInfo.fetch().then((state) => {
+    console.log("Connection type", state.type);
+    console.log("Is connected?", state.isConnected);
+    if (state.isConnected) {
+      UpdateUserInfoIntoServer(values);
+    }
+  });
 };
 /*
 // User Image's code. 

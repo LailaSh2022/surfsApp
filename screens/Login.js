@@ -38,8 +38,14 @@ import {
   TextLink,
   TextLinkContent,
 } from "./../components/Styles";
-import { checkUsernamePassword } from "../Database";
+import {
+  checkUsernamePassword,
+  updateExistingUser,
+  getUser,
+} from "../Database";
 import { useNavigation } from "@react-navigation/native";
+import { getUserInfoFromServer } from "../DataSynchronization";
+import NetInfo from "@react-native-community/netinfo";
 
 const { brand, darkLight, tertiary } = Colors;
 const Login = () => {
@@ -72,6 +78,20 @@ const Login = () => {
       .then((userId) => {
         if (userId) {
           //alert("Login Successful! " + userId);
+
+          //synchronization data with server if there is any connection
+          NetInfo.fetch().then((state) => {
+            if (state.isConnected) {
+              getUserInfoFromServer(userId)
+                .then((userData) => {
+                  updateExistingUser(userData);
+                })
+                .catch((error) => {
+                  console.error(error);
+                });
+            }
+          });
+
           navigation.navigate("HomePage", { userId: userId });
         } else {
           alert("Invalid username or password!");

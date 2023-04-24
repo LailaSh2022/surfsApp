@@ -4,17 +4,24 @@ const { manifest } = Constants;
 
 const uri = `http://${manifest.debuggerHost.split(":").shift()}:5000`; //this line will generate the your machine ip automatically
 
-export function getUserInfoFromServer() {
-  console.log(`${uri}/users`);
-  fetch(`${uri}/users`)
-    .then((response) => response.json())
-    .then((data) => console.log(data))
-    .catch((error) => console.error(error));
+export async function getUserInfoFromServer(userId) {
+  try {
+    const response = await fetch(`${uri}/users/` + userId);
+    
+    if (response.ok) {
+      const userData = await response.json();
+      return userData;
+    } else {
+      console.log(`Error fetching user: ${response.status}`);
+    }
+  } catch (error) {
+    console.log(`Error fetching user: ${error}`);
+  }
 }
 
 export function UpdateUserInfoIntoServer(updatedUser) {
   console.log("updated user...");
-  console.log(updatedUser);
+  //console.log(updatedUser);
 
   fetch(`${uri}/users/` + updatedUser.Id, {
     method: "PUT",
