@@ -45,11 +45,13 @@ import {
   deleteUser,
 } from "../Database";
 const { brand, darkLight, tertiary } = Colors;
+// Input Validation.
 const onSubmit = (values) => {
   if (values.UserName == "") {
     Alert.alert("Error", "UserName cannot be empty");
     return;
   }
+  // Check if username is exsits on the database.
   CheckUserNameExists(values.userName)
     .then((exists) => {
       if (exists) {
@@ -86,31 +88,14 @@ const onSubmit = (values) => {
     Alert.alert("Error", "Password cannot be empty");
     return;
   }
-
+  // If password not equal confirm password.
   if (values.password != values.confirmPassword) {
     Alert.alert("Error", "Password and Confirm Password must be the same");
     return;
   }
-  updateExistingUser(values);
+  updateExistingUser(values); // Using updateExistingUser function to update the given data.
 };
-/*
-// User Image's code. 
-<View
-        style={{
-          position: "absolute",
-          left: "1%",
-          top: "0.5%",
-          bottom: "2%",
-        }}
-      >
-        <UserImage
-          source={require("./../assets/UserImage.png")}
-          style={{
-            position: "absolute",
-            marginTop: 1,
-          }}
-        />
-      </View> */
+
 const Profile = () => {
   const [hidePassword, setHidePassword] = useState(true);
   const [userData, setUserData] = useState(null);
@@ -124,6 +109,7 @@ const Profile = () => {
 
   //Check if the user's data has been fetched before rendering the form
   if (!userData) {
+    // Display the loading indicator if the userId is undefined.
     return <ActivityIndicator />;
   }
   return (
@@ -140,7 +126,7 @@ const Profile = () => {
             >
               <MediumPageLogo
                 resizeMode="cover"
-                source={require("./../assets/Logo.png")}
+                source={require("./../assets/Logo.png")} // Display the logo image
               />
             </View>
             <PageTitle>User Profile</PageTitle>
@@ -160,6 +146,7 @@ const Profile = () => {
               {({ handleChange, handleBlur, handleSubmit, values }) => (
                 <StyledFormArea>
                   <MyTextInput
+                    // First Name.
                     placeholder="First Name"
                     placeholderTextColor={darkLight}
                     onChangeText={handleChange("firstName")}
@@ -169,6 +156,7 @@ const Profile = () => {
                   />
 
                   <MyTextInput
+                    // Last Name.
                     placeholder="Last Name"
                     placeholderTextColor={darkLight}
                     onChangeText={handleChange("LastName")}
@@ -178,6 +166,7 @@ const Profile = () => {
                   />
 
                   <MyTextInput
+                    // Username.
                     placeholder="Username"
                     placeholderTextColor={darkLight}
                     onChangeText={handleChange("username")}
@@ -187,6 +176,7 @@ const Profile = () => {
                     keyboardType="email-address"
                   />
                   <MyTextInput
+                    // Email address.
                     placeholder="Email Address"
                     placeholderTextColor={darkLight}
                     onChangeText={handleChange("email")}
@@ -196,15 +186,16 @@ const Profile = () => {
                     keyboardType="email-address"
                   />
                   <MyTextInput
+                    // Mobile Number.
                     placeholder="Mobile Number"
                     placeholderTextColor={darkLight}
                     onChangeText={handleChange("MobileNum")}
                     onBlur={handleBlur("MobileNum")}
                     values={values.MobileNum}
                     defaultValue={userData.Phone_Number}
-                    //keyboardType="email-address"
                   />
                   <MyTextInput
+                    // Password.
                     placeholder="Password"
                     placeholderTextColor={darkLight}
                     onChangeText={handleChange("password")}
@@ -216,6 +207,7 @@ const Profile = () => {
                     setHidePassword={setHidePassword}
                   />
                   <MyTextInput
+                    // Confirm password.
                     placeholder="Confirm Password"
                     placeholderTextColor={darkLight}
                     onChangeText={handleChange("confirmPassword")}
@@ -242,9 +234,9 @@ const Profile = () => {
         </KeyboardAvoidingView>
       </ScrollView>
       <View style={{ flexDirection: "column", height: "17%" }} />
-      {/* <View>
+      <View>
         <PageFooter />
-      </View> */}
+      </View>
     </StyledContainer>
   );
 };
@@ -256,6 +248,7 @@ const MyTextInput = ({
   setHidePassword,
   ...props
 }) => {
+  // Display and Hide the password when click on the eye icon.
   return (
     <View>
       <LeftIcon>

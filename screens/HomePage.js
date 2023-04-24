@@ -11,8 +11,7 @@ import SignedInDrawerNavigator from "../components/SignedInDrawerNavigator";
 import { useNavigation } from "@react-navigation/native";
 import CurrencyExchange from "../components/CurrencyExchange";
 import "../global.js";
-
-//styles
+//Import the styles
 import {
   SubPageLogo,
   StyledContainer,
@@ -27,11 +26,8 @@ import {
   StyledSideSmallButton,
   InnerContainer,
 } from "../components/Styles";
-
+// Function to draw the layout of the page.
 function DrawHome_Page() {
-  // const route = useRoute();
-  // console.log("route: ", route);
-  // const { userId } = route.params || {};
   console.log("Draw_HomePage_userId: ", global.userId[0]);
   const navigation = useNavigation();
   return (
@@ -80,22 +76,14 @@ function DrawHome_Page() {
     </StyledContainer>
   );
 }
-// Open the Contact Us Page
-// function Contacts() {
-//   return (
-//     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-//       <Text>Contact Us</Text>
-//     </View>
-//   );
-// }
-
+// Main
 const HomePage = () => {
+  // Get the userId from the Login page.
   const route = useRoute();
   console.log("route: ", route);
-
   const { userId } = route.params || {};
   console.log("userId: ", userId);
-  global.userId[0] = userId;
+  global.userId[0] = userId; // Update the userId global variable to use it though the screens
   console.log("HomePage global.userId[0]: ", global.userId[0]);
   useEffect(() => {
     if (!userId) {
@@ -104,10 +92,10 @@ const HomePage = () => {
   }, [userId]);
 
   if (userId) {
+    // If user signed in display the side menu
     return <SignedInDrawerNavigator userId={userId} />;
   } else {
     return <DrawHome_Page />;
   }
 };
-
 export default HomePage;

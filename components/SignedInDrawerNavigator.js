@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import Login from "./../screens/Login";
 import Profile from "./../screens/Profile";
@@ -9,20 +10,22 @@ import ReceiverList from "../screens/ReceiverList";
 import TransferMoney from "../screens/ReceiverList";
 import { useNavigation } from "@react-navigation/native";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import "./../global";
 
-const Drawer = createDrawerNavigator();
+const Drawer = createDrawerNavigator(); // Create the Drawer object
 const SignedInDrawerNavigator = ({ userId }) => {
-  //const screenProps = { userId: userId };
-  //console.log(screenProps);
   const navigation = useNavigation();
-  // Open the Sign Out Page
+  // Display sign out page when signed out:
   function SignOut() {
+    global.userId[0] = -1;
+    console.log(global.userId);
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <Text style={{ fontSize: 16 }}>Thank you for using SurfsApp</Text>
       </View>
     );
   }
+  // Draw the Drawer
   return (
     <Drawer.Navigator
       screenOptions={{
@@ -34,11 +37,12 @@ const SignedInDrawerNavigator = ({ userId }) => {
         headerTitle: "",
       }}
     >
+      {/* Navigate to Home page screen */}
       <Drawer.Screen
         component={Home_Page01}
         name={"Home Page"}
         options={{
-          drawerLabel: "Home",
+          drawerLabel: "Home", // Display the Home icon.
           drawerIcon: ({ focused, size }) => (
             <MaterialIcons
               name="home"
@@ -52,33 +56,37 @@ const SignedInDrawerNavigator = ({ userId }) => {
           press: () => navigation.navigate("DrawHome_Page", { userId: userId }),
         }}
       />
-      {/* <Drawer.Screen component={Home_Page01} name={"Home Page"} /> */}
+      {/* Navigate to Profile screen */}
       <Drawer.Screen
         component={Profile}
         name={"Your Profile"}
         initialParams={{ userId: userId }}
       />
+      {/* Navigate to Receiver List screen */}
       <Drawer.Screen
         component={ReceiverList}
         name={"Receiver's List"}
         initialParams={{ userId: userId }}
       />
+      {/* Navigate to Receiver List screen */}
       <Drawer.Screen
         component={TransferMoney}
         name={"Transfer Money"}
         initialParams={{ userId: userId }}
       />
+      {/* Navigate to History screen */}
       <Drawer.Screen
         component={History}
         name={"History"}
         initialParams={{ userId: userId }}
       />
+      {/* Navigate to Contact Us screen */}
       <Drawer.Screen
         component={ContactUs}
         name={"Contact Us"}
         initialParams={{ userId: userId }}
       />
-      {/*Navigate to Login Page*/}
+      {/* Navigate to Sign out Page */}
       <Drawer.Screen component={SignOut} name={"Sign Out"} />
     </Drawer.Navigator>
   );

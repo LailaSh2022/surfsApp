@@ -2,10 +2,7 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Text, Button, TextInput } from "react-native";
 import { BorderText, FlagImage } from "../components/Styles";
 
-// const API_URL = "https://openexchangerates.org/api/convert";
-// //"https://api.apilayer.com/currency_data/convert";
-// const API_KEY = "4d5744e21ad04cfab971dfae110003c7"; //"w8IexBQMMawAcT8enFM8I1jXRoYK3dAE";
-
+// API
 const API_URL = "https://openexchangerates.org/api/latest.json"; // Using open exchanger rates api
 const API_KEY = ""; //"dc17da5627284a82aec1e8de2ad69a67"; // Api Key
 
@@ -41,6 +38,7 @@ const CurrencyScreen = () => {
     exchangeResult("GBP", "NZD", 1, setConvertedAmount3); // Get the exchange rate for 1 GBP to NZD
     exchangeResult("CNY", "NZD", 1, setConvertedAmount4); // Get the exchange rate for 1 CNY to NZD
 
+    // Send a request every 12 hours to update the currency screen.
     const intervalId = setInterval(() => {
       exchangeResult("NZD", "USD", 1, setConvertedAmount1);
       exchangeResult("AUD", "NZD", 1, setConvertedAmount2);

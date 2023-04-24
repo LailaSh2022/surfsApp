@@ -3,29 +3,15 @@ import { View, Text, TextInput, StyleSheet, Button } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import MyButton from "./MyButton";
 import { useNavigation } from "@react-navigation/native";
-
 import Login from "./../screens/Login";
 import "../global.js";
-import { createStackNavigator } from "@react-navigation/stack";
-//import ReceiverList01 from "../screens/ReceiverList01";
-
-// const Stack = createStackNavigator();
-
-// const MyNavigator = () => {
-//   return (
-//     <Stack.Navigator>
-//       <Stack.Screen name="Login" component={Login} />
-//       <Stack.Screen name="ReceiverList01" component={ReceiverList01} />
-//     </Stack.Navigator>
-//   );
-// };
 const API_KEY = "dc17da5627284a82aec1e8de2ad69a67";
 
 const CurrencyExchange = () => {
   console.log("CurrencyExchange_userId: ", userId);
   console.log("CurrencyExchange global.userId[0]: ", global.userId[0]);
   const navigation = useNavigation();
-
+  // Using useState to returns a stateful value, and a function to update it.
   const [baseAmount, setBaseAmount] = useState("");
   const [baseCurrency, setBaseCurrency] = useState("USD");
   const [targetAmount, setTargetAmount] = useState("");
@@ -35,7 +21,7 @@ const CurrencyExchange = () => {
   const [fee, setfee] = useState("");
   const [exchangeAmount, setExchangeAmount] = useState("");
   const currencyOptions = [
-    // Creating the list
+    // Creating the list of currencies
     { label: "NZD", value: "NZD" },
     { label: "USD", value: "USD" },
     { label: "EUR", value: "EUR" },
@@ -52,7 +38,7 @@ const CurrencyExchange = () => {
   // Using API to convert the given amount
   const convertAmount = async () => {
     const response = await fetch(
-      `https://openexchangerates.org/api/latest.json?app_id=${API_KEY}&base=${baseCurrency}`
+      `https://openexchangerates.org/api/latest.json?app_id=${API_KEY}&base=${baseCurrency}` // API url
     );
     const data = await response.json();
     const rate = data.rates[targetCurrency];
@@ -94,7 +80,7 @@ const CurrencyExchange = () => {
         >
           {currencyOptions.map(
             (
-              option // Assign the list to the picker.
+              option // Assign the list to the picker --> To display the drop down list for currencies
             ) => (
               <Picker.Item
                 key={option.value}
@@ -104,11 +90,8 @@ const CurrencyExchange = () => {
             )
           )}
         </Picker>
-
-        {/* <Text style={styles.currency}>{baseCurrency}</Text> */}
       </View>
-      {/* style={{ alignItems: "flex-start", justifyContent: "flex-start" }} */}
-      {/* <View> */}
+      {/* Display the middle part between the input part and result part*/}
       <Text>
         {exchangeAmount}
         {targetCurrency} Converted Amount
@@ -123,8 +106,6 @@ const CurrencyExchange = () => {
         {totalAmountWithfee}
         {targetCurrency} Total Amount will Convert
       </Text>
-      {/* </View> */}
-      {/* <View style={{ height: "1%" }} /> */}
       <View style={styles.row}>
         <TextInput
           placeholder="Recipient gets"
@@ -138,16 +119,18 @@ const CurrencyExchange = () => {
           style={styles.picker}
           onValueChange={(itemValue) => setTargetCurrency(itemValue)}
         >
-          {currencyOptions.map((option) => (
-            <Picker.Item
-              key={option.value}
-              label={option.label}
-              value={option.value}
-            />
-          ))}
+          {currencyOptions.map(
+            (
+              option // Assign the list to the picker --> To display the drop down list for currencies
+            ) => (
+              <Picker.Item
+                key={option.value}
+                label={option.label}
+                value={option.value}
+              />
+            )
+          )}
         </Picker>
-
-        {/* <Text style={styles.currency}>{targetCurrency}</Text> */}
       </View>
       <View style={styles.row}>
         <MyButton
@@ -165,10 +148,9 @@ const CurrencyExchange = () => {
     </View>
   );
 };
-
+// UI Stye
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -202,5 +184,4 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
 });
-
 export default CurrencyExchange;

@@ -7,7 +7,7 @@ import { Formik } from "formik";
 import { Octicons, Ionicons } from "@expo/vector-icons";
 import PageFooter from "../components/PageFooter";
 //Buttons and Alert
-import { Button } from 'react-native';
+import { Button } from "react-native";
 // Styles
 import {
   StyledContainer,
@@ -108,7 +108,7 @@ const SignUp = () => {
       <ScrollView>
         <StatusBar style="dark" />
         <PageTitle>Enter your details below</PageTitle>
-        
+
         <InnerContainer>
           <Formik initialValues={initialValues} onSubmit={onSubmit}>
             {({ handleChange, handleBlur, handleSubmit, values }) => (
@@ -119,7 +119,6 @@ const SignUp = () => {
                   onChangeText={handleChange("UserName")}
                   onBlur={handleBlur("UserName")}
                   values={values.UserName}
-                  //keyboardType="email-address"
                 />
                 <MyTextInput
                   placeholder="First Name"
@@ -160,7 +159,6 @@ const SignUp = () => {
                   onChangeText={handleChange("Phone_Number")}
                   onBlur={handleBlur("Phone_Number")}
                   values={values.Phone_Number}
-                  //keyboardType="email-address"
                 />
                 <MyTextInput
                   placeholder="Password"
@@ -184,7 +182,6 @@ const SignUp = () => {
                   hidePassword={hidePassword}
                   setHidePassword={setHidePassword}
                 />
-
                 <StyledButton onPress={handleSubmit}>
                   <ButtonText>Sign Up</ButtonText>
                 </StyledButton>
@@ -194,7 +191,7 @@ const SignUp = () => {
           <ExtraView>
             <ExtraText>Already have an account? </ExtraText>
             <TextLink>
-                <SignInLink />
+              <SignInLink />
             </TextLink>
           </ExtraView>
           <ExtraView>
@@ -202,15 +199,17 @@ const SignUp = () => {
           </ExtraView>
           <ExtraView>
             <TermsAndConditions />
-            <ExtraText>  </ExtraText>
+            <ExtraText> </ExtraText>
             <ExtraText>and </ExtraText>
-            <ExtraText>  </ExtraText>
+            <ExtraText> </ExtraText>
             <PrivacyPolicy />
           </ExtraView>
         </InnerContainer>
       </ScrollView>
       <View style={{ flexDirection: "column", height: "17%" }} />
-      
+      <View>
+        <PageFooter />
+      </View>
     </StyledContainer>
   );
 };
