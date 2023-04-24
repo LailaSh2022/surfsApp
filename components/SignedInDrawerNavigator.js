@@ -3,19 +3,26 @@ import Login from "./../screens/Login";
 import Profile from "./../screens/Profile";
 import Home_Page01 from "./../screens/HomePage";
 import History from "./../screens/History";
-
-function Contacts() {
-  return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Contact Us</Text>
-    </View>
-  );
-}
+import ContactUs from "../screens/Contactus";
+import { View, Text } from "react-native";
+import ReceiverList from "../screens/ReceiverList";
+import TransferMoney from "../screens/ReceiverList";
+import { useNavigation } from "@react-navigation/native";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 const Drawer = createDrawerNavigator();
 const SignedInDrawerNavigator = ({ userId }) => {
-  const screenProps = { userId: userId };
-  console.log(screenProps);
+  //const screenProps = { userId: userId };
+  //console.log(screenProps);
+  const navigation = useNavigation();
+  // Open the Sign Out Page
+  function SignOut() {
+    return (
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <Text style={{ fontSize: 16 }}>Thank you for using SurfsApp</Text>
+      </View>
+    );
+  }
   return (
     <Drawer.Navigator
       screenOptions={{
@@ -30,12 +37,35 @@ const SignedInDrawerNavigator = ({ userId }) => {
       <Drawer.Screen
         component={Home_Page01}
         name={"Home Page"}
-        // screenProps={screenProps}
-        //initialParams={{ userId: userId }}
+        options={{
+          drawerLabel: "Home",
+          drawerIcon: ({ focused, size }) => (
+            <MaterialIcons
+              name="home"
+              size={size}
+              color={focused ? "#007AFF" : "#8E8E93"}
+            />
+          ),
+        }}
+        // Use navigation to navigate to the 'Settings' screen
+        listeners={{
+          press: () => navigation.navigate("DrawHome_Page", { userId: userId }),
+        }}
       />
+      {/* <Drawer.Screen component={Home_Page01} name={"Home Page"} /> */}
       <Drawer.Screen
         component={Profile}
         name={"Your Profile"}
+        initialParams={{ userId: userId }}
+      />
+      <Drawer.Screen
+        component={ReceiverList}
+        name={"Receiver's List"}
+        initialParams={{ userId: userId }}
+      />
+      <Drawer.Screen
+        component={TransferMoney}
+        name={"Transfer Money"}
         initialParams={{ userId: userId }}
       />
       <Drawer.Screen
@@ -44,12 +74,12 @@ const SignedInDrawerNavigator = ({ userId }) => {
         initialParams={{ userId: userId }}
       />
       <Drawer.Screen
-        component={Contacts}
+        component={ContactUs}
         name={"Contact Us"}
         initialParams={{ userId: userId }}
-        // screenProps={screenProps}
       />
       {/*Navigate to Login Page*/}
+      <Drawer.Screen component={SignOut} name={"Sign Out"} />
     </Drawer.Navigator>
   );
 };

@@ -3,12 +3,29 @@ import { View, Text, TextInput, StyleSheet, Button } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import MyButton from "./MyButton";
 import { useNavigation } from "@react-navigation/native";
-import OrderReceiverList from "./../screens/ReceiverList";
 
+import Login from "./../screens/Login";
+import "../global.js";
+import { createStackNavigator } from "@react-navigation/stack";
+//import ReceiverList01 from "../screens/ReceiverList01";
+
+// const Stack = createStackNavigator();
+
+// const MyNavigator = () => {
+//   return (
+//     <Stack.Navigator>
+//       <Stack.Screen name="Login" component={Login} />
+//       <Stack.Screen name="ReceiverList01" component={ReceiverList01} />
+//     </Stack.Navigator>
+//   );
+// };
 const API_KEY = "dc17da5627284a82aec1e8de2ad69a67";
 
 const CurrencyExchange = () => {
+  console.log("CurrencyExchange_userId: ", userId);
+  console.log("CurrencyExchange global.userId[0]: ", global.userId[0]);
   const navigation = useNavigation();
+
   const [baseAmount, setBaseAmount] = useState("");
   const [baseCurrency, setBaseCurrency] = useState("USD");
   const [targetAmount, setTargetAmount] = useState("");
@@ -45,6 +62,7 @@ const CurrencyExchange = () => {
     const fee = (totalAmount - convertedAmount).toFixed(2);
     console.log(fee);
     const totalAmountWithfee = (convertedAmount - fee).toFixed(2);
+    global.Amount[0] = totalAmountWithfee; // Using global variable to pass values between screens.
     console.log(totalAmountWithfee);
     setTargetAmount(totalAmountWithfee); // Calculate the targer amount
     setTotalAmount(convertedAmount);
@@ -52,6 +70,13 @@ const CurrencyExchange = () => {
     setfee(fee);
     setExchangeAmount(exchangeAmount);
   };
+  const handleTransferPress = () => {
+    console.log("handleTransferPress userId:" + userId);
+    if (global.userId[0] > 0)
+      navigation.navigate("OrderSummary", { userId: global.userId[0] });
+    else navigation.navigate("Login");
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.row}>
@@ -133,7 +158,7 @@ const CurrencyExchange = () => {
         <View style={{ width: "10%" }} />
         <MyButton
           title="Transfer"
-          onPress={() => navigation.navigate("OrderReceiverList")}
+          onPress={handleTransferPress}
           style={styles.button}
         />
       </View>
