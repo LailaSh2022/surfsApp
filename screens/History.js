@@ -1,16 +1,41 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import HistoryItem from "./../components/HistoryItem";
-import { StyledContainer } from "./../components/Styles";
+import {
+  StyledContainer,
+  StyledBackButton,
+  ButtonText,
+} from "./../components/Styles";
 
 const History = ({ route }) => {
-  //console.log(route.params);
+  if (typeof route.params == "undefined") {
+    return (
+      <StyledContainer>
+        <View style={{ flexDirection: "row" }}>
+          <StyledBackButton>
+            <ButtonText>{"<"}</ButtonText>
+          </StyledBackButton>
+          <Text style={styles.headline}> History</Text>
+        </View>
+        <Text style={{ paddingTop: 15, color: "blue", fontSize: 15 }}>
+          Transactions
+        </Text>
+        <Text style={{ marginTop: 50, textAlign: "center", fontSize: 15 }}>
+          There is no trasaction history!
+        </Text>
+      </StyledContainer>
+    );
+  }
+
   let { transactions } = route.params;
 
   return (
     <StyledContainer>
       <View>
         <View style={{ flexDirection: "row" }}>
+          <StyledBackButton>
+            <ButtonText>{"<"}</ButtonText>
+          </StyledBackButton>
           <Text style={styles.headline}> History</Text>
         </View>
         <Text style={{ paddingTop: 15, color: "blue", fontSize: 15 }}>

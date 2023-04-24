@@ -3,10 +3,7 @@ import React from "react";
 import { View, Text } from "react-native";
 import Profile from "./Profile";
 import HomePage from "./HomePage";
-import {
-  GetReceiverDetails,
-  GetAllOrderByUserId,
-} from "../Database";
+import { GetReceiverDetails, GetAllOrderByUserId } from "../Database";
 import Unsubscribe from "./Unsubscribe";
 
 const Home = ({ navigation }) => {
@@ -33,6 +30,7 @@ const Home = ({ navigation }) => {
     });
 
   //for testing
+
   var OrderSummary = {
     OrderId: 1,
     Date: "16/04/2023",
@@ -54,15 +52,15 @@ const Home = ({ navigation }) => {
             const fullname = result.FirstName + " " + result.LastName;
             const receiverGet = (order.Amount * order.Exchange_Rate).toFixed(2);
             const history = {
-                OrderNo: order.OrderId,
-                SentDate: order.Send_Date,
-                Receiver: fullname,
-                Amount: order.Amount,
-                ReceivierGets: receiverGet,
-                From: order.From_Currency,
-                To: order.To_Currency,
+              OrderNo: order.OrderId,
+              SentDate: order.Send_Date,
+              Receiver: fullname,
+              Amount: order.Amount,
+              ReceivierGets: receiverGet,
+              From: order.From_Currency,
+              To: order.To_Currency,
             };
-            console.log(history)
+            console.log(history);
             transactions.push(history);
           })
           .catch((error) => {
@@ -78,10 +76,8 @@ const Home = ({ navigation }) => {
 
   return (
     <View>
-      
-          <Text onPress={() => navigation.navigate("HomePage")}>{HomePage}</Text>
+      <Text onPress={() => navigation.navigate("HomePage")}>{HomePage}</Text>
       <Text onPress={() => navigation.navigate("Profile")}>{Profile}</Text>
-       
 
       <Text onPress={() => navigation.navigate("SignUp")}>{SignUp}</Text>
       <Text onPress={() => navigation.navigate("Login")}>{login}</Text>
