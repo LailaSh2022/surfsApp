@@ -258,12 +258,12 @@ export async function updateExistingUser(user) {
       "UPDATE Users SET FirstName = ?, LastName = ?, UserName = ?, Password = ?," +
         "Email = ?, Phone_Number = ? WHERE Id = ? ;",
       [
-        user.firstName,
-        user.lastName,
-        user.username,
-        user.password,
-        user.email,
-        user.MobileNum,
+        user.FirstName,
+        user.LastName,
+        user.UserName,
+        user.Password,
+        user.Email,
+        user.Phone_Number,
         user.Id,
       ],
       (_, { rowsAffected }) => {

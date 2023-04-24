@@ -44,6 +44,14 @@ import {
   updateExistingUser,
   deleteUser,
 } from "../Database";
+
+import {
+  getUserInfoFromServer,
+  UpdateUserInfoIntoServer,
+} from "../DataSynchronization";
+
+import NetInfo from "@react-native-community/netinfo";
+
 const { brand, darkLight, tertiary } = Colors;
 // Input Validation.
 const onSubmit = (values) => {
@@ -51,7 +59,6 @@ const onSubmit = (values) => {
     Alert.alert("Error", "UserName cannot be empty");
     return;
   }
-  // Check if username is exsits on the database.
   CheckUserNameExists(values.userName)
     .then((exists) => {
       if (exists) {
@@ -64,36 +71,46 @@ const onSubmit = (values) => {
       return;
     });
 
-  if (values.firstName == "") {
+
+  if (values.FirstName == "") {
     Alert.alert("Error", "FirstName cannot be empty");
     return;
   }
 
-  if (values.lastName == "") {
+  if (values.LastName == "") {
     Alert.alert("Error", "LastName cannot be empty");
     return;
   }
 
-  if (values.email == "") {
+  if (values.Email == "") {
     Alert.alert("Error", "Email cannot be empty");
     return;
   }
 
-  if (values.MobileNum == "") {
+  if (values.Phone_Number == "") {
     Alert.alert("Error", "Mobile Number cannot be empty");
     return;
   }
 
-  if (values.password == "") {
+  if (values.Password == "") {
     Alert.alert("Error", "Password cannot be empty");
     return;
   }
   // If password not equal confirm password.
-  if (values.password != values.confirmPassword) {
+  if (values.Password != values.ConfirmPassword) {
     Alert.alert("Error", "Password and Confirm Password must be the same");
     return;
   }
   updateExistingUser(values); // Using updateExistingUser function to update the given data.
+  
+  //synchronize user data to server if there is any connection
+  NetInfo.fetch().then((state) => {
+    console.log("Connection type", state.type);
+    console.log("Is connected?", state.isConnected);
+    if (state.isConnected) {
+      UpdateUserInfoIntoServer(values);
+    }
+  });
 };
 
 const Profile = () => {
@@ -133,13 +150,13 @@ const Profile = () => {
             <Formik
               initialValues={{
                 Id: userData.Id,
-                firstName: userData.FirstName,
-                lastName: userData.LastName,
-                username: userData.UserName,
-                email: userData.Email,
-                MobileNum: userData.Phone_Number,
-                password: "",
-                confirmPassword: "",
+                FirstName: userData.FirstName,
+                LastName: userData.LastName,
+                UserName: userData.UserName,
+                Email: userData.Email,
+                Phone_Number: userData.Phone_Number,
+                Password: "",
+                ConfirmPassword: "",
               }}
               onSubmit={onSubmit}
             >
@@ -149,8 +166,8 @@ const Profile = () => {
                     // First Name.
                     placeholder="First Name"
                     placeholderTextColor={darkLight}
-                    onChangeText={handleChange("firstName")}
-                    onBlur={handleBlur("firstName")}
+                    onChangeText={handleChange("FirstName")}
+                    onBlur={handleBlur("FirstName")}
                     defaultValue={userData.FirstName}
                     values={values.FirstName}
                   />
@@ -169,19 +186,19 @@ const Profile = () => {
                     // Username.
                     placeholder="Username"
                     placeholderTextColor={darkLight}
-                    onChangeText={handleChange("username")}
-                    onBlur={handleBlur("username")}
+                    onChangeText={handleChange("UserName")}
+                    onBlur={handleBlur("UserName")}
                     defaultValue={userData.UserName}
-                    values={values.username}
+                    values={values.UserName}
                     keyboardType="email-address"
                   />
                   <MyTextInput
                     // Email address.
                     placeholder="Email Address"
                     placeholderTextColor={darkLight}
-                    onChangeText={handleChange("email")}
-                    onBlur={handleBlur("email")}
-                    values={values.email}
+                    onChangeText={handleChange("Email")}
+                    onBlur={handleBlur("Email")}
+                    values={values.Email}
                     defaultValue={userData.Email}
                     keyboardType="email-address"
                   />
@@ -189,18 +206,18 @@ const Profile = () => {
                     // Mobile Number.
                     placeholder="Mobile Number"
                     placeholderTextColor={darkLight}
-                    onChangeText={handleChange("MobileNum")}
-                    onBlur={handleBlur("MobileNum")}
-                    values={values.MobileNum}
+                    onChangeText={handleChange("Phone_Number")}
+                    onBlur={handleBlur("Phone_Number")}
+                    values={values.Phone_Number}
                     defaultValue={userData.Phone_Number}
                   />
                   <MyTextInput
                     // Password.
                     placeholder="Password"
                     placeholderTextColor={darkLight}
-                    onChangeText={handleChange("password")}
-                    onBlur={handleBlur("password")}
-                    values={values.password}
+                    onChangeText={handleChange("Password")}
+                    onBlur={handleBlur("Password")}
+                    values={values.Password}
                     secureTextEntry={hidePassword}
                     isPassword={true}
                     hidePassword={hidePassword}
@@ -210,9 +227,9 @@ const Profile = () => {
                     // Confirm password.
                     placeholder="Confirm Password"
                     placeholderTextColor={darkLight}
-                    onChangeText={handleChange("confirmPassword")}
-                    onBlur={handleBlur("confirmPassword")}
-                    values={values.confirmPassword}
+                    onChangeText={handleChange("ConfirmPassword")}
+                    onBlur={handleBlur("ConfirmPassword")}
+                    values={values.ConfirmPassword}
                     secureTextEntry={hidePassword}
                     isPassword={true}
                     hidePassword={hidePassword}

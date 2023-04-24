@@ -4,7 +4,7 @@ import { View, Text } from "react-native";
 const HistoryItem = (props) => {
   const { OrderNo, SentDate, Receiver, Amount, ReceivierGets, From, To } =
     props.item;
-    console.log(props.item)
+    //console.log(props.item)
   return (
     <View>
       <View style={{ flexDirection: "row", paddingTop: 20 }}>
