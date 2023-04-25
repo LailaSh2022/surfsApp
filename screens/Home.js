@@ -19,7 +19,7 @@ const Home = ({ navigation }) => {
   const history = "history";
   const SignUp = "SignUp";
   const AddReceiver = "AddReceiver";
-  const Contactus = "ContactUs";
+  const Contactus = "Contactus";
   const Unsubscribe = "Unsubscribe";
 
   var receiver;

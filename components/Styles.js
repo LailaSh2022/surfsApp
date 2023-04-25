@@ -45,6 +45,13 @@ export const UnsubscribeLogo = styled.Image`
   width: 300px;
   height: 300px;
 `;
+
+export const CancelLogo = styled.Image`
+  width: 200px;
+  height: 200px;
+`;
+
+
 export const SubPageLogo = styled.Image`
   width: 150px;
   height: 100px;
