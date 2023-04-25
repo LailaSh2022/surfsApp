@@ -102,8 +102,7 @@ const onSubmit = (values) => {
     Alert.alert("Error", "Password and Confirm Password must be the same");
     return;
   }
-  updateExistingUser(values);
-  
+  updateExistingUser(values);  
   //synchronize user data to server if there is any connection
   NetInfo.fetch().then((state) => {
     console.log("Connection type", state.type);

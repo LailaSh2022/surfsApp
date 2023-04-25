@@ -55,7 +55,7 @@ const ContactUs = () => {
         <ScrollView>
           {/* Fixed from <image> to <Image> and imported the tag from "react-native" By Laila */}
           <Image
-            source={require("./../assets/building.png")}
+            //source={require("./../assets/building.png")}
             style={{ borderRadius: 5 }} // Added By Laila
           />
           <ExtraView>

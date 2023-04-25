@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import HistoryItem from "./../components/HistoryItem";
 import {
@@ -6,28 +6,47 @@ import {
   StyledBackButton,
   ButtonText,
 } from "./../components/Styles";
+import { useRoute } from "@react-navigation/native";
+import { GetReceiverDetails, GetAllOrderByUserId } from "../Database";
 
-const History = ({ route }) => {
-  if (typeof route.params == "undefined") {
-    return (
-      <StyledContainer>
-        <View style={{ flexDirection: "row" }}>
-          <StyledBackButton>
-            <ButtonText>{"<"}</ButtonText>
-          </StyledBackButton>
-          <Text style={styles.headline}> History</Text>
-        </View>
-        <Text style={{ paddingTop: 15, color: "blue", fontSize: 15 }}>
-          Transactions
-        </Text>
-        <Text style={{ marginTop: 50, textAlign: "center", fontSize: 15 }}>
-          There is no trasaction history!
-        </Text>
-      </StyledContainer>
-    );
-  }
+const History = () => {
+  const [transactions, setTransactions] = useState([]);
+  const route = useRoute();
+  const { userId } = route.params;
+  useEffect(() => {
+    if (!userId) {
+      console.log("Info: userId is undefined");
+    }
+  }, [userId]);
 
-  let { transactions } = route.params;
+  GetAllOrderByUserId(userId)
+    .then((result) => {
+      const orders = result;
+      Promise.all(
+        orders.map((order) =>
+          GetReceiverDetails(order.RecipientId, userId).then((result) => {
+            const fullname = result.FirstName + " " + result.LastName;
+            const receiverGet = (order.Amount * order.Exchange_Rate).toFixed(2);
+            const history = {
+              OrderNo: order.OrderId,
+              SentDate: order.Send_Date,
+              Receiver: fullname,
+              Amount: order.Amount,
+              ReceivierGets: receiverGet,
+              From: order.From_Currency,
+              To: order.To_Currency,
+            };
+            return history;
+          })
+        )
+      ).then((histories) => {
+        setTransactions(histories);
+      });
+    })
+    .catch((error) => {
+      console.log(`Error while getting order details: ${error}`);
+      return;
+    });
 
   return (
     <StyledContainer>

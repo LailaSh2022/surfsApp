@@ -20,9 +20,10 @@ const Home = ({ navigation }) => {
 
   var receiver;
   //var bank_info;
-  GetReceiverDetails(1)
+  GetReceiverDetails(2, 3)
     .then((result) => {
       receiver = result;
+      console.log(receiver);
     })
     .catch((error) => {
       console.log(`Error while getting receiver details: ${error}`);
@@ -33,16 +34,17 @@ const Home = ({ navigation }) => {
 
   var OrderSummary = {
     OrderId: 1,
-    Date: "16/04/2023",
-    Rate: 3.05,
+    Date: "13/02/2023",
+    Rate: 0.5912,
     From_Currency: "NZD",
-    To_Currency: "BRL",
+    To_Currency: "USD",
     Amount: 350,
     Fee: 0.01,
   };
 
+  /*
   const transactions = [];
-  GetAllOrderByUserId(2)
+  GetAllOrderByUserId(3)
     .then((result) => {
       const orders = result;
       //const transactions = [];
@@ -60,7 +62,9 @@ const Home = ({ navigation }) => {
               From: order.From_Currency,
               To: order.To_Currency,
             };
+            console.log("history started");
             console.log(history);
+            console.log("history ended");
             transactions.push(history);
           })
           .catch((error) => {
@@ -73,7 +77,7 @@ const Home = ({ navigation }) => {
       console.log(`Error while getting order details: ${error}`);
       return;
     });
-
+    */
   return (
     <View>
       <Text onPress={() => navigation.navigate("HomePage")}>{HomePage}</Text>
@@ -94,9 +98,9 @@ const Home = ({ navigation }) => {
       >
         {orderSummary}
       </Text>
-      <Text onPress={() => navigation.navigate("History", { transactions })}>
-        {history}
-      </Text>
+      {/* <Text onPress={() => navigation.navigate("History", { transactions })}>
+        {history} </Text>*/}
+
       <Text onPress={() => navigation.navigate("Unsubscribe", { Unsubscribe })}>
         {Unsubscribe}
       </Text>

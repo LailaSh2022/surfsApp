@@ -2,7 +2,7 @@ import Constants from "expo-constants";
 
 const { manifest } = Constants;
 
-const uri = `http://${manifest.debuggerHost.split(":").shift()}:5000`; //this line will generate the your machine ip automatically
+const uri = `http://${manifest.debuggerHost.split(":").shift()}:5000`; 
 
 export async function getUserInfoFromServer(userId) {
   try {
@@ -21,7 +21,6 @@ export async function getUserInfoFromServer(userId) {
 
 export function UpdateUserInfoIntoServer(updatedUser) {
   console.log("updated user...");
-  //console.log(updatedUser);
 
   fetch(`${uri}/users/` + updatedUser.Id, {
     method: "PUT",

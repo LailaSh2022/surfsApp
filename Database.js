@@ -109,16 +109,14 @@ export async function CheckUserNameExists(username) {
   });
 }
 
-export async function GetReceiverDetails(receiverId) {
+export async function GetReceiverDetails(receiverId, senderId) {
   const db = await OpenDatabase();
   return new Promise((resolve, reject) => {
     db.transaction((tx) => {
       tx.executeSql(
         // Fixed by Laila
-        "SELECT * FROM Recipients,Users_Recipients,users " +
-          "where Recipients.id = Users_Recipients.recipientId" +
-          " and users.id = users_recipients.userId and users.id = ?",
-        [receiverId],
+        "select * from Recipients, Users_Recipients where  Recipients.Id = ? and Recipients.Id = Users_Recipients.RecipientId and Users_Recipients.UserId = ?;",
+        [receiverId, senderId],
         (_, { rows }) => {
           if (rows._array.length > 0) {
             console.log(rows.item(0));

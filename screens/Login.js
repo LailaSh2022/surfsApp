@@ -78,7 +78,7 @@ const Login = () => {
       .then((userId) => {
         if (userId) {
           //alert("Login Successful! " + userId);
-
+          /*
           //synchronization data with server if there is any connection
           NetInfo.fetch().then((state) => {
             if (state.isConnected) {
@@ -91,6 +91,7 @@ const Login = () => {
                 });
             }
           });
+          */
 
           navigation.navigate("HomePage", { userId: userId });
         } else {
