@@ -1,0 +1,193 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ContactUs component Matches the snapshot 1`] = `
+<View
+  style={
+    [
+      {
+        "backgroundColor": "#ffffff",
+        "flexBasis": 0,
+        "flexGrow": 1,
+        "flexShrink": 1,
+        "paddingBottom": 25,
+        "paddingLeft": 25,
+        "paddingRight": 25,
+        "paddingTop": 64,
+      },
+    ]
+  }
+>
+  <View
+    style={
+      [
+        {
+          "alignItems": "center",
+          "flexBasis": 0,
+          "flexGrow": 1,
+          "flexShrink": 1,
+          "width": "100%",
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        {
+          "marginTop": "-20%",
+          "top": 0,
+        }
+      }
+    >
+      <Image
+        resizeMode="cover"
+        source={1}
+        style={
+          [
+            {
+              "height": 170,
+              "width": 200,
+            },
+          ]
+        }
+      />
+    </View>
+    <Text
+      style={
+        [
+          {
+            "color": "#152A5F",
+            "fontSize": 30,
+            "fontWeight": "bold",
+            "paddingBottom": 10,
+            "paddingLeft": 10,
+            "paddingRight": 10,
+            "paddingTop": 10,
+            "textAlign": "center",
+          },
+        ]
+      }
+    >
+      Contact Us
+    </Text>
+    <RCTScrollView>
+      <View>
+        <Image
+          style={
+            {
+              "borderRadius": 5,
+            }
+          }
+        />
+        <View
+          style={
+            [
+              {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "justifyContent": "center",
+                "paddingBottom": 10,
+                "paddingLeft": 10,
+                "paddingRight": 10,
+                "paddingTop": 10,
+              },
+            ]
+          }
+        >
+          <View
+            style={
+              {
+                "flexDirection": "column",
+              }
+            }
+          >
+            <Text
+              style={
+                [
+                  {
+                    "alignItems": "center",
+                    "color": "#152A5F",
+                    "fontSize": 15,
+                    "justifyContent": "center",
+                  },
+                ]
+              }
+            >
+              Name: SurfsApp Limited 
+            </Text>
+            <Text
+              style={
+                [
+                  {
+                    "alignItems": "center",
+                    "color": "#152A5F",
+                    "fontSize": 15,
+                    "justifyContent": "center",
+                  },
+                ]
+              }
+            >
+              Phone Number: 09 827 6100 
+            </Text>
+            <Text
+              style={
+                [
+                  {
+                    "alignItems": "center",
+                    "color": "#152A5F",
+                    "fontSize": 15,
+                    "justifyContent": "center",
+                  },
+                ]
+              }
+            >
+              Address: 242 Queen Street, Auckland CBD 
+            </Text>
+            <Text
+              style={
+                [
+                  {
+                    "alignItems": "center",
+                    "color": "#152A5F",
+                    "fontSize": 15,
+                    "justifyContent": "center",
+                  },
+                ]
+              }
+            >
+              Auckland 1010 
+            </Text>
+            <Text
+              style={
+                [
+                  {
+                    "alignItems": "center",
+                    "color": "#152A5F",
+                    "fontSize": 15,
+                    "justifyContent": "center",
+                  },
+                ]
+              }
+            >
+              Email: surfsapp.limited@gmail.com 
+            </Text>
+            <Text
+              style={
+                [
+                  {
+                    "alignItems": "center",
+                    "color": "#152A5F",
+                    "fontSize": 15,
+                    "justifyContent": "center",
+                  },
+                ]
+              }
+            >
+              Opening Hours: 9:00am - 5:00 pm 
+            </Text>
+          </View>
+        </View>
+      </View>
+    </RCTScrollView>
+  </View>
+</View>
+`;

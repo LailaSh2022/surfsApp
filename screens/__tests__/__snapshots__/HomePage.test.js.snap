@@ -1,0 +1,264 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HomePage component renders correctly 1`] = `
+<View
+  style={
+    [
+      {
+        "backgroundColor": "#ffffff",
+        "flexBasis": 0,
+        "flexGrow": 1,
+        "flexShrink": 1,
+        "paddingBottom": 25,
+        "paddingLeft": 25,
+        "paddingRight": 25,
+        "paddingTop": 64,
+      },
+    ]
+  }
+>
+  <View
+    style={
+      {
+        "alignSelf": "flex-end",
+        "flexDirection": "row",
+        "marginTop": "2%",
+        "position": "absolute",
+      }
+    }
+  >
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "backgroundColor": "#152A5F",
+          "borderRadius": 10,
+          "height": 40,
+          "justifyContent": "center",
+          "marginVertical": 1,
+          "opacity": 1,
+          "paddingBottom": 5,
+          "paddingLeft": 5,
+          "paddingRight": 5,
+          "paddingTop": 5,
+          "width": 70,
+        }
+      }
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#ffffff",
+              "fontSize": 16,
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        Sign In
+      </Text>
+    </View>
+    <View
+      style={
+        {
+          "width": "5%",
+        }
+      }
+    />
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "backgroundColor": "#152A5F",
+          "borderRadius": 10,
+          "height": 40,
+          "justifyContent": "center",
+          "marginVertical": 1,
+          "opacity": 1,
+          "paddingBottom": 5,
+          "paddingLeft": 5,
+          "paddingRight": 5,
+          "paddingTop": 5,
+          "width": 70,
+        }
+      }
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#ffffff",
+              "fontSize": 16,
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        Sign Up
+      </Text>
+    </View>
+    <View
+      style={
+        {
+          "width": "8%",
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      {
+        "left": 0,
+        "marginTop": "-6%",
+        "position": "absolute",
+        "top": 0,
+      }
+    }
+  >
+    <Image
+      resizeMode="cover"
+      source={1}
+      style={
+        [
+          {
+            "height": 100,
+            "paddingBottom": 10,
+            "paddingLeft": 10,
+            "paddingRight": 10,
+            "paddingTop": 10,
+            "width": 150,
+          },
+        ]
+      }
+    />
+  </View>
+  <View
+    style={
+      [
+        {
+          "alignItems": "center",
+          "flexBasis": 0,
+          "flexGrow": 1,
+          "flexShrink": 1,
+          "width": "100%",
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        {
+          "height": "7%",
+        }
+      }
+    />
+    <View
+      style={
+        {
+          "height": "0.5%",
+        }
+      }
+    />
+  </View>
+  <View>
+    <View
+      style={
+        [
+          {
+            "alignItems": "center",
+            "backgroundColor": "#152A5F",
+            "bottom": 0,
+            "flexBasis": 0,
+            "flexGrow": 0.2,
+            "flexShrink": 1,
+            "height": 90,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "width": "100%",
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          {
+            "position": "absolute",
+          }
+        }
+      >
+        <Image
+          resizeMode="cover"
+          source={1}
+          style={
+            [
+              {
+                "height": 50,
+                "width": 100,
+              },
+              {
+                "left": "0%",
+                "top": "0%",
+              },
+            ]
+          }
+        />
+      </View>
+      <View
+        style={
+          {
+            "height": "50%",
+          }
+        }
+      />
+      <View>
+        <Text
+          style={
+            [
+              {
+                "color": "#ffffff",
+                "fontSize": 9,
+                "textAlign": "center",
+              },
+            ]
+          }
+        >
+          Join Us for fast and secure online 
+        </Text>
+        <Text
+          style={
+            [
+              {
+                "color": "#ffffff",
+                "fontSize": 9,
+                "textAlign": "center",
+              },
+            ]
+          }
+        >
+          money transfer
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
