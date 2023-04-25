@@ -89,54 +89,6 @@ exports[`Testing History screen against its snapshot. If there is any unexpected
     >
       Transactions
     </Text>
-    <View>
-      <View
-        style={
-          {
-            "flexDirection": "row",
-            "paddingTop": 20,
-          }
-        }
-      >
-        <Text
-          style={
-            {
-              "width": "75%",
-            }
-          }
-        >
-          John Deer
-        </Text>
-        <Text>
-          350
-          NZD
-        </Text>
-      </View>
-      <View
-        style={
-          {
-            "flexDirection": "row",
-          }
-        }
-      >
-        <Text
-          style={
-            {
-              "width": "75%",
-            }
-          }
-        >
-          Sent:
-          12/31/2022
-          , Order No: 
-          1
-        </Text>
-        <Text>
-          201
-          USD
-        </Text>
-      </View>
-    </View>
   </View>
 </View>
 `;

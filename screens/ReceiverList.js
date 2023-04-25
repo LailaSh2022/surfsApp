@@ -1,13 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import HistoryItem from "../components/HistoryItem";
-import { ExtraView, StyledContainer } from "../components/Styles";
-import { AddNewReceiver, GetAllOrderByUserId, GetReceiverDetails } from "../Database";
+import {
+  ExtraView,
+  StyledContainer,
+  StyledFormArea,
+  StyledSideSmallButton,
+  SmallButtonText,
+  StyledButton,
+  ButtonText,
+} from "../components/Styles";
+import {
+  AddNewReceiver,
+  GetAllOrderByUserId,
+  GetReceiverDetails,
+} from "../Database";
 import { useRoute } from "@react-navigation/native";
-import ReceiverListItem from "./../components/ReceiverListItem";
+import ReceiverListItem from "../components/ReceiverListItem";
 import DeleteReceiver from "../components/DeleteReceiver";
-import ReceiverDetails from "" 
-
+import ReceiverDetails from "./ReceiverDetails";
 
 const ReceiverList = (navigation) => {
   ////// Get user Id. Added by Laila.
@@ -80,18 +91,14 @@ const ReceiverList = (navigation) => {
         return;
       });
 
-  const handleselectedRecipient = Recipients => {
+  const handleselectedRecipient = (Recipients) => {
     setSelectedRecipient(Recipients);
-    navigation.navigate('ReceiverDetails', {Recipients});
-  }   
-  
-
+    navigation.navigate("ReceiverDetails", { Recipients });
+  };
 
   return (
     <StyledContainer>
       <StyledFormArea>
-
-      
         <View>
           <View style={{ flexDirection: "row" }}>
             <Text style={styles.headline}> Receiver List</Text>
@@ -99,20 +106,19 @@ const ReceiverList = (navigation) => {
           <Text style={{ paddingTop: 15, color: "blue", fontSize: 15 }}>
             Receiver List
           </Text>
-          <StyledSideSmallButton onPress={() => navigation.navigate("AddReceiver")}>
+          <StyledSideSmallButton
+            onPress={() => navigation.navigate("AddReceiver")}
+          >
             <SmallButtonText> + </SmallButtonText>
           </StyledSideSmallButton>
-          
+
           {transactions.map((item, i) => (
             <ReceiverList item={item} key={i} />
-
-            
           ))}
         </View>
         <StyledButton onPress={() => navigation.navigate("ReceiverDetails")}>
-            <ButtonText>Confirm</ButtonText>
+          <ButtonText>Confirm</ButtonText>
         </StyledButton>
-
       </StyledFormArea>
     </StyledContainer>
   );

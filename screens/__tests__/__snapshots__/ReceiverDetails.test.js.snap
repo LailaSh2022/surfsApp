@@ -116,6 +116,65 @@ exports[`Testing ReceiverDetails screen against its snapshot. If there is any un
         }
       }
     >
+      Email:
+    </Text>
+    <Text>
+      john_deer@gmail.com
+    </Text>
+  </View>
+  <View
+    style={
+      {
+        "flexDirection": "row",
+        "marginTop": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        {
+          "width": "25%",
+        }
+      }
+    >
+      Mobile No:
+    </Text>
+    <Text />
+  </View>
+  <View
+    style={
+      {
+        "flexDirection": "row",
+        "marginTop": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        {
+          "width": "25%",
+        }
+      }
+    >
+      Relationship:
+    </Text>
+    <Text />
+  </View>
+  <View
+    style={
+      {
+        "flexDirection": "row",
+        "marginTop": 15,
+      }
+    }
+  >
+    <Text
+      style={
+        {
+          "width": "25%",
+        }
+      }
+    >
       Account No:
     </Text>
     <Text>
@@ -164,11 +223,15 @@ exports[`Testing ReceiverDetails screen against its snapshot. If there is any un
         }
       }
     >
-      Email:
+      Currency:
     </Text>
-    <Text>
-      john_deer@gmail.com
-    </Text>
+    <Text
+      style={
+        {
+          "paddingRight": "15%",
+        }
+      }
+    />
   </View>
   <View
     style={

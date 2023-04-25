@@ -45,10 +45,7 @@ import {
   deleteUser,
 } from "../Database";
 
-import {
-  getUserInfoFromServer,
-  UpdateUserInfoIntoServer,
-} from "../DataSynchronization";
+import { UpdateUserInfoIntoServer } from "../DataSynchronization";
 
 import NetInfo from "@react-native-community/netinfo";
 
@@ -70,7 +67,6 @@ const onSubmit = (values) => {
       console.log(`Error while checking user: ${error}`);
       return;
     });
-
 
   if (values.FirstName == "") {
     Alert.alert("Error", "FirstName cannot be empty");
@@ -101,7 +97,7 @@ const onSubmit = (values) => {
     Alert.alert("Error", "Password and Confirm Password must be the same");
     return;
   }
-  updateExistingUser(values);  
+  updateExistingUser(values);
   //synchronize user data to server if there is any connection
   NetInfo.fetch().then((state) => {
     console.log("Connection type", state.type);

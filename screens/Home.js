@@ -42,42 +42,6 @@ const Home = ({ navigation }) => {
     Fee: 0.01,
   };
 
-  /*
-  const transactions = [];
-  GetAllOrderByUserId(3)
-    .then((result) => {
-      const orders = result;
-      //const transactions = [];
-      orders.map((order) => {
-        GetReceiverDetails(order.RecipientId)
-          .then((result) => {
-            const fullname = result.FirstName + " " + result.LastName;
-            const receiverGet = (order.Amount * order.Exchange_Rate).toFixed(2);
-            const history = {
-              OrderNo: order.OrderId,
-              SentDate: order.Send_Date,
-              Receiver: fullname,
-              Amount: order.Amount,
-              ReceivierGets: receiverGet,
-              From: order.From_Currency,
-              To: order.To_Currency,
-            };
-            console.log("history started");
-            console.log(history);
-            console.log("history ended");
-            transactions.push(history);
-          })
-          .catch((error) => {
-            console.log(`Error while getting receiver details: ${error}`);
-            return;
-          });
-      });
-    })
-    .catch((error) => {
-      console.log(`Error while getting order details: ${error}`);
-      return;
-    });
-    */
   return (
     <View>
       <Text onPress={() => navigation.navigate("HomePage")}>{HomePage}</Text>
@@ -98,8 +62,6 @@ const Home = ({ navigation }) => {
       >
         {orderSummary}
       </Text>
-      {/* <Text onPress={() => navigation.navigate("History", { transactions })}>
-        {history} </Text>*/}
 
       <Text onPress={() => navigation.navigate("Unsubscribe", { Unsubscribe })}>
         {Unsubscribe}
