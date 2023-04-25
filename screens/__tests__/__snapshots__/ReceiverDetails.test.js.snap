@@ -1,10 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-<<<<<<< HEAD
-exports[`Testing OrderSummary screen against its snapshot. If there is unexpected change in UI, it will prompt test failed. 1`] = `
-=======
-exports[`Testing OrderSummary screen against its snapshot. If there is any unexpected change in the screen, it will prompt test failed. 1`] = `
->>>>>>> 416cac8028822d12da463eb324fe4d3fb6c999e8
+exports[`Testing ReceiverDetails screen against its snapshot. If there is any unexpected change in the screen, it will prompt test failed. 1`] = `
 <View
   style={
     [
@@ -78,7 +74,7 @@ exports[`Testing OrderSummary screen against its snapshot. If there is any unexp
         }
       }
     >
-       Order Summary
+       Receiver Details
     </Text>
   </View>
   <View
@@ -96,10 +92,13 @@ exports[`Testing OrderSummary screen against its snapshot. If there is any unexp
         }
       }
     >
-      Order No:
+      Name:
     </Text>
     <Text>
-      1
+      John
+       
+       
+      Dear
     </Text>
   </View>
   <View
@@ -117,21 +116,12 @@ exports[`Testing OrderSummary screen against its snapshot. If there is any unexp
         }
       }
     >
-      Date:
+      Account No:
     </Text>
     <Text>
-      16/04/2023
+      07-111111111111111-02
     </Text>
   </View>
-  <View
-    style={
-      {
-        "borderBottomColor": "black",
-        "borderBottomWidth": 0.5,
-        "paddingTop": 10,
-      }
-    }
-  />
   <View
     style={
       {
@@ -147,32 +137,18 @@ exports[`Testing OrderSummary screen against its snapshot. If there is any unexp
         }
       }
     >
-      Rate:
+      Address:
     </Text>
     <Text
       style={
         {
-          "fontSize": 20,
-          "marginTop": -5,
+          "paddingRight": "15%",
         }
       }
     >
-      1.00
-      NZD
-       = 
-      3.05
-      BRL
+      10 Martin Road, Manurewa, Auckland 2102
     </Text>
   </View>
-  <View
-    style={
-      {
-        "borderBottomColor": "black",
-        "borderBottomWidth": 0.5,
-        "paddingTop": 10,
-      }
-    }
-  />
   <View
     style={
       {
@@ -181,8 +157,17 @@ exports[`Testing OrderSummary screen against its snapshot. If there is any unexp
       }
     }
   >
+    <Text
+      style={
+        {
+          "width": "25%",
+        }
+      }
+    >
+      Email:
+    </Text>
     <Text>
-      Transfer Info:
+      john_deer@gmail.com
     </Text>
   </View>
   <View
@@ -200,115 +185,16 @@ exports[`Testing OrderSummary screen against its snapshot. If there is any unexp
         }
       }
     >
-      Amount:
+      Swift Code:
     </Text>
     <Text
       style={
         {
-          "fontSize": 20,
-          "marginTop": -5,
-        }
-      }
-    >
-      350
-      NZD
-    </Text>
-  </View>
-  <View
-    style={
-      {
-        "flexDirection": "row",
-        "marginTop": 15,
-      }
-    }
-  >
-    <Text
-      style={
-        {
-          "width": "25%",
-        }
-      }
-    >
-      Fee (1%):
-    </Text>
-    <Text
-      style={
-        {
-          "fontSize": 20,
-          "marginTop": -5,
-        }
-      }
-    >
-      3.50
-      NZD
-    </Text>
-  </View>
-  <View
-    style={
-      {
-        "flexDirection": "row",
-        "marginTop": 15,
-      }
-    }
-  >
-    <Text
-      style={
-        {
-          "width": "25%",
-        }
-      }
-    >
-      Total:
-    </Text>
-    <Text
-      style={
-        {
-          "fontSize": 20,
-          "marginTop": -5,
-        }
-      }
-    >
-      353.50
-      NZD
-    </Text>
-  </View>
-  <View
-    style={
-      {
-        "borderBottomColor": "black",
-        "borderBottomWidth": 0.5,
-        "paddingTop": 10,
-      }
-    }
-  />
-  <View
-    style={
-      {
-        "flexDirection": "row",
-        "marginTop": 15,
-      }
-    }
-  >
-    <Text
-      style={
-        {
-          "width": "40%",
-        }
-      }
-    >
-      Total Receiver gets:
-    </Text>
-    <Text
-      style={
-        {
-          "fontSize": 20,
-          "marginTop": -5,
           "paddingBottom": 30,
         }
       }
     >
-      1067.50
-      NZD
+      012
     </Text>
   </View>
   <View

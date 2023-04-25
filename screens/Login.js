@@ -8,16 +8,13 @@ import {
   KeyboardAvoidingView,
   Alert,
 } from "react-native";
-//Using formik
+// Using formik to create a form in the screen
 import { Formik } from "formik";
 //Icons
 import { Octicons, Ionicons } from "@expo/vector-icons";
 import PageFooter from "../components/PageFooter";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
 import SignUpLink from "../components/SignUpLink";
 import HomePage from "./HomePage";
-
 // Styles
 import {
   StyledContainer,
@@ -38,8 +35,12 @@ import {
   TextLink,
   TextLinkContent,
 } from "./../components/Styles";
-import { checkUsernamePassword } from "../Database";
+import {
+  checkUsernamePassword,
+} from "../Database"; // Call checkUsernamePassword funciton from Database.js
 import { useNavigation } from "@react-navigation/native";
+import { getUserInfoFromServer } from "../DataSynchronization";
+import NetInfo from "@react-native-community/netinfo";
 
 const { brand, darkLight, tertiary } = Colors;
 const Login = () => {
@@ -47,7 +48,7 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigation = useNavigation();
-
+  // Validation part.
   const handleUserNameChange = (text) => {
     setUsername(text);
   };
@@ -68,10 +69,25 @@ const Login = () => {
     }
 
     // perform login logic
-    checkUsernamePassword(username, password)
+    checkUsernamePassword(username, password) // Use checkUsernamePassword funciton from Database.js
+      // If username and password exsits return the user id.
       .then((userId) => {
         if (userId) {
-          //alert("Login Successful! " + userId);
+          // If Correct username and password --> navigate to HomePage.js
+
+          //synchronization data with server if there is any connection
+          NetInfo.fetch().then((state) => {
+            if (state.isConnected) {
+              getUserInfoFromServer(userId)
+                .then((userData) => {
+                  updateExistingUser(userData);
+                })
+                .catch((error) => {
+                  console.error(error);
+                });
+            }
+          });
+
           navigation.navigate("HomePage", { userId: userId });
         } else {
           alert("Invalid username or password!");
@@ -112,7 +128,7 @@ const Login = () => {
               }) => (
                 <StyledFormArea>
                   <MyTextInput
-                    //lable="Username"
+                    // Username input text
                     icon="person-fill"
                     placeholder="Username"
                     placeholderTextColor={darkLight}
@@ -122,7 +138,7 @@ const Login = () => {
                     keyboardType="email-address"
                   />
                   <MyTextInput
-                    //lable="Password"
+                    // Password input text
                     icon="lock"
                     placeholder="Password"
                     placeholderTextColor={darkLight}
@@ -149,13 +165,14 @@ const Login = () => {
           </InnerContainer>
         </KeyboardAvoidingView>
       </ScrollView>
+      <View style={{ flexDirection: "column", height: "18%" }} />
+      <View>
+        <PageFooter />
+      </View>
     </StyledContainer>
   );
 };
-//<View style={{ flexDirection: "column", height: "18%" }} />
-//<View>
-//<PageFooter />
-//</View>
+// Hide and display the password by ckicking on the eye icon
 const MyTextInput = ({
   lable,
   icon,

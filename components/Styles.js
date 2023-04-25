@@ -259,6 +259,7 @@ export const Input = styled.TextInput`
   color: ${darkLight};
 `;
 //position: absolute;
+// Page Footer style
 export const Footer = styled.View`
   flex: 0.2;
   left: 0;

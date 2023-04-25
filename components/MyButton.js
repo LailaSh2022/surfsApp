@@ -1,6 +1,6 @@
 import React from "react";
 import { TouchableOpacity, Text, View } from "react-native";
-
+// Used to draw the Refresh and Transfer buttons.
 const MyButton = ({ title, onPress, style }) => (
   <TouchableOpacity
     style={[{ backgroundColor: "#152A5F" }, style]}

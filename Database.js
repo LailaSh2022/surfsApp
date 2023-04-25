@@ -86,7 +86,7 @@ export async function checkUsernamePassword(username, password) {
     });
   });
 }
-
+// Used to make sure that the entered username is unique.
 export async function CheckUserNameExists(username) {
   const db = await OpenDatabase();
   return new Promise((resolve, reject) => {
@@ -194,7 +194,8 @@ export async function AddNewReceiver(receiver, userId) {
   try {
     db.transaction((tx) => {
       tx.executeSql(
-        "INSERT INTO Recipients (FirstName, MiddleName, LastName, Email, MobileNumber, Relationship, Bank_Account_Number, Address, Currency, Swift_Code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?);",
+        "INSERT INTO Recipients (FirstName, MiddleName, LastName, Email, MobileNumber, Relationship,"+
+        " Bank_Account_Number, Address, Currency, Swift_Code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?);",
         [
           receiver.firstname,
           "",
@@ -245,7 +246,6 @@ export async function getUser(id) {
 }
 
 // Update user profile data.
-//
 export async function updateExistingUser(user) {
   const db = await OpenDatabase();
   console.log(user);
@@ -258,12 +258,12 @@ export async function updateExistingUser(user) {
       "UPDATE Users SET FirstName = ?, LastName = ?, UserName = ?, Password = ?," +
         "Email = ?, Phone_Number = ? WHERE Id = ? ;",
       [
-        user.firstName,
-        user.lastName,
-        user.username,
-        user.password,
-        user.email,
-        user.MobileNum,
+        user.FirstName,
+        user.LastName,
+        user.UserName,
+        user.Password,
+        user.Email,
+        user.Phone_Number,
         user.Id,
       ],
       (_, { rowsAffected }) => {
@@ -286,7 +286,6 @@ export async function updateExistingUser(user) {
 }
 
 // Unsubscribe User
-
 export async function deleteUser(id) {
   const db = await OpenDatabase();
   console.log(id);

@@ -1,0 +1,104 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing History screen against its snapshot. If there is any unexpected change in the screen, it will prompt test failed. 1`] = `
+<View
+  style={
+    [
+      {
+        "backgroundColor": "#ffffff",
+        "flexBasis": 0,
+        "flexGrow": 1,
+        "flexShrink": 1,
+        "paddingBottom": 25,
+        "paddingLeft": 25,
+        "paddingRight": 25,
+        "paddingTop": 64,
+      },
+    ]
+  }
+>
+  <View>
+    <View
+      style={
+        {
+          "flexDirection": "row",
+        }
+      }
+    >
+      <Text
+        style={
+          {
+            "color": "#152A5F",
+            "flex": 1,
+            "fontSize": 18,
+            "fontWeight": "bold",
+            "paddingTop": 10,
+            "textAlign": "center",
+          }
+        }
+      >
+         History
+      </Text>
+    </View>
+    <Text
+      style={
+        {
+          "color": "blue",
+          "fontSize": 15,
+          "paddingTop": 15,
+        }
+      }
+    >
+      Transactions
+    </Text>
+    <View>
+      <View
+        style={
+          {
+            "flexDirection": "row",
+            "paddingTop": 20,
+          }
+        }
+      >
+        <Text
+          style={
+            {
+              "width": "75%",
+            }
+          }
+        >
+          John Deer
+        </Text>
+        <Text>
+          350
+          NZD
+        </Text>
+      </View>
+      <View
+        style={
+          {
+            "flexDirection": "row",
+          }
+        }
+      >
+        <Text
+          style={
+            {
+              "width": "75%",
+            }
+          }
+        >
+          Sent:
+          12/31/2022
+          , Order No: 
+          1
+        </Text>
+        <Text>
+          201
+          USD
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;

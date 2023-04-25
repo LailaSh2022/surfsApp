@@ -8,7 +8,26 @@ import {
 } from "./../components/Styles";
 
 const OrderSummary = ({ route }) => {
+  if (typeof route.params == "undefined") {
+    return (
+      <StyledContainer>
+        <View style={{ flexDirection: "row" }}>
+          <StyledBackButton>
+            <ButtonText>{"<"}</ButtonText>
+          </StyledBackButton>
+          <Text style={styles.headline}> Order Summary</Text>
+        </View>
+        <View style={{ fontSize: 18, marginTop: 30 }}>
+          <Text style={{ textAlign: "center", fontSize: 15, marginTop: 50 }}>
+            There is no order!!!
+          </Text>
+        </View>
+      </StyledContainer>
+    );
+  }
+
   const { OrderSummary } = route.params;
+
   return (
     <StyledContainer>
       <View style={{ flexDirection: "row" }}>

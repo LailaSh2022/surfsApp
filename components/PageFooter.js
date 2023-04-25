@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text, Button, TextInput } from "react-native";
-import { Footer, GooglePlayBadge, ExtraSmallText } from "./Styles";
+import { Footer, GooglePlayBadge, ExtraSmallText } from "./Styles"; // Import UI style
 
 const PageFooter = () => {
   return (
@@ -8,7 +8,7 @@ const PageFooter = () => {
       <View style={{ position: "absolute" }}>
         <GooglePlayBadge
           resizeMode="cover"
-          source={require("./../assets/google-play-badge.png")}
+          source={require("./../assets/google-play-badge.png")} // Google Play badge image source
           style={{
             left: "0%",
             top: "0%",

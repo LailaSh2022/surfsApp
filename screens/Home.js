@@ -3,11 +3,7 @@ import React from "react";
 import { View, Text } from "react-native";
 import Profile from "./Profile";
 import HomePage from "./HomePage";
-import {
-  GetReceiverDetails,
-  //GetReceiverBankInfo,
-  GetAllOrderByUserId,
-} from "../Database";
+import { GetReceiverDetails, GetAllOrderByUserId } from "../Database";
 import Unsubscribe from "./Unsubscribe";
 
 const Home = ({ navigation }) => {
@@ -27,16 +23,6 @@ const Home = ({ navigation }) => {
   GetReceiverDetails(1)
     .then((result) => {
       receiver = result;
-      /*
-      GetReceiverBankInfo(receiver.Bank_Info)
-        .then((result) => {
-          bank_info = result;
-        })
-        .catch((error) => {
-          console.log(`Error while getting bank_info: ${error}`);
-          return;
-        });
-        */
     })
     .catch((error) => {
       console.log(`Error while getting receiver details: ${error}`);
@@ -44,6 +30,7 @@ const Home = ({ navigation }) => {
     });
 
   //for testing
+
   var OrderSummary = {
     OrderId: 1,
     Date: "16/04/2023",

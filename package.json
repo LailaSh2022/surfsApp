@@ -11,8 +11,14 @@
   },
   "dependencies": {
     "@expo/webpack-config": "^0.17.0",
+<<<<<<< HEAD
     "@react-native-picker/picker": "<= 3.0.0",
     
+=======
+    "@react-native-community/netinfo": "^9.3.9",
+    "@react-native-picker/picker": "<= 3.0.0",
+    ">>>>>>>" "4e87bb1c04e4208fc38c097176e6f10325783688",
+>>>>>>> 416cac8028822d12da463eb324fe4d3fb6c999e8
     "@react-navigation/drawer": "^6.6.2",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/native-stack": "^6.9.12",

@@ -33,7 +33,7 @@ const Unsubscribe = () => {
           source={require("./../assets/Unsubscribe.png")}
         />
         <View style={{ flexDirection: "row", height: "11%" }}>
-          <ExtraText style={{  fontSize: 16 }}>Go back to</ExtraText>
+          <ExtraText style={{ fontSize: 16 }}>Go back to</ExtraText>
           <TouchableOpacity onPress={handleNavigateToHome}>
             <Text style={{ color: "blue", fontSize: 16 }}> Home Page</Text>
           </TouchableOpacity>
@@ -42,5 +42,4 @@ const Unsubscribe = () => {
     </StyledContainer>
   );
 };
-
 export default Unsubscribe;

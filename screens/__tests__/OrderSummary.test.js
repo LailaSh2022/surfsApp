@@ -6,7 +6,7 @@ import OrderSummary from "../OrderSummary";
 
 it(
   "Testing OrderSummary screen against its snapshot. " +
-    "If there is unexpected change in UI, it will prompt test failed.",
+    "If there is any unexpected change in the screen, it will prompt test failed.",
   () => {
     const mockRoute = {
       params: {
