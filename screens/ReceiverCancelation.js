@@ -17,7 +17,7 @@ import {
   TextLink,
 } from "../components/Styles";
 
-const Unsubscribe = () => {
+const DeleteReceiver = () => {
   const navigation = useNavigation(); // initialize the navigation object
 
   const handleNavigateToHome = () => {
@@ -27,13 +27,13 @@ const Unsubscribe = () => {
     <StyledContainer>
       <StatusBar style="dark" />
       <InnerContainer>
-        <PageTitle>Unsubscribe</PageTitle>
-        <UnsubscribeLogo
+        <PageTitle></PageTitle>
+        <CancelLogo
           resizeMode="cover"
-          source={require("./../assets/Unsubscribe.png")}
+          source={require("./../assets/cancel.png")}
         />
         <View style={{ flexDirection: "row", height: "11%" }}>
-          <ExtraText style={{ fontSize: 16 }}>Go back to</ExtraText>
+          <ExtraText style={{  fontSize: 16 }}>Go back to</ExtraText>
           <TouchableOpacity onPress={handleNavigateToHome}>
             <Text style={{ color: "blue", fontSize: 16 }}> Home Page</Text>
           </TouchableOpacity>
@@ -42,4 +42,5 @@ const Unsubscribe = () => {
     </StyledContainer>
   );
 };
-export default Unsubscribe;
+
+export default DeleteReceiver;

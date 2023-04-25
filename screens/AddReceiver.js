@@ -84,7 +84,6 @@ const AddReceiver = () => {
                   values={values.email}
                   keyboardType="email-address"
                 />
-
                 <MyTextInput
                   placeholder="Mobile Number"
                   placeholderTextColor={darkLight}
@@ -114,7 +113,6 @@ const AddReceiver = () => {
                   onBlur={handleBlur("SwiftNum")}
                   values={values.SwiftNum}
                 />
-
                 <StyledButton onPress={handleSubmit}>
                   <ButtonText>Confirm</ButtonText>
                 </StyledButton>

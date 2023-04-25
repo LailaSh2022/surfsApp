@@ -45,6 +45,13 @@ export const UnsubscribeLogo = styled.Image`
   width: 300px;
   height: 300px;
 `;
+
+export const CancelLogo = styled.Image`
+  width: 200px;
+  height: 200px;
+`;
+
+
 export const SubPageLogo = styled.Image`
   width: 150px;
   height: 100px;
@@ -252,6 +259,7 @@ export const Input = styled.TextInput`
   color: ${darkLight};
 `;
 //position: absolute;
+// Page Footer style
 export const Footer = styled.View`
   flex: 0.2;
   left: 0;
