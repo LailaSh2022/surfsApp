@@ -115,7 +115,9 @@ export async function GetReceiverDetails(receiverId, senderId) {
     db.transaction((tx) => {
       tx.executeSql(
         // Fixed by Laila
-        "select * from Recipients, Users_Recipients where  Recipients.Id = ? and Recipients.Id = Users_Recipients.RecipientId and Users_Recipients.UserId = ?;",
+        "select * from Recipients, Users_Recipients " +
+          "where  Recipients.Id = ? and Recipients.Id = Users_Recipients.RecipientId" +
+          " and Users_Recipients.UserId = ?;",
         [receiverId, senderId],
         (_, { rows }) => {
           if (rows._array.length > 0) {
@@ -139,7 +141,8 @@ export async function SignUpNewUser(user) {
   try {
     db.transaction((tx) => {
       tx.executeSql(
-        "INSERT INTO Users (FirstName, LastName, UserName, Password, DateOfBirth, Email, Phone_Number, Image, Bank_Account_Number) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);",
+        "INSERT INTO Users (FirstName, LastName, UserName, Password, DateOfBirth, Email, Phone_Number," +
+          " Image, Bank_Account_Number) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);",
         [
           user.FirstName,
           user.LastName,
@@ -192,8 +195,8 @@ export async function AddNewReceiver(receiver, userId) {
   try {
     db.transaction((tx) => {
       tx.executeSql(
-        "INSERT INTO Recipients (FirstName, MiddleName, LastName, Email, MobileNumber, Relationship,"+
-        " Bank_Account_Number, Address, Currency, Swift_Code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?);",
+        "INSERT INTO Recipients (FirstName, MiddleName, LastName, Email, MobileNumber, Relationship," +
+          " Bank_Account_Number, Address, Currency, Swift_Code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?);",
         [
           receiver.firstname,
           "",
