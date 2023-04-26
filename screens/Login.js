@@ -165,9 +165,9 @@ const Login = () => {
         </KeyboardAvoidingView>
       </ScrollView>
       <View style={{ flexDirection: "column", height: "18%" }} />
-      <View>
+      {/* <View>
         <PageFooter />
-      </View>
+      </View> */}
     </StyledContainer>
   );
 };

@@ -42,6 +42,7 @@ export default function App() {
         <Stack.Screen name="History" component={History} />
         <Stack.Screen name="Contactus" component={Contactus} />
         <Stack.Screen name="Unsubscribe" component={Unsubscribe} />
+        <Stack.Screen name="ReceiverList" component={ReceiverList} />
       </Stack.Navigator>
     </NavigationContainer>
   );

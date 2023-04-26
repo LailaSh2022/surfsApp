@@ -135,6 +135,26 @@ export async function GetReceiverDetails(receiverId, senderId) {
   });
 }
 
+// Get the Recipient List for given userId
+export async function GetRecipientList(userId) {
+  const db = await OpenDatabase();
+  return new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        "SELECT Recipients.Id, (Recipients.FirstName || ' ' || Recipients.LastName) AS Name, Recipients.Bank_Account_Number, " +
+          " Recipients.Currency FROM Recipients " +
+          "JOIN Users_Recipients ON Recipients.Id = Users_Recipients.RecipientId " +
+          "WHERE Users_Recipients.UserId = ?",
+        [userId],
+        (_, { rows }) => {
+          console.log(rows._array);
+          resolve(rows._array);
+        }
+      );
+    });
+  }, []);
+}
+
 export async function SignUpNewUser(user) {
   const db = await OpenDatabase();
   console.log(user);

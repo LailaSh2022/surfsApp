@@ -22,6 +22,7 @@ export const Colors = {
   brand: "#2854d9",
   blue: "#152A5F",
   gray: "#979797",
+  listBtn: "#b589e6",
 };
 const { primary, secondary, tertiary, darkLight, brand, blue, gray } = Colors;
 
@@ -50,7 +51,6 @@ export const CancelLogo = styled.Image`
   width: 200px;
   height: 200px;
 `;
-
 
 export const SubPageLogo = styled.Image`
   width: 150px;

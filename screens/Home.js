@@ -17,6 +17,7 @@ const Home = ({ navigation }) => {
   const AddReceiver = "AddReceiver";
   const Contactus = "Contactus";
   const Unsubscribe = "Unsubscribe";
+  const ReceiverList = "ReceiverList";
 
   var receiver;
   //var bank_info;
@@ -68,6 +69,11 @@ const Home = ({ navigation }) => {
       </Text>
       <Text onPress={() => navigation.navigate("Contactus", { Contactus })}>
         {Contactus}
+      </Text>
+      <Text
+        onPress={() => navigation.navigate("ReceiverList", { ReceiverList })}
+      >
+        {ReceiverList}
       </Text>
     </View>
   );

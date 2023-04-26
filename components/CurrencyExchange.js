@@ -59,7 +59,7 @@ const CurrencyExchange = () => {
   const handleTransferPress = () => {
     console.log("handleTransferPress userId:" + userId);
     if (global.userId[0] > 0)
-      navigation.navigate("OrderSummary", { userId: global.userId[0] });
+      navigation.navigate("ReceiverList", { userId: global.userId[0] });
     else navigation.navigate("Login");
   };
 
