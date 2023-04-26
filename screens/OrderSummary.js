@@ -6,28 +6,29 @@ import {
   ButtonText,
   StyledButton,
 } from "./../components/Styles";
+import "../global";
 
 const OrderSummary = ({ route }) => {
-  if (typeof route.params == "undefined") {
-    return (
-      <StyledContainer>
-        <View style={{ flexDirection: "row" }}>
-          <StyledBackButton>
-            <ButtonText>{"<"}</ButtonText>
-          </StyledBackButton>
-          <Text style={styles.headline}> Order Summary</Text>
-        </View>
-        <View style={{ fontSize: 18, marginTop: 30 }}>
-          <Text style={{ textAlign: "center", fontSize: 15, marginTop: 50 }}>
-            There is no order!!!
-          </Text>
-        </View>
-      </StyledContainer>
-    );
-  }
+  // if (typeof route.params == "undefined") {
+  //   return (
+  //     <StyledContainer>
+  //       <View style={{ flexDirection: "row" }}>
+  //         <StyledBackButton>
+  //           <ButtonText>{"<"}</ButtonText>
+  //         </StyledBackButton>
+  //         <Text style={styles.headline}> Order Summary</Text>
+  //       </View>
+  //       <View style={{ fontSize: 18, marginTop: 30 }}>
+  //         <Text style={{ textAlign: "center", fontSize: 15, marginTop: 50 }}>
+  //           There is no order!!!
+  //         </Text>
+  //       </View>
+  //     </StyledContainer>
+  //   );
+  // }
 
-  const { OrderSummary } = route.params;
-
+  // const { OrderSummary } = route.params;
+  // Updated by Laila Shihada to get the data from the global.js file
   return (
     <StyledContainer>
       <View style={{ flexDirection: "row" }}>
@@ -38,18 +39,18 @@ const OrderSummary = ({ route }) => {
       </View>
       <View style={{ flexDirection: "row", marginTop: 30 }}>
         <Text style={{ width: "25%" }}>Order No:</Text>
-        <Text>{OrderSummary.OrderId}</Text>
+        {/* <Text>{OrderSummary.OrderId}</Text>     -----> Please Uncomit after update the code (Laila Shihada)*/}
       </View>
       <View style={{ flexDirection: "row", marginTop: 15 }}>
         <Text style={{ width: "25%" }}>Date:</Text>
-        <Text>{OrderSummary.Date}</Text>
+        {/* <Text>{OrderSummary.Date}</Text> -----> Please Uncomit after update the code (Laila Shihada) */}
       </View>
       <View style={styles.line} />
       <View style={{ flexDirection: "row", marginTop: 15 }}>
         <Text style={{ width: "25%" }}>Rate:</Text>
         <Text style={{ fontSize: 20, marginTop: -5 }}>
-          1.00{OrderSummary.From_Currency} = {OrderSummary.Rate}
-          {OrderSummary.To_Currency}
+          1.00{global.FromCurrency[0]} = {global.rate[0]}
+          {global.ToCurrency[0]}
         </Text>
       </View>
       <View style={styles.line} />
@@ -59,31 +60,31 @@ const OrderSummary = ({ route }) => {
       <View style={{ flexDirection: "row", marginTop: 15 }}>
         <Text style={{ width: "25%" }}>Amount:</Text>
         <Text style={{ fontSize: 20, marginTop: -5 }}>
-          {OrderSummary.Amount}
-          {OrderSummary.From_Currency}
+          {global.FromAmount[0]}
+          {global.FromCurrency[0]}
         </Text>
       </View>
 
       <View style={{ flexDirection: "row", marginTop: 15 }}>
         <Text style={{ width: "25%" }}>Fee (1%):</Text>
         <Text style={{ fontSize: 20, marginTop: -5 }}>
-          {(OrderSummary.Amount / 100).toFixed(2)}
-          {OrderSummary.From_Currency}
+          {global.fee[0]}
+          {global.ToCurrency[0]}
         </Text>
       </View>
       <View style={{ flexDirection: "row", marginTop: 15 }}>
         <Text style={{ width: "25%" }}>Total:</Text>
         <Text style={{ fontSize: 20, marginTop: -5 }}>
-          {(OrderSummary.Amount + OrderSummary.Amount / 100).toFixed(2)}
-          {OrderSummary.From_Currency}
+          {global.Amount[0]}
+          {global.ToCurrency[0]}
         </Text>
       </View>
       <View style={styles.line} />
       <View style={{ flexDirection: "row", marginTop: 15 }}>
         <Text style={{ width: "40%" }}>Total Receiver gets:</Text>
         <Text style={{ paddingBottom: 30, fontSize: 20, marginTop: -5 }}>
-          {(OrderSummary.Amount * OrderSummary.Rate).toFixed(2)}
-          {OrderSummary.From_Currency}
+          {global.Amount[0]}
+          {global.ToCurrency[0]}
         </Text>
       </View>
       <StyledButton>

@@ -10,6 +10,8 @@ const API_KEY = "dc17da5627284a82aec1e8de2ad69a67";
 const CurrencyExchange = () => {
   console.log("CurrencyExchange_userId: ", userId);
   console.log("CurrencyExchange global.userId[0]: ", global.userId[0]);
+  console.log("global.ToCurrency[0]: " + global.ToCurrency[0]);
+  console.log("global.FromCurrency[0]: " + global.FromCurrency[0]);
   const navigation = useNavigation();
   // Using useState to returns a stateful value, and a function to update it.
   const [baseAmount, setBaseAmount] = useState("");
@@ -42,10 +44,13 @@ const CurrencyExchange = () => {
     );
     const data = await response.json();
     const rate = data.rates[targetCurrency];
+    global.rate[0] = rate.toFixed(2);
     const convertedAmount = parseFloat(baseAmount) * rate;
+    global.FromAmount[0] = baseAmount;
     const exchangeAmount = convertedAmount.toFixed(2);
     const totalAmount = (convertedAmount * 1.01).toFixed(2); // Calculate the total amount.
     const fee = (totalAmount - convertedAmount).toFixed(2);
+    global.fee[0] = fee;
     console.log(fee);
     const totalAmountWithfee = (convertedAmount - fee).toFixed(2);
     global.Amount[0] = totalAmountWithfee; // Using global variable to pass values between screens.
@@ -58,6 +63,7 @@ const CurrencyExchange = () => {
   };
   const handleTransferPress = () => {
     console.log("handleTransferPress userId:" + userId);
+
     if (global.userId[0] > 0)
       navigation.navigate("ReceiverList", { userId: global.userId[0] });
     else navigation.navigate("Login");
@@ -76,7 +82,10 @@ const CurrencyExchange = () => {
         <Picker
           selectedValue={baseCurrency}
           style={styles.picker}
-          onValueChange={(itemValue) => setBaseCurrency(itemValue)}
+          onValueChange={(itemValue) => {
+            global.FromCurrency[0] = itemValue.toString();
+            setBaseCurrency(itemValue);
+          }}
         >
           {currencyOptions.map(
             (
@@ -117,7 +126,11 @@ const CurrencyExchange = () => {
         <Picker
           selectedValue={targetCurrency}
           style={styles.picker}
-          onValueChange={(itemValue) => setTargetCurrency(itemValue)}
+          onValueChange={(itemValue) => {
+            global.ToCurrency[0] = itemValue.toString();
+
+            setTargetCurrency(itemValue);
+          }}
         >
           {currencyOptions.map(
             (

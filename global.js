@@ -1,4 +1,10 @@
 global.userId = [-1];
+global.rate = [-1];
+global.fee = [-1];
+global.TotalAmount = [-1];
 global.Amount = [-1];
+global.FromAmount = [-1];
+global.FromCurrency = [""];
+global.ToCurrency = [""];
 global.ReceiverId = [-1];
 global.ReceiverName = [""];

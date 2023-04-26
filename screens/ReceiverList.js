@@ -16,6 +16,7 @@ import {
   StyledButton,
   ButtonText,
   StyledBackButton,
+  InnerContainer,
 } from "../components/Styles";
 import {
   AddNewReceiver,
@@ -30,11 +31,15 @@ import ReceiverDetails from "./ReceiverDetails";
 import "./../global.js";
 import { ScrollView } from "react-native-gesture-handler";
 import { FontAwesome } from "@expo/vector-icons";
-
+import PageFooter from "../components/PageFooter";
+/******************************************************************************** */
+// Updated by Laila Shihada.
 const RecipientItem = ({ item }) => {
   const [isChecked, setIsChecked] = useState(false);
   const toggleChecked = () => {
     setIsChecked(!isChecked);
+    if (!isChecked) global.ReceiverId[0] = item.Id;
+    console.log(global.ReceiverId[0]);
   };
   return (
     <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -98,39 +103,56 @@ const ReceiverList = () => {
 
   return (
     <StyledContainer>
-      <StyledFormArea>
-        <View>
-          <View style={{ flexDirection: "row" }}>
-            {/* <StyledBackButton>
+      <InnerContainer>
+        <StyledFormArea>
+          <View>
+            <View style={{ flexDirection: "row" }}>
+              {/* <StyledBackButton>
               <ButtonText>{"<"}</ButtonText>
             </StyledBackButton> */}
-            <View style={{ width: "5%" }} />
-            <PageTitle> Recipients </PageTitle>
-            <View style={{ width: "20%" }} />
-            <StyledSideSmallButton
-              onPress={() => navigation.navigate("AddReceiver")}
-            >
-              <SmallButtonText> + </SmallButtonText>
-            </StyledSideSmallButton>
-          </View>
-          <View style={{ height: "5%" }} />
-          <Text style={{ color: "blue", fontSize: 20 }}>Your Recipients:</Text>
-          <View style={{ height: "10%" }} />
-          <ScrollView style={{ height: "50%" }}>
+              <View style={{ width: "5%" }} />
+              <PageTitle> Recipients </PageTitle>
+              <View style={{ width: "20%" }} />
+              <StyledSideSmallButton
+                onPress={() => navigation.navigate("AddReceiver")}
+              >
+                <SmallButtonText> + </SmallButtonText>
+              </StyledSideSmallButton>
+            </View>
+            <View style={{ height: "5%" }} />
+            <Text style={{ color: "blue", fontSize: 20 }}>
+              Your Recipients:
+            </Text>
+            <View style={{ height: "10%" }} />
+            {/* <ScrollView style={{ height: "50%" }}> */}
             <FlatList
               data={recipients}
               renderItem={({ item }) => <RecipientItem item={item} />}
               keyExtractor={(item) => item.Id.toString()}
             />
-          </ScrollView>
-        </View>
-        <View style={{ flex: 1 }}></View>
-        <StyledButton onPress={() => navigation.navigate("ReceiverDetails")}>
-          <ButtonText>Confirm</ButtonText>
-        </StyledButton>
-      </StyledFormArea>
+          </View>
+          <View style={{ height: "40%" }} />
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignContent: "center",
+            }}
+          >
+            <View style={{ height: "10%" }} />
+            <StyledButton
+              onPress={() => navigation.navigate("ReceiverDetails")}
+            >
+              <ButtonText>Confirm</ButtonText>
+            </StyledButton>
+          </View>
+        </StyledFormArea>
+      </InnerContainer>
+      <View>
+        <PageFooter />
+      </View>
     </StyledContainer>
   );
 };
-
+/***************************************************************************************** */
 export default ReceiverList;

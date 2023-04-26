@@ -70,9 +70,9 @@ function DrawHome_Page() {
         <CurrencyExchange />
       </InnerContainer>
 
-      <View>
+      {/* <View>
         <PageFooter />
-      </View>
+      </View> */}
     </StyledContainer>
   );
 }
