@@ -37,7 +37,8 @@ const History = () => {
         orders.map((order) =>
           GetReceiverDetails(order.RecipientId, userId).then((result) => {
             const fullname = result.FirstName + " " + result.LastName;
-            const receiverGet = (order.Amount * order.Exchange_Rate).toFixed(2);
+            const amount = order.Amount * order.Exchange_Rate;
+            const receiverGet = (amount - amount * 0.01).toFixed(2);
             const history = {
               OrderNo: order.OrderId,
               SentDate: order.Send_Date,

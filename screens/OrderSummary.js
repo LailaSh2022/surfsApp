@@ -34,7 +34,7 @@ const OrderSummary = ({ route }) => {
     InsertOrder({
       SenderId: global.userId[0],
       RecipientId: global.ReceiverId[0],
-      Amount: global.Amount[0],
+      Amount: global.FromAmount[0],
       Fee: global.fee[0],
       Rate: global.rate[0],
       FromCurrency: global.FromCurrency[0],
