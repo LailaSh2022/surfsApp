@@ -16,6 +16,8 @@ const CurrencyExchange = () => {
   // Using useState to returns a stateful value, and a function to update it.
   const [baseAmount, setBaseAmount] = useState("");
   const [baseCurrency, setBaseCurrency] = useState("USD");
+  global.FromCurrency[0] = "USD";
+  global.ToCurrency[0] = "NZD";
   const [targetAmount, setTargetAmount] = useState("");
   const [targetCurrency, setTargetCurrency] = useState("NZD");
   const [totalAmount, setTotalAmount] = useState("");
