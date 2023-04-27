@@ -60,7 +60,7 @@ const ContactUs = () => {
           <ExtraView>
             <View style={{ flexDirection: "column" }}>
               <Image
-                source={require("./../assets/building.png")}
+                //source={require("./../assets/building.png")}
                 style={{ borderRadius: 5 }} // The style added By Laila
               />
               <ExtraText>Name: SurfsApp Limited </ExtraText>

@@ -363,6 +363,7 @@ export async function GetAllOrderByUserId(userId) {
           console.log("Query completed successfully.");
 
           if (_array.length > 0) {
+            console.log(_array);
             resolve(_array);
           } else {
             resolve(null);
@@ -376,4 +377,87 @@ export async function GetAllOrderByUserId(userId) {
       );
     });
   });
+}
+
+export async function getLastOrderId() {
+  const db = await OpenDatabase();
+  return new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        "SELECT OrderId FROM Orders ORDER BY OrderId DESC LIMIT 1;",
+        [],
+        (_, { rows: { _array } }) => {
+          if (_array.length > 0) {
+            resolve(_array[0].OrderId);
+          } else {
+            resolve(null);
+          }
+        },
+        (_, error) => {
+          console.log(`Error while executing SQL query: ${error}`);
+          reject(error);
+        }
+      );
+    });
+  });
+}
+
+export async function InsertOrder({
+  SenderId,
+  RecipientId,
+  Amount,
+  Fee,
+  Rate,
+  FromCurrency,
+  ToCurrency,
+  Date,
+}) {
+  console.log("start");
+  console.log({
+    SenderId,
+    RecipientId,
+    Amount,
+    Fee,
+    Rate,
+    FromCurrency,
+    ToCurrency,
+    Date,
+  });
+  console.log("end");
+  const db = await OpenDatabase();
+  try {
+    db.transaction((tx) => {
+      tx.executeSql(
+        "INSERT INTO Orders (SenderId, RecipientId, Amount, Fee, Exchange_Rate, From_Currency, To_Currency, Order_Date, Order_Time, Order_Status, Send_Date, Send_Time, Receive_Date, Receive_Time, Transaction_Type, Note)" +
+          " VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
+        [
+          SenderId,
+          RecipientId,
+          Amount,
+          Fee,
+          Rate,
+          FromCurrency,
+          ToCurrency,
+          Date,
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+        ],
+        (txObj, resultSet) => {
+          console.log("insertId: " + resultSet.insertId);
+          console.log("rowsAffected: " + resultSet.rowsAffected);
+        },
+        (txObj, error) => {
+          console.log("Error: " + error.message);
+        }
+      );
+    });
+  } catch (error) {
+    console.log(error);
+  }
 }

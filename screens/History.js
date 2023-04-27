@@ -13,12 +13,23 @@ const History = () => {
   const [transactions, setTransactions] = useState([]);
   const route = useRoute();
   const { userId } = route.params;
+  //const userId = global.userId;
+  /*
+  try {
+    const { userId } = route.params;
+  } catch {
+    userId = global.userId;
+  }*/
+
   useEffect(() => {
     if (!userId) {
       console.log("Info: userId is undefined");
     }
   }, [userId]);
 
+  console.log("start userId");
+  console.log(userId);
+  console.log("end userid");
   GetAllOrderByUserId(userId)
     .then((result) => {
       const orders = result;
