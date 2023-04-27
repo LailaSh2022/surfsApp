@@ -45,23 +45,24 @@ const ContactUs = () => {
         <View
           style={{
             top: 0,
-            marginTop: "-20%",
+            marginTop: "-10%",
           }}
         >
-          <PageLogo
+          {/* <PageLogo
             resizeMode="cover"
             source={require("./../assets/Logo.png")}
-          />
+          /> */}
         </View>
         <PageTitle>Contact Us</PageTitle>
         <ScrollView>
           {/* Fixed from <image> to <Image> and imported the tag from "react-native" By Laila */}
-          <Image
-            //source={require("./../assets/building.png")}
-            style={{ borderRadius: 5 }} // The style added By Laila
-          />
+
           <ExtraView>
             <View style={{ flexDirection: "column" }}>
+              <Image
+                source={require("./../assets/building.png")}
+                style={{ borderRadius: 5 }} // The style added By Laila
+              />
               <ExtraText>Name: SurfsApp Limited </ExtraText>
               <ExtraText>Phone Number: 09 827 6100 </ExtraText>
               <ExtraText>Address: 242 Queen Street, Auckland CBD </ExtraText>
@@ -70,6 +71,13 @@ const ContactUs = () => {
               <ExtraText>Opening Hours: 9:00am - 5:00 pm </ExtraText>
             </View>
           </ExtraView>
+          <View>
+            <Image
+              resizeMode="contain"
+              source={require("./../assets/googlemaps.png")}
+              style={{ width: 310, height: 310 }}
+            />
+          </View>
         </ScrollView>
       </InnerContainer>
     </StyledContainer>
