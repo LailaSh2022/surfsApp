@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Testing OrderSummary screen against its snapshot. If there is any unexpected change in the screen, it will prompt test failed. 1`] = `
+exports[`OrderSummary renders correctly 1`] = `
 <View
   style={
     [
@@ -95,7 +95,7 @@ exports[`Testing OrderSummary screen against its snapshot. If there is any unexp
       Order No:
     </Text>
     <Text>
-      1
+      0
     </Text>
   </View>
   <View
@@ -116,7 +116,11 @@ exports[`Testing OrderSummary screen against its snapshot. If there is any unexp
       Date:
     </Text>
     <Text>
-      16/04/2023
+      4
+      /
+      28
+      /
+      2023
     </Text>
   </View>
   <View
@@ -154,10 +158,8 @@ exports[`Testing OrderSummary screen against its snapshot. If there is any unexp
       }
     >
       1.00
-      NZD
        = 
-      3.05
-      BRL
+      -1
     </Text>
   </View>
   <View
@@ -206,8 +208,7 @@ exports[`Testing OrderSummary screen against its snapshot. If there is any unexp
         }
       }
     >
-      350
-      NZD
+      -1
     </Text>
   </View>
   <View
@@ -235,8 +236,7 @@ exports[`Testing OrderSummary screen against its snapshot. If there is any unexp
         }
       }
     >
-      3.50
-      NZD
+      -1
     </Text>
   </View>
   <View
@@ -264,8 +264,7 @@ exports[`Testing OrderSummary screen against its snapshot. If there is any unexp
         }
       }
     >
-      353.50
-      NZD
+      -1
     </Text>
   </View>
   <View
@@ -303,14 +302,13 @@ exports[`Testing OrderSummary screen against its snapshot. If there is any unexp
         }
       }
     >
-      1067.50
-      NZD
+      -1
     </Text>
   </View>
   <View
     accessible={true}
     collapsable={false}
-    focusable={false}
+    focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}

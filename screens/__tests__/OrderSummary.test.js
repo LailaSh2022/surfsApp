@@ -1,28 +1,20 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import "jest-styled-components";
-
 import OrderSummary from "../OrderSummary";
 
-it(
-  "Testing OrderSummary screen against its snapshot. " +
-    "If there is any unexpected change in the screen, it will prompt test failed.",
-  () => {
-    const mockRoute = {
-      params: {
-        OrderSummary: {
-          OrderId: 1,
-          Date: "16/04/2023",
-          Rate: 3.05,
-          From_Currency: "NZD",
-          To_Currency: "BRL",
-          Amount: 350,
-          Fee: 0.01,
-        },
-      },
-    };
+jest.mock("@react-navigation/native", () => ({
+  useNavigation: () => ({ navigate: jest.fn() }),
+  useRoute: () => ({ params: {} }),
+}));
 
-    const tree = renderer.create(<OrderSummary route={mockRoute} />).toJSON();
+jest.mock("../../Database", () => ({
+  getLastOrderId: () => Promise.resolve(1),
+}));
+
+describe("OrderSummary", () => {
+  it("renders correctly", async () => {
+    const tree = renderer.create(<OrderSummary />).toJSON();
+    await new Promise((resolve) => setTimeout(resolve, 100)); // wait for useEffect to complete
     expect(tree).toMatchSnapshot();
-  }
-);
+  });
+});

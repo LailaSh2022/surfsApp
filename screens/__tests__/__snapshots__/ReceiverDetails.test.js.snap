@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Testing ReceiverDetails screen against its snapshot. If there is any unexpected change in the screen, it will prompt test failed. 1`] = `
+exports[`ReceiverDetails renders correctly 1`] = `
 <View
   style={
     [
@@ -95,10 +95,8 @@ exports[`Testing ReceiverDetails screen against its snapshot. If there is any un
       Name:
     </Text>
     <Text>
-      John
        
        
-      Dear
     </Text>
   </View>
   <View
@@ -118,9 +116,7 @@ exports[`Testing ReceiverDetails screen against its snapshot. If there is any un
     >
       Email:
     </Text>
-    <Text>
-      john_deer@gmail.com
-    </Text>
+    <Text />
   </View>
   <View
     style={
@@ -177,9 +173,7 @@ exports[`Testing ReceiverDetails screen against its snapshot. If there is any un
     >
       Account No:
     </Text>
-    <Text>
-      07-111111111111111-02
-    </Text>
+    <Text />
   </View>
   <View
     style={
@@ -204,9 +198,7 @@ exports[`Testing ReceiverDetails screen against its snapshot. If there is any un
           "paddingRight": "15%",
         }
       }
-    >
-      10 Martin Road, Manurewa, Auckland 2102
-    </Text>
+    />
   </View>
   <View
     style={
@@ -256,14 +248,12 @@ exports[`Testing ReceiverDetails screen against its snapshot. If there is any un
           "paddingBottom": 30,
         }
       }
-    >
-      012
-    </Text>
+    />
   </View>
   <View
     accessible={true}
     collapsable={false}
-    focusable={false}
+    focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}

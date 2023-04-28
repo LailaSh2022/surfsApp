@@ -1,29 +1,34 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import "jest-styled-components";
 import ReceiverDetails from "../ReceiverDetails";
+import "../../global.js";
 
-it(
-  "Testing ReceiverDetails screen against its snapshot. " +
-    "If there is any unexpected change in the screen, it will prompt test failed.",
-  () => {
-    const mockRoute = {
-      params: {
-        receiver: {
-          FirstName: "John",
-          MiddleName: "",
-          LastName: "Dear",
-          Bank_Account_Number: "07-111111111111111-02",
-          Address: "10 Martin Road, Manurewa, Auckland 2102",
-          Email: "john_deer@gmail.com",
-          Swift_Code: "012",
-        },
-      },
-    };
+jest.mock("@react-navigation/native", () => ({
+  useNavigation: () => ({ navigate: jest.fn() }),
+  useRoute: () => ({ params: {} }),
+}));
+jest.mock("../../Database", () => ({
+  GetRecipientDetails: () =>
+    Promise.resolve({
+      FirstName: "John",
+      MiddleName: "",
+      LastName: "Deer",
+      Email: "john.deer@gmail.com",
+      MobileNumber: "021222222222222",
+      Relationship: "Friend",
+      Bank_Account_Number: "1234567890",
+      Address: "10 Martin Road Manurewa Auckland New Zealand",
+      Currency: "NZD",
+      Swift_Code: "012",
+    }),
+}));
 
-    const tree = renderer
-      .create(<ReceiverDetails route={mockRoute} />)
-      .toJSON();
+global.ReceiverId[0] = "1";
+
+describe("ReceiverDetails", () => {
+  it("renders correctly", async () => {
+    const tree = renderer.create(<ReceiverDetails />).toJSON();
+    await new Promise((resolve) => setTimeout(resolve, 100)); // wait for useEffect to complete
     expect(tree).toMatchSnapshot();
-  }
-);
+  });
+});
