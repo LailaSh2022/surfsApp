@@ -207,9 +207,9 @@ const SignUp = () => {
         </InnerContainer>
       </ScrollView>
       <View style={{ flexDirection: "column", height: "17%" }} />
-      <View>
+      {/* <View>
         <PageFooter />
-      </View>
+      </View> */}
     </StyledContainer>
   );
 };

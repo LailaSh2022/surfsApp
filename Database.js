@@ -162,6 +162,7 @@ export async function GetRecipientDetails(receiverId) {
 // Get the Recipient List for given userId
 export async function GetRecipientList(userId) {
   const db = await OpenDatabase();
+
   return new Promise((resolve, reject) => {
     db.transaction((tx) => {
       tx.executeSql(
@@ -171,7 +172,7 @@ export async function GetRecipientList(userId) {
           "WHERE Users_Recipients.UserId = ?",
         [userId],
         (_, { rows }) => {
-          console.log(rows._array);
+          console.log("GetRecipientList: " + rows._array);
           resolve(rows._array);
         }
       );
@@ -212,19 +213,48 @@ export async function SignUpNewUser(user) {
   }
 }
 
-export async function AddUserIDReceiverId(userId, receiverId) {
+export async function AddNewReceiver(receiver, userId) {
+  console.log(receiver);
   const db = await OpenDatabase();
   try {
-    db.transaction((tx) => {
-      tx.executeSql(
-        "INSERT INTO Users_Recipients (UserId, RecipientId) VALUES (?, ?);",
-        [userId, receiverId],
-        (txObj, resultSet) => {
-          console.log("insertId: " + resultSet.insertId);
-          console.log("rowsAffected: " + resultSet.rowsAffected);
+    await new Promise((resolve, reject) => {
+      db.transaction(
+        (tx) => {
+          tx.executeSql(
+            "INSERT INTO Recipients (FirstName, MiddleName, LastName, Email, MobileNumber, Relationship," +
+              " Bank_Account_Number, Address, Currency, Swift_Code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?);",
+            [
+              receiver.firstname,
+              "",
+              receiver.lastname,
+              receiver.email,
+              receiver.MobileNum,
+              receiver.relationship,
+              receiver.bankAccount,
+              "",
+              receiver.currency,
+              receiver.SwiftNum,
+            ],
+            (_, { rowsAffected, insertId }) => {
+              console.log(`Inserted ${rowsAffected} row with ID ${insertId}`);
+              AddUserIDReceiverId(userId, insertId, (newRecordId) => {
+                console.log("New record ID: " + newRecordId);
+                // Do something with new record ID here
+              });
+            },
+            (error) => {
+              console.log(error);
+              reject(error);
+            }
+          );
         },
-        (txObj, error) => {
-          console.log("Error: " + error.message);
+        (error) => {
+          console.log(error);
+          reject(error);
+        },
+        () => {
+          console.log("Transaction committed.");
+          resolve();
         }
       );
     });
@@ -233,43 +263,63 @@ export async function AddUserIDReceiverId(userId, receiverId) {
   }
 }
 
-export async function AddNewReceiver(receiver, userId) {
-  console.log(receiver);
+export async function AddUserIDReceiverId(userId, receiverId, callback) {
   const db = await OpenDatabase();
+  console.log("AddUserIDReceiverId-userId: " + userId);
+  console.log("AddUserIDReceiverId-receiverId: " + receiverId);
   try {
     db.transaction((tx) => {
       tx.executeSql(
-        "INSERT INTO Recipients (FirstName, MiddleName, LastName, Email, MobileNumber, Relationship," +
-          " Bank_Account_Number, Address, Currency, Swift_Code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?);",
-        [
-          receiver.firstname,
-          "",
-          receiver.lastname,
-          receiver.email,
-          receiver.MobileNum,
-          receiver.relationship,
-          receiver.bankAccount,
-          "",
-          receiver.currency,
-          receiver.SwiftNum,
-        ],
-        (_, { rowsAffected, insertId }) => {
-          console.log(`Inserted ${rowsAffected} row with ID ${insertId}`);
-          AddUserIDReceiverId(userId, insertId)
-            .then(() => {
-              console.log("adder user id and receiver id success");
-            })
-            .catch((error) => {
-              console.log("error");
-            });
+        "INSERT INTO Users_Recipients (UserID,RecipientId) VALUES (?, ?);",
+        [userId, receiverId],
+        (txObj, resultSet) => {
+          console.log("insertId: " + resultSet.insertId);
+          console.log("rowsAffected: " + resultSet.rowsAffected);
+
+          txObj.executeSql(
+            "SELECT * FROM Users_Recipients WHERE UserID = ? AND RecipientId = ?",
+            [userId, receiverId],
+            (_, { rows: { _array } }) => {
+              console.log("Last inserted record: ", _array[0]);
+              callback(_array[0].id);
+            }
+          );
         },
-        (error) => console.log(error)
+        (txObj, error) => {
+          console.log("Error: " + error.message);
+          if (error.message.includes("database is locked")) {
+            setTimeout(() => {
+              AddUserIDReceiverId(userId, receiverId, callback);
+            }, 1000);
+          }
+        }
       );
     });
   } catch (error) {
     console.log(error);
   }
 }
+
+// Get Receiver
+export async function getReceiver(id) {
+  const db = await OpenDatabase();
+  return new Promise((resolve, reject) => {
+    try {
+      db.transaction((tx) => {
+        tx.executeSql(
+          "SELECT * FROM Recipients Where Id = ?",
+          [id],
+          (tx, { rows }) => {
+            resolve(rows._array[0]);
+          }
+        );
+      });
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
+
 //Get user's data
 export async function getUser(id) {
   const db = await OpenDatabase();
@@ -325,6 +375,50 @@ export async function updateExistingUser(user) {
         );
       },
       (_, error) => console.log(`Error updating user ${user.Id}: `, error)
+    );
+    console.log("Transaction completed");
+  });
+}
+
+export async function updateExistingReceiver(user) {
+  const db = await OpenDatabase();
+  console.log(user);
+  console.log("Executing SQL query...");
+  db.transaction((tx) => {
+    console.log("Transaction started");
+    console.log(global.ReceiverId[0]);
+    console.log(user);
+    tx.executeSql(
+      "UPDATE Recipients SET Currency = ?, FirstName = ?," +
+        "LastName = ?, Email = ?, MobileNumber = ?," +
+        "Relationship = ?, Bank_Account_Number = ?," +
+        " Swift_Code = ? WHERE Id = ?",
+      [
+        user.currency,
+        user.FirstName,
+        user.LastName,
+        user.Email,
+        user.MobileNumber,
+        user.relationship,
+        user.bankAccount,
+        user.SwiftNum,
+        global.ReceiverId[0],
+      ],
+      (_, { rowsAffected }) => {
+        console.log(`Updated ${rowsAffected} row`);
+        tx.executeSql(
+          "SELECT * FROM Recipients WHERE Id = ?;",
+          [global.ReceiverId[0]],
+          (_, { rows }) => {
+            console.log(`Receiver updated successfully`);
+            console.log(rows.item(0));
+          },
+          (_, error) =>
+            console.log(`Error while getting receiver details: `, error)
+        );
+      },
+      (_, error) =>
+        console.log(`Error updating Receiver ${global.ReceiverId[0]}: `, error)
     );
     console.log("Transaction completed");
   });

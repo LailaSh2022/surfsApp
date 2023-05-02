@@ -4,7 +4,7 @@ import { BorderText, FlagImage } from "../components/Styles";
 
 // API
 const API_URL = "https://openexchangerates.org/api/latest.json"; // Using open exchanger rates api
-const API_KEY = ""; //"dc17da5627284a82aec1e8de2ad69a67"; // Api Key
+const API_KEY = "dc17da5627284a82aec1e8de2ad69a67"; // Api Key
 
 const CurrencyScreen = () => {
   const [convertedAmount1, setConvertedAmount1] = useState("");

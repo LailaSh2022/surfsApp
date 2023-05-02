@@ -15,6 +15,7 @@ import Unsubscribe from "./screens/Unsubscribe";
 import { useEffect } from "react";
 import { getAllRecipients, getAllUsers } from "./Database";
 import Contactus from "./screens/Contactus";
+import EditReceiver from "./screens/EditReceiver";
 
 const Stack = createStackNavigator();
 
@@ -43,6 +44,7 @@ export default function App() {
         <Stack.Screen name="Contactus" component={Contactus} />
         <Stack.Screen name="Unsubscribe" component={Unsubscribe} />
         <Stack.Screen name="ReceiverList" component={ReceiverList} />
+        <Stack.Screen name="EditReceiver" component={EditReceiver} />
       </Stack.Navigator>
     </NavigationContainer>
   );

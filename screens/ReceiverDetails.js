@@ -16,14 +16,17 @@ const ReceiverDetails = ({ route }) => {
   useEffect(() => {
     const fetchRecipientDetails = async () => {
       try {
+        console.log("global.ReceiverId[0]: " + global.ReceiverId[0]);
         const details = await GetRecipientDetails(global.ReceiverId[0]);
+        console.log("details: " + details);
         setRecipientDetails(details);
+        console.log("recipientDetails: " + recipientDetails);
       } catch (error) {
         console.error(error);
       }
     };
     fetchRecipientDetails();
-    console.log(recipientDetails);
+    
   }, [global.ReceiverId[0]]);
   //* ************************************************************** */
   // if (typeof route.params == "undefined") {

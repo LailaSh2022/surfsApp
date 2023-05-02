@@ -35,11 +35,12 @@ import PageFooter from "../components/PageFooter";
 /******************************************************************************** */
 // Updated by Laila Shihada.
 const RecipientItem = ({ item }) => {
+  const navigation = useNavigation();
   const [isChecked, setIsChecked] = useState(false);
   const toggleChecked = () => {
     setIsChecked(!isChecked);
     if (!isChecked) global.ReceiverId[0] = item.Id;
-    console.log(global.ReceiverId[0]);
+    console.log("global.ReceiverId[0]: " + global.ReceiverId[0]);
   };
   return (
     <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -62,6 +63,7 @@ const RecipientItem = ({ item }) => {
       <View style={{ flexDirection: "row", width: "27%" }}>
         <TouchableOpacity
           style={{ backgroundColor: "#e6d8f5", padding: 5, borderRadius: 5 }}
+          onPress={() => navigation.navigate("EditReceiver")}
         >
           <Text>Edit</Text>
         </TouchableOpacity>
@@ -91,15 +93,18 @@ const ReceiverList = () => {
       console.log("Info: userId is undefined");
     }
   }, [userId]);
+  console.log("Receiver List userId: " + userId);
+
   //////
   const [recipients, setRecipients] = useState([]);
 
   useEffect(() => {
-    GetRecipientList(userId).then((results) => {
+    console.log("Receiver List global.userId[0]: " + global.userId[0]);
+    GetRecipientList(global.userId[0]).then((results) => {
       setRecipients(results);
       console.log(results);
     });
-  }, [userId]);
+  }, [global.userId[0]]);
 
   return (
     <StyledContainer>

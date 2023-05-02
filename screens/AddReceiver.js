@@ -22,10 +22,13 @@ import {
 } from "./../components/Styles";
 
 import { AddNewReceiver } from "../Database";
+import "./../global";
+import { useNavigation } from "@react-navigation/native";
 
 const { darkLight } = Colors;
 const AddReceiver = () => {
-  const userId = 1; //for testing
+  const navigation = useNavigation();
+  //const userId = 1; //for testing
   return (
     <StyledContainer>
       <ScrollView>
@@ -47,7 +50,8 @@ const AddReceiver = () => {
             }}
             onSubmit={(values) => {
               console.log(values);
-              AddNewReceiver(values, userId);
+              AddNewReceiver(values, global.userId[0]);
+              navigation.navigate("ReceiverList", { userId: global.userId[0] });
             }}
           >
             {({ handleChange, handleBlur, handleSubmit, values }) => (
@@ -122,9 +126,9 @@ const AddReceiver = () => {
         </InnerContainer>
       </ScrollView>
       <View style={{ flexDirection: "column", height: "17%" }} />
-      <View>
+      {/* <View>
         <PageFooter />
-      </View>
+      </View> */}
     </StyledContainer>
   );
 };
